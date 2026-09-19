@@ -5,6 +5,9 @@ export const mockCustomer: Customer = {
   name: 'Priya Sharma',
   location: 'Coimbatore',
   avatar: 'PS',
+  phone: '+91 98421 77312',
+  maskedPhone: '+91 080-6922-8492 Ext 704',
+  coordinates: { lat: 11.016844, lng: 76.955832 },
 };
 
 export const mockWorkers: Worker[] = [
@@ -24,6 +27,9 @@ export const mockWorkers: Worker[] = [
     skillVerified: true,
     isMentor: true,
     mentorTier: 2,
+    phone: '+91 94432 10892',
+    maskedPhone: '+91 080-6922-4829 Ext 118',
+    currentCoordinates: { lat: 11.016920, lng: 76.955910 }, // 12m from customer
   },
   {
     id: 'w2',

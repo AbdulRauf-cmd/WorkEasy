@@ -34,6 +34,7 @@ import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import { ServiceType, MaterialOption, Worker, BulkOptionType, ContractorTeam } from '../../types';
 import TierBadge from '../../components/TierBadge';
+import LanguageSwitch from '../../components/LanguageSwitch';
 import { classifyTier, calculateDynamicFare, calculateBulkFare, TIER_BASE_RATES, calculateTransitFee } from '../../utils/tierClassification';
 
 const services = [
@@ -176,6 +177,18 @@ export const PostJob: React.FC = () => {
     navigate('/job-classification');
   };
 
+  const getServiceLocalizedName = (sId: string) => {
+    switch (sId) {
+      case 'Plumbing': return t('plumbing');
+      case 'Electrical': return t('electrical');
+      case 'Cleaning': return t('cleaning');
+      case 'Gardening': return t('gardening');
+      case 'Appliance Repair': return t('appliances');
+      case 'Tyre Puncture': return t('roadsideHelp');
+      default: return t('customService');
+    }
+  };
+
   const steps = [t('stepCategory'), t('stepDetails'), t('stepFareDispatch'), t('stepSummary')];
 
   return (
@@ -193,12 +206,12 @@ export const PostJob: React.FC = () => {
           
           <div className="text-center">
             <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-tight block">
-              Step {step} of 4
+              {t('stepOf')} {step} / 4
             </span>
             <h2 className="text-xs font-bold text-slate-900">{steps[step - 1]}</h2>
           </div>
 
-          <div className="w-7" />
+          <LanguageSwitch />
         </div>
 
         {/* Step progress line */}
@@ -249,7 +262,7 @@ export const PostJob: React.FC = () => {
                       </div>
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="font-semibold text-xs text-slate-900">{s.name}</span>
+                          <span className="font-semibold text-xs text-slate-900">{getServiceLocalizedName(s.id)}</span>
                           <TierBadge tier={tier} size="sm" />
                         </div>
                         <span className="text-[11px] text-slate-500 mt-0.5 block">{s.defaultTitle}</span>

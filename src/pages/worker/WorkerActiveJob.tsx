@@ -4,7 +4,25 @@ import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
 import StatusTimeline from '../../components/StatusTimeline';
-import { MapPin, Phone, KeyRound, AlertCircle, Navigation, Clock, CheckCircle2 } from 'lucide-react';
+import LanguageSwitch from '../../components/LanguageSwitch';
+import MaskedCallModal from '../../components/MaskedCallModal';
+import { 
+  MapPin, 
+  Phone, 
+  KeyRound, 
+  AlertCircle, 
+  Navigation, 
+  Clock, 
+  CheckCircle2, 
+  ShieldCheck,
+  Radio,
+  Lock
+} from 'lucide-react';
+import { 
+  DEFAULT_CUSTOMER_COORDS, 
+  calculateDistanceMeters, 
+  Coordinates 
+} from '../../utils/geoUtils';
 
 const WorkerActiveJob: React.FC = () => {
   const { state, markArrived, verifyArrivalOtp, requestExtension, t } = useApp();
@@ -15,6 +33,20 @@ const WorkerActiveJob: React.FC = () => {
   const [showExtensionModal, setShowExtensionModal] = useState(false);
   const [extensionTime, setExtensionTime] = useState('+45 mins');
   const [extensionReason, setExtensionReason] = useState('Adhesive / Sealant requires curing before pressure test');
+
+  // Masked Call Modal state (Rapido style)
+  const [showMaskedCallModal, setShowMaskedCallModal] = useState(false);
+
+  // Geo-Coordinates & OTP Proximity State
+  const customerCoords = job?.customerCoordinates || DEFAULT_CUSTOMER_COORDS;
+  const [isOtpSimulatedOnSite, setIsOtpSimulatedOnSite] = useState(true);
+
+  const workerCoords: Coordinates = isOtpSimulatedOnSite
+    ? { lat: 11.016930, lng: 76.955920 } // ~18m away
+    : { lat: 11.042100, lng: 76.983200 }; // ~3.2km away
+
+  const otpDistanceMeters = calculateDistanceMeters(workerCoords, customerCoords);
+  const isOtpWithinGeoFence = otpDistanceMeters <= 100;
 
   // OTP inputs state
   const [otp, setOtp] = useState(['', '', '', '']);
@@ -96,6 +128,12 @@ const WorkerActiveJob: React.FC = () => {
       return;
     }
 
+    // Strict Geo-Fence Verification upon PIN Entry
+    if (!isOtpWithinGeoFence) {
+      setOtpError(`${t('pinGeoFailed')} (${otpDistanceMeters}m away from customer site)`);
+      return;
+    }
+
     setIsVerifying(true);
     setTimeout(() => {
       const isValid = verifyArrivalOtp(fullOtp);
@@ -106,14 +144,24 @@ const WorkerActiveJob: React.FC = () => {
     }, 450);
   };
 
+  const customerMaskedPhone = state.customer.maskedPhone || '+91 080-6922-8492 Ext 704';
+
   return (
-    <AnimatedPage className="pb-16 pt-4 px-4 bg-slate-50 min-h-screen">
+    <AnimatedPage className="pb-16 pt-3 px-4 bg-slate-50 min-h-screen">
+      {/* Top Header with Language Switch */}
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">
+          {t('activeAssignment')}
+        </span>
+        <LanguageSwitch />
+      </div>
+
       {/* Top Details Card */}
       <div className="bg-white rounded-xl shadow-2xs border border-slate-200/90 p-4 mb-3.5">
         <div className="flex items-start justify-between mb-2">
           <div>
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">{t('activeAssignment')}</span>
             <h1 className="text-sm font-bold text-slate-900 mt-0.5">{job.title}</h1>
+            <span className="text-[10px] text-slate-500 font-mono block">Order #{job.id.slice(-4).toUpperCase()}</span>
           </div>
           <div className="text-right">
             <span className="text-sm font-bold text-slate-900">₹{job.budget}</span>
@@ -126,25 +174,31 @@ const WorkerActiveJob: React.FC = () => {
           <span className="text-[11px] text-slate-500 font-medium">{t('zeroCommissionKeep100')}</span>
         </div>
         
-        {/* Customer Location Info */}
-        <div className="bg-slate-50 rounded-lg p-3 border border-slate-200/60 space-y-2 text-xs text-slate-600 mb-3">
+        {/* Customer Location & Masked Contact Card (Rapido style) */}
+        <div className="bg-slate-50 rounded-xl p-3 border border-slate-200/60 space-y-2 text-xs text-slate-600 mb-3">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-semibold text-slate-900">{state.customer.name}</p>
               <p className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
-                <MapPin size={12} className="text-slate-400" /> {job.location} (2.4 km away)
+                <MapPin size={12} className="text-slate-400" /> {job.location} ({otpDistanceMeters}m away)
               </p>
+              <div className="flex items-center gap-1 mt-1">
+                <span className="text-[9px] font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-1.5 py-0.5 rounded flex items-center gap-0.5">
+                  <Lock size={9} /> {customerMaskedPhone}
+                </span>
+              </div>
             </div>
             
             <div className="flex items-center gap-1.5">
               <button 
-                onClick={() => alert(`Calling customer ${state.customer.name}...`)}
-                className="px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-[11px] font-semibold flex items-center gap-1 transition"
+                onClick={() => setShowMaskedCallModal(true)}
+                className="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold flex items-center gap-1 transition shadow-2xs active:scale-95"
+                title="Call Customer via Secure Relay"
               >
                 <Phone size={12} /> {t('call')}
               </button>
               <button 
-                onClick={() => alert("Opening GPS navigation...")}
+                onClick={() => alert(`Opening GPS navigation to ${job.location}...`)}
                 className="px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-[11px] font-semibold flex items-center gap-1 transition"
               >
                 <Navigation size={12} /> Map
@@ -182,10 +236,10 @@ const WorkerActiveJob: React.FC = () => {
           </div>
         )}
 
-        {/* STEP 2: ARRIVED -> ENTER CUSTOMER PIN */}
+        {/* STEP 2: ARRIVED -> ENTER CUSTOMER PIN (CROSS-CHECKED WITH GEO COORDINATES) */}
         {job.status === 'worker_arrived' && (
           <div className="bg-white p-4 rounded-xl border-2 border-slate-900 shadow-xs">
-            <div className="mb-3">
+            <div className="mb-2">
               <div className="flex items-center gap-1.5 mb-1">
                 <KeyRound size={15} className="text-slate-900" />
                 <h3 className="font-bold text-xs text-slate-900">{t('enterStartPin')}</h3>
@@ -193,8 +247,64 @@ const WorkerActiveJob: React.FC = () => {
               <p className="text-[11px] text-slate-500">{t('sharePinToStart')}</p>
             </div>
 
+            {/* Geo-Fence Check Indicator inside PIN Screen */}
+            <div className={`p-2.5 rounded-lg border mb-3 text-xs transition-colors ${
+              isOtpWithinGeoFence 
+                ? 'bg-emerald-50/70 border-emerald-200 text-emerald-900' 
+                : 'bg-red-50/70 border-red-200 text-red-900'
+            }`}>
+              <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center gap-1.5">
+                  <MapPin size={13} className={isOtpWithinGeoFence ? 'text-emerald-700' : 'text-red-600'} />
+                  <span className="text-[11px] font-bold">
+                    {isOtpWithinGeoFence ? t('pinGeoVerified') : t('geoFenceFailed')}
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono font-bold bg-white px-1.5 py-0.5 rounded border border-slate-200">
+                  {otpDistanceMeters}m
+                </span>
+              </div>
+              <p className="text-[10px] leading-tight opacity-90">
+                {isOtpWithinGeoFence 
+                  ? `Worker is physically verified on-site (${otpDistanceMeters}m from customer door). PIN unlock authorized.`
+                  : t('pinGeoFailed')}
+              </p>
+
+              {/* Simulation Toggle for Demo Testing */}
+              <div className="mt-2 pt-1.5 border-t border-slate-200/60 flex items-center justify-between">
+                <span className="text-[9px] text-slate-500 font-medium">GPS Simulation:</span>
+                <div className="flex gap-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsOtpSimulatedOnSite(true);
+                      setOtpError('');
+                    }}
+                    className={`px-1.5 py-0.5 text-[9px] font-bold rounded ${
+                      isOtpSimulatedOnSite 
+                        ? 'bg-emerald-700 text-white' 
+                        : 'bg-white text-slate-600 border border-slate-200'
+                    }`}
+                  >
+                    On-Site (18m)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIsOtpSimulatedOnSite(false)}
+                    className={`px-1.5 py-0.5 text-[9px] font-bold rounded ${
+                      !isOtpSimulatedOnSite 
+                        ? 'bg-red-700 text-white' 
+                        : 'bg-white text-slate-600 border border-slate-200'
+                    }`}
+                  >
+                    Off-Site (3.2 km)
+                  </button>
+                </div>
+              </div>
+            </div>
+
             {/* 4 Digit Boxes */}
-            <div className="my-3">
+            <div className="my-2">
               <div className="flex justify-center gap-2 mb-2">
                 {otp.map((digit, index) => (
                   <input
@@ -212,8 +322,8 @@ const WorkerActiveJob: React.FC = () => {
               </div>
 
               {otpError && (
-                <p className="text-[11px] font-semibold text-red-600 text-center flex items-center justify-center gap-1">
-                  <AlertCircle size={12} /> {otpError}
+                <p className="text-[11px] font-semibold text-red-600 text-center flex items-center justify-center gap-1 my-1">
+                  <AlertCircle size={12} className="shrink-0" /> {otpError}
                 </p>
               )}
             </div>
@@ -235,7 +345,7 @@ const WorkerActiveJob: React.FC = () => {
               onClick={handleVerifyOtp}
               className="w-full bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white font-semibold py-3 rounded-lg text-xs shadow-xs transition active:scale-98"
             >
-              {isVerifying ? 'Verifying...' : t('verifyPinAndStart')}
+              {isVerifying ? 'Verifying Coordinates & PIN...' : t('verifyPinAndStart')}
             </button>
           </div>
         )}
@@ -250,7 +360,7 @@ const WorkerActiveJob: React.FC = () => {
                 </span>
                 <h3 className="font-semibold text-xs text-slate-900 mt-1">{job.title}</h3>
               </div>
-              <span className="text-[11px] font-mono text-slate-500">PIN Verified ✓</span>
+              <span className="text-[11px] font-mono text-emerald-700 font-bold">PIN & Geo Verified ✓</span>
             </div>
 
             {/* EXTENSION STATUS BANNER (If requested) */}
@@ -386,6 +496,16 @@ const WorkerActiveJob: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Rapido-Style Masked Call Modal */}
+      <MaskedCallModal
+        isOpen={showMaskedCallModal}
+        onClose={() => setShowMaskedCallModal(false)}
+        callerName="Ramesh Kumar (Partner)"
+        calleeName={state.customer.name}
+        calleeRole="Customer"
+        maskedNumber={customerMaskedPhone}
+      />
     </AnimatedPage>
   );
 };

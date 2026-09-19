@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
+import LanguageSwitch from '../../components/LanguageSwitch';
 
 export const CustomerVerification: React.FC = () => {
   const navigate = useNavigate();
@@ -21,8 +22,13 @@ export const CustomerVerification: React.FC = () => {
   if (!state.currentJob) return null;
 
   return (
-    <AnimatedPage className="min-h-screen bg-slate-50 flex flex-col p-4 pt-6 pb-16">
+    <AnimatedPage className="min-h-screen bg-slate-50 flex flex-col p-4 pt-4 pb-16">
       <div className="flex-1 flex flex-col max-w-sm mx-auto w-full">
+        {/* Top bar with Language Switch */}
+        <div className="flex justify-end mb-2">
+          <LanguageSwitch />
+        </div>
+
         {/* Header */}
         <div className="text-center mb-5">
           <div className="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto mb-2.5">

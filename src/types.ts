@@ -60,6 +60,9 @@ export interface Worker {
   apprenticeshipHours?: number;
   apprenticeshipGoalHours?: number;
   targetTier?: Tier;
+  phone?: string;
+  maskedPhone?: string;
+  currentCoordinates?: { lat: number; lng: number };
 }
 
 export type MaterialOption = 'customer_provides' | 'worker_procures';
@@ -136,6 +139,12 @@ export interface Job {
   completedAt?: string;
   extensionRequest?: ExtensionRequest;
   warrantyClaim?: WarrantyClaim;
+  customerCoordinates?: { lat: number; lng: number };
+  beforePhotoUrl?: string;
+  afterPhotoUrl?: string;
+  afterPhotoGeo?: { lat: number; lng: number; timestamp: string; verified: boolean; distanceMeters: number };
+  arrivalGeoVerified?: boolean;
+  arrivalGeoDistance?: number;
 }
 
 export type Language = 'en' | 'ta' | 'hi';
@@ -145,6 +154,9 @@ export interface Customer {
   name: string;
   location: string;
   avatar: string;
+  phone?: string;
+  maskedPhone?: string;
+  coordinates?: { lat: number; lng: number };
 }
 
 export interface AppState {

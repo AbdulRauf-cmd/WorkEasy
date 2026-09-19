@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
+import LanguageSwitch from '../../components/LanguageSwitch';
 import { Lock, Navigation } from 'lucide-react';
 
 const WorkerHome: React.FC = () => {
@@ -29,18 +30,21 @@ const WorkerHome: React.FC = () => {
           </h1>
         </div>
 
-        {/* Online / Offline Status Toggle */}
-        <button 
-          onClick={() => setIsOnline(!isOnline)}
-          className={`px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all ${
-            isOnline 
-              ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' 
-              : 'bg-slate-200 text-slate-600'
-          }`}
-        >
-          <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-600' : 'bg-slate-400'}`} />
-          <span>{isOnline ? t('onlineStatus') : t('offlineStatus')}</span>
-        </button>
+        {/* Online / Offline Status Toggle & Language */}
+        <div className="flex items-center gap-1.5">
+          <LanguageSwitch />
+          <button 
+            onClick={() => setIsOnline(!isOnline)}
+            className={`px-2.5 py-1 rounded-full text-[11px] font-semibold flex items-center gap-1 transition-all ${
+              isOnline 
+                ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' 
+                : 'bg-slate-200 text-slate-600'
+            }`}
+          >
+            <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-emerald-600' : 'bg-slate-400'}`} />
+            <span>{isOnline ? t('onlineStatus') : t('offlineStatus')}</span>
+          </button>
+        </div>
       </div>
 
       {/* Metrics Card */}

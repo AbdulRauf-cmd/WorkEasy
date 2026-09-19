@@ -287,6 +287,34 @@ export interface Translations {
   fairRotationRate: string;
   zeroCommissionSaved: string;
   liveAuditLog: string;
+
+  // Masked Phone Calling (Rapido style)
+  maskedCallTitle: string;
+  maskedCallSubtitle: string;
+  maskedCallPrivacyNote: string;
+  maskedCallConnecting: string;
+  maskedCallVirtualNumber: string;
+  maskedCallStartBtn: string;
+  maskedCallClose: string;
+  maskedCallSafetyBadge: string;
+  virtualLine: string;
+
+  // Geo-verification & Live Camera
+  geoVerifiedDoorstep: string;
+  geoDistanceMeters: string;
+  geoFencePassed: string;
+  geoFenceFailed: string;
+  geoFenceAlertOffsite: string;
+  cameraLiveOnlyNote: string;
+  galleryDisabledNote: string;
+  takeLivePhotoBtn: string;
+  retakePhotoBtn: string;
+  photoGeoStamped: string;
+  pinGeoVerified: string;
+  pinGeoFailed: string;
+  testSimulateOnsite: string;
+  testSimulateOffsite: string;
+  watermarkVerified: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -559,6 +587,34 @@ export const translations: Record<Language, Translations> = {
     fairRotationRate: 'Fair Rotation Compliance',
     zeroCommissionSaved: 'Saved in Zero Commissions',
     liveAuditLog: 'Live Algorithmic Allocation Stream',
+
+    // Masked Phone Calling (Rapido style)
+    maskedCallTitle: 'Secure Masked Call',
+    maskedCallSubtitle: 'WorkEasy Encrypted Relay (Rapido-style)',
+    maskedCallPrivacyNote: 'Your real phone number remains 100% hidden and confidential. Calls are connected through our secure virtual proxy line with automatic fraud detection and safety monitoring.',
+    maskedCallConnecting: 'Connecting through secure proxy...',
+    maskedCallVirtualNumber: 'Virtual Relay Line',
+    maskedCallStartBtn: 'Call via Virtual Proxy',
+    maskedCallClose: 'Cancel Call',
+    maskedCallSafetyBadge: 'Private & Encrypted',
+    virtualLine: 'Masked Virtual Line',
+
+    // Geo-verification & Live Camera
+    geoVerifiedDoorstep: 'Doorstep Location Verified',
+    geoDistanceMeters: 'Distance to Customer',
+    geoFencePassed: 'Geo-fence Verified (On-Site)',
+    geoFenceFailed: 'Geo-fence Check Failed (Off-Site)',
+    geoFenceAlertOffsite: 'You must be physically present within 100 meters of the customer\'s site to perform this action.',
+    cameraLiveOnlyNote: 'Live Camera Capture Enforced',
+    galleryDisabledNote: 'Gallery attachment is strictly disabled to prevent fraud. You must capture a live photo on-site.',
+    takeLivePhotoBtn: 'Snap Live Photo (On-Site)',
+    retakePhotoBtn: 'Retake Live Photo',
+    photoGeoStamped: 'Geo-Stamped & Watermarked',
+    pinGeoVerified: 'Arrival PIN & Location Verified',
+    pinGeoFailed: 'Location Mismatch: Cannot verify PIN while away from customer premises',
+    testSimulateOnsite: 'Simulate On-Site (14m)',
+    testSimulateOffsite: 'Simulate Off-Site (2.4 km)',
+    watermarkVerified: 'Tamper-Proof Geo Verification',
   },
 
   ta: {
@@ -830,6 +886,34 @@ export const translations: Record<Language, Translations> = {
     fairRotationRate: 'சுழற்சி முறை இணக்கம்',
     zeroCommissionSaved: 'கமிஷன் இல்லாததால் மிச்சமான தொகை',
     liveAuditLog: 'நேரலை ஒதுக்கீட்டுப் பதிவு',
+
+    // Masked Phone Calling (Rapido style)
+    maskedCallTitle: 'பாதுகாப்பான மறைக்கப்பட்ட அழைப்பு',
+    maskedCallSubtitle: 'WorkEasy மறைகுறியாக்கப்பட்ட ரிலே (ராபிடோ பாணி)',
+    maskedCallPrivacyNote: 'உங்கள் உண்மையான தொலைபேசி எண் 100% ரகசியமாக வைக்கப்படும். பாதுகாப்பு மற்றும் மோசடி தடுப்புக்காக மெய்நிகர் பிராக்ஸி வழியாக அழைப்புகள் இணைக்கப்படுகின்றன.',
+    maskedCallConnecting: 'பாதுகாப்பான பிராக்ஸி வழியாக இணைக்கிறது...',
+    maskedCallVirtualNumber: 'மெய்நிகர் ரிலே எண்',
+    maskedCallStartBtn: 'மெய்நிகர் எண் மூலம் அழை',
+    maskedCallClose: 'ரத்து செய்',
+    maskedCallSafetyBadge: 'ரகசியம் மற்றும் பாதுகாப்பானது',
+    virtualLine: 'மறைக்கப்பட்ட மெய்நிகர் எண்',
+
+    // Geo-verification & Live Camera
+    geoVerifiedDoorstep: 'வாடிக்கையாளர் முகவரி சரிபார்க்கப்பட்டது',
+    geoDistanceMeters: 'வாடிக்கையாளருக்கான தூரம்',
+    geoFencePassed: 'இருப்பிடம் சரிபார்க்கப்பட்டது (தளத்தில்)',
+    geoFenceFailed: 'இருப்பிட சரிபார்ப்பு தோல்வி (வெளியில்)',
+    geoFenceAlertOffsite: 'இந்த செயலைச் செய்ய நீங்கள் வாடிக்கையாளரின் இடத்திலிருந்து 100 மீட்டருக்குள் இருக்க வேண்டும்.',
+    cameraLiveOnlyNote: 'நேரடி கேமரா புகைப்படம் மட்டுமே அனுமதிக்கப்படும்',
+    galleryDisabledNote: 'மோசடிகளைத் தவிர்க்க கேலரி படங்கள் முடக்கப்பட்டுள்ளன. தளத்தில் இருந்தே நேரடி புகைப்படம் எடுக்க வேண்டும்.',
+    takeLivePhotoBtn: 'நேரடி புகைப்படம் எடு (தளத்தில்)',
+    retakePhotoBtn: 'மீண்டும் புகைப்படம் எடு',
+    photoGeoStamped: 'இருப்பிட முத்திரை பதிக்கப்பட்டது',
+    pinGeoVerified: 'வருகை PIN & இருப்பிடம் சரிபார்க்கப்பட்டது',
+    pinGeoFailed: 'இருப்பிட முரண்பாடு: வாடிக்கையாளர் இடத்திற்கு வெளியே இருந்து PIN சரிபார்க்க முடியாது',
+    testSimulateOnsite: 'தளத்தில் இருத்தல் (14 மீ)',
+    testSimulateOffsite: 'வெளியில் இருத்தல் (2.4 கி.மீ)',
+    watermarkVerified: 'சரிபார்க்கப்பட்ட பாதுகாப்பான புவி-முத்திரை',
   },
 
   hi: {
@@ -1101,6 +1185,34 @@ export const translations: Record<Language, Translations> = {
     fairRotationRate: 'निष्पक्ष रोटेशन अनुपालन',
     zeroCommissionSaved: 'कमीशन न कटने से बचत',
     liveAuditLog: 'लाइव आवंटन स्ट्रीम',
+
+    // Masked Phone Calling (Rapido style)
+    maskedCallTitle: 'सुरक्षित नकाबपोश (मास्क्ड) कॉल',
+    maskedCallSubtitle: 'WorkEasy एन्क्रिप्टेड रिले (रैपिडो स्टाइल)',
+    maskedCallPrivacyNote: 'आपका असली फोन नंबर 100% गोपनीय रहता है। सुरक्षा और गोपनीयता के लिए कॉल सुरक्षित वर्चुअल प्रॉक्सी के माध्यम से कनेक्ट किए जाते हैं।',
+    maskedCallConnecting: 'सुरक्षित प्रॉक्सी से कनेक्ट हो रहा है...',
+    maskedCallVirtualNumber: 'वर्चुअल रिले लाइन',
+    maskedCallStartBtn: 'वर्चुअल नंबर से कॉल करें',
+    maskedCallClose: 'रद्द करें',
+    maskedCallSafetyBadge: 'निजी और सुरक्षित',
+    virtualLine: 'मास्क्ड वर्चुअल लाइन',
+
+    // Geo-verification & Live Camera
+    geoVerifiedDoorstep: 'ग्राहक का स्थान सत्यापित',
+    geoDistanceMeters: 'ग्राहक से दूरी',
+    geoFencePassed: 'जियो-फेंस सत्यापित (कार्यस्थल पर)',
+    geoFenceFailed: 'जियो-फेंस विफल (स्थान से बाहर)',
+    geoFenceAlertOffsite: 'यह कार्य करने के लिए आपको ग्राहक के पते के 100 मीटर के भीतर उपस्थित होना अनिवार्य है।',
+    cameraLiveOnlyNote: 'केवल लाइव कैमरा फोटो अनिवार्य',
+    galleryDisabledNote: 'धोखाधड़ी रोकने के लिए गैलरी फोटो अपलोड बंद है। केवल कार्यस्थल पर लाइव फोटो लें।',
+    takeLivePhotoBtn: 'लाइव फोटो खींचें (साइट पर)',
+    retakePhotoBtn: 'दोबारा फोटो लें',
+    photoGeoStamped: 'जियो-स्टैम्प और वाटरमार्क सत्यापित',
+    pinGeoVerified: 'आगमन पिन और स्थान सत्यापित',
+    pinGeoFailed: 'स्थान गलत: ग्राहक के पते से दूर होने पर पिन सत्यापित नहीं किया जा सकता',
+    testSimulateOnsite: 'साइट पर स्थिति (14 मी)',
+    testSimulateOffsite: 'साइट से बाहर स्थिति (2.4 किमी)',
+    watermarkVerified: 'छेड़छाड़-मुक्त जियो सत्यापन',
   },
 };
 

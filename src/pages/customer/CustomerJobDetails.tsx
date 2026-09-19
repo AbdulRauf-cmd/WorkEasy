@@ -24,6 +24,8 @@ import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
 import StatusTimeline from '../../components/StatusTimeline';
 import WorkerCard from '../../components/WorkerCard';
+import LanguageSwitch from '../../components/LanguageSwitch';
+import MaskedCallModal from '../../components/MaskedCallModal';
 import { Worker, ContractorTeam } from '../../types';
 
 export const CustomerJobDetails: React.FC = () => {
@@ -44,6 +46,23 @@ export const CustomerJobDetails: React.FC = () => {
   const [warrantyIssue, setWarrantyIssue] = useState('Tap started leaking again after 2 days of service');
   const [customWarrantyText, setCustomWarrantyText] = useState('');
   const [selectedAltWorkerId, setSelectedAltWorkerId] = useState<string>('');
+  
+  // Masked calling state (Rapido style)
+  const [showMaskedCallModal, setShowMaskedCallModal] = useState(false);
+  const [calleeInfo, setCalleeInfo] = useState({
+    name: 'Ramesh Kumar',
+    role: 'Certified Partner',
+    maskedNumber: '+91 080-6922-4829 Ext 118',
+  });
+
+  const handleCallPartner = (name: string, role: string, maskedNum?: string) => {
+    setCalleeInfo({
+      name,
+      role,
+      maskedNumber: maskedNum || '+91 080-6922-4829 Ext 118',
+    });
+    setShowMaskedCallModal(true);
+  };
 
   if (!currentJob) {
     return (
@@ -99,7 +118,7 @@ export const CustomerJobDetails: React.FC = () => {
           <h1 className="text-xs font-bold text-slate-900">{t('bookingNumber')} #{currentJob.id.slice(-4).toUpperCase()}</h1>
           <span className="text-[10px] text-slate-500 font-medium">{t('liveStatus')}</span>
         </div>
-        <div className="w-7" />
+        <LanguageSwitch />
       </div>
 
       <div className="p-4 space-y-3.5">
@@ -530,8 +549,8 @@ export const CustomerJobDetails: React.FC = () => {
             {/* Quick Actions */}
             <div className="grid grid-cols-2 gap-2">
               <button 
-                onClick={() => alert(`Calling contractor lead ${currentJob.contractorName}...`)}
-                className="py-2 px-3 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 hover:bg-slate-50 transition active:scale-98"
+                onClick={() => handleCallPartner(currentJob.contractorName || 'Er. Sundaramurthy', 'Lead Contractor', '+91 080-6922-4829 Ext 501')}
+                className="py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98 shadow-2xs"
               >
                 <Phone size={13} /> Call Crew Lead
               </button>
@@ -597,8 +616,8 @@ export const CustomerJobDetails: React.FC = () => {
             {/* Quick Actions */}
             <div className="grid grid-cols-2 gap-2">
               <button 
-                onClick={() => alert(`Calling primary lead ${(currentJob.pooledWorkers?.[0] || workers[0])?.name}...`)}
-                className="py-2 px-3 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 hover:bg-slate-50 transition active:scale-98"
+                onClick={() => handleCallPartner((currentJob.pooledWorkers?.[0] || workers[0])?.name, 'Primary Squad Lead', '+91 080-6922-4829 Ext 202')}
+                className="py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98 shadow-2xs"
               >
                 <Phone size={13} /> Call Lead Worker
               </button>
@@ -625,8 +644,8 @@ export const CustomerJobDetails: React.FC = () => {
             {/* Quick Actions */}
             <div className="grid grid-cols-2 gap-2 mt-2">
               <button 
-                onClick={() => alert(`Calling partner ${worker.name}...`)}
-                className="py-2 px-3 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 hover:bg-slate-50 transition active:scale-98"
+                onClick={() => handleCallPartner(worker.name, 'Assigned Partner', worker.maskedPhone || '+91 080-6922-4829 Ext 118')}
+                className="py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98 shadow-2xs"
               >
                 <Phone size={13} /> {t('callPartner')}
               </button>
@@ -636,6 +655,17 @@ export const CustomerJobDetails: React.FC = () => {
               >
                 <MessageSquare size={13} /> {t('chatPartner')}
               </button>
+            </div>
+            
+            {/* Rapido-style Masked Line Notice */}
+            <div className="flex items-center justify-between mt-2 px-2 py-1 bg-emerald-50/70 border border-emerald-200/60 rounded-lg text-[10px] text-emerald-800">
+              <span className="flex items-center gap-1 font-medium">
+                <ShieldCheck size={11} className="text-emerald-600" />
+                {t('maskedCallSafetyBadge')}: Real numbers hidden
+              </span>
+              <span className="font-mono font-bold">
+                {worker.maskedPhone || '+91 080-6922-4829 Ext 118'}
+              </span>
             </div>
           </div>
         ) : null}
@@ -756,6 +786,16 @@ export const CustomerJobDetails: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Rapido-Style Masked Call Modal */}
+      <MaskedCallModal
+        isOpen={showMaskedCallModal}
+        onClose={() => setShowMaskedCallModal(false)}
+        callerName={`${state.customer.name} (Customer)`}
+        calleeName={calleeInfo.name}
+        calleeRole={calleeInfo.role}
+        maskedNumber={calleeInfo.maskedNumber}
+      />
     </AnimatedPage>
   );
 };
