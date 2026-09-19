@@ -49,7 +49,7 @@ const services = [
 export const PostJob: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { state, postJob } = useApp();
+  const { state, postJob, t } = useApp();
   
   const [step, setStep] = useState(1);
   const [service, setService] = useState<ServiceType>('Plumbing');
@@ -162,7 +162,7 @@ export const PostJob: React.FC = () => {
       distanceFee: isBulk ? bulkFare.transitTotal : soloFare.transitFee,
       materialOption,
       materialCost: materialOption === 'worker_procures' ? (isBulk ? bulkFare.partsFee : soloFare.partsFee) : 0,
-      workerId: isBulk ? (bulkOption === 'contractor' ? activeSelectedContractor?.id : pooledWorkersSquad[0]?.id) : activeSelectedWorker?.id,
+      workerId: isBulk ? (bulkOption === 'contractor' ? activeSelectedContractor?.id : pooledWorkersSquad[0]?.id) : undefined,
       workerCount,
       bulkOption: isBulk ? bulkOption : undefined,
       contractorTeamId: isBulk && bulkOption === 'contractor' ? activeSelectedContractor?.id : undefined,
@@ -176,7 +176,7 @@ export const PostJob: React.FC = () => {
     navigate('/job-classification');
   };
 
-  const steps = ['Category', 'Task & Workforce', 'Partners & Fare', 'Summary'];
+  const steps = [t('stepCategory'), t('stepDetails'), t('stepFareDispatch'), t('stepSummary')];
 
   return (
     <AnimatedPage className="min-h-screen bg-slate-50 pb-16 flex flex-col">
@@ -845,83 +845,73 @@ export const PostJob: React.FC = () => {
                 </div>
               )}
 
-              {/* CASE 3: SOLO WORKER LIST (When workerCount === 1) */}
+              {/* CASE 3: AUTOMATIC FAIR DISPATCH (When workerCount === 1) */}
               {!isBulk && (
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="text-[11px] font-semibold text-slate-700 uppercase tracking-tight flex items-center gap-1">
-                      <Navigation size={13} className="text-slate-900" />
-                      Available Nearby Certified Partners ({activeWorkerList.length})
-                    </label>
-                    <span className="text-[10px] text-slate-400">Upfront Estimates</span>
-                  </div>
-
-                  <div className="space-y-2">
-                    {activeWorkerList.map((w: Worker) => {
-                      const isSelected = (activeSelectedWorker?.id === w.id);
-                      const baseRate = currentServiceConfig.baseRate || TIER_BASE_RATES[w.tier] || 450;
-                      const fare = calculateDynamicFare(
-                        baseRate,
-                        w.distance,
-                        materialOption,
-                        materialCost
-                      );
-                      const etaMinutes = Math.round(w.distance * 5);
-
-                      return (
-                        <div
-                          key={w.id}
-                          onClick={() => setSelectedWorkerId(w.id)}
-                          className={`p-3 rounded-xl border-2 cursor-pointer transition-all ${
-                            isSelected 
-                              ? 'border-slate-900 bg-white shadow-xs' 
-                              : 'border-slate-200 bg-white/80 hover:border-slate-300'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                              <div className="relative">
-                                <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 text-slate-800 flex items-center justify-center font-bold text-xs">
-                                  {w.avatar}
-                                </div>
-                                {w.verified && (
-                                  <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5 shadow-2xs">
-                                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 fill-emerald-50" />
-                                  </div>
-                                )}
-                              </div>
-
-                              <div>
-                                <div className="flex items-center gap-1.5">
-                                  <span className="font-bold text-xs text-slate-900">{w.name}</span>
-                                  <TierBadge tier={w.tier} size="sm" />
-                                </div>
-
-                                <div className="flex items-center gap-1 text-[10px] text-slate-500 mt-0.5">
-                                  <span className="flex items-center gap-0.5 font-semibold text-slate-700">
-                                    <Star size={11} className="fill-amber-400 text-amber-400" />
-                                    {w.rating.toFixed(1)}
-                                  </span>
-                                  <span>·</span>
-                                  <span>{w.distance} km away</span>
-                                  <span>·</span>
-                                  <span className="text-emerald-700 font-medium">{etaMinutes} min dispatch</span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="text-right">
-                              <span className="text-sm font-black text-slate-900 block">
-                                ₹{fare.total}
-                              </span>
-                              <span className="text-[10px] text-slate-400 block leading-tight">
-                                Labor ₹{fare.baseLaborRate} + Transit ₹{fare.transitFee}
-                              </span>
-                            </div>
-                          </div>
+                <div className="space-y-3">
+                  <div className="bg-white rounded-xl border-2 border-slate-900 p-4 shadow-2xs">
+                    {/* Header with icon & badge */}
+                    <div className="flex items-start justify-between gap-2 pb-3 border-b border-slate-100">
+                      <div className="flex items-start gap-2.5">
+                        <div className="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center shrink-0 mt-0.5">
+                          <Zap size={18} className="text-amber-400 fill-amber-400" />
                         </div>
-                      );
-                    })}
+                        <div>
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <h3 className="text-xs font-bold text-slate-900">{t('autoDispatchTitle')}</h3>
+                            <span className="text-[9px] bg-slate-100 text-slate-700 font-bold px-1.5 py-0.5 rounded border border-slate-200">
+                              {t('autoDispatchBadge')}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-slate-500 mt-1 leading-relaxed">
+                            {t('autoDispatchDesc')}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Fair Rotation Trust Badges */}
+                    <div className="grid grid-cols-3 gap-2 mt-3 text-center">
+                      <div className="p-2 rounded-lg bg-slate-50 border border-slate-200/80">
+                        <UserCheck size={14} className="text-emerald-600 mx-auto mb-1" />
+                        <span className="text-[10px] font-bold text-slate-800 block leading-tight">
+                          {t('bgVerifiedBadge')}
+                        </span>
+                        <span className="text-[9px] text-slate-400">Govt ID + Police</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-slate-50 border border-slate-200/80">
+                        <ShieldCheck size={14} className="text-blue-600 mx-auto mb-1" />
+                        <span className="text-[10px] font-bold text-slate-800 block leading-tight">
+                          {t('skillCertifiedBadge')}
+                        </span>
+                        <span className="text-[9px] text-slate-400">Tier {computedTier} Tested</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-slate-50 border border-slate-200/80">
+                        <CheckCircle2 size={14} className="text-amber-600 mx-auto mb-1" />
+                        <span className="text-[10px] font-bold text-slate-800 block leading-tight">
+                          {t('zeroBiddingBadge')}
+                        </span>
+                        <span className="text-[9px] text-slate-400">0% Commission</span>
+                      </div>
+                    </div>
+
+                    {/* Upfront Standardized Rate Preview */}
+                    <div className="mt-3 pt-3 border-t border-slate-100 bg-slate-50/70 -mx-4 -mb-4 p-3.5 rounded-b-xl flex items-center justify-between">
+                      <div>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight block">
+                          {t('fixedPrice')}
+                        </span>
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="text-lg font-black text-slate-900">₹{soloFare.total}</span>
+                          <span className="text-[10px] text-emerald-700 font-semibold">100% to partner</span>
+                        </div>
+                      </div>
+                      <div className="text-right text-[10px] text-slate-500">
+                        <span>Labor ₹{soloFare.baseLaborRate} + Transit ₹{soloFare.transitFee}</span>
+                        {materialOption === 'worker_procures' && (
+                          <span className="block text-slate-600">+ Parts ₹{soloFare.partsFee}</span>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
@@ -933,14 +923,14 @@ export const PostJob: React.FC = () => {
                   <strong className="text-slate-900 font-semibold block mb-0.5">
                     {isBulk 
                       ? (bulkOption === 'contractor' ? 'Contractor Supervised Guarantee' : 'Cooperative Pooled Dispatch Guarantee') 
-                      : 'Standardized Cooperative Fare'}
+                      : t('autoDispatchTitle')}
                   </strong>
                   <p className="leading-tight text-slate-500">
                     {isBulk 
                       ? (bulkOption === 'contractor' 
                           ? `Total fare includes licensed contractor supervision fee (₹${activeSelectedContractor?.baseSupervisorRate || 300}) and standardized wages for ${workerCount} crew members.`
                           : `Total fare aggregates ${workerCount} certified specialists at standardized tier wages with pooled transit reimbursement. 0% platform wage cut.`)
-                      : `Fares are calculated algorithmically based on skill certification level (₹${soloFare.baseLaborRate}) and distance (${workerDistance} km @ ₹15/km).`}
+                      : `${t('autoDispatchDesc')} (${workerDistance} km transit @ ₹15/km).`}
                   </p>
                 </div>
               </div>
@@ -987,7 +977,7 @@ export const PostJob: React.FC = () => {
               {/* Assigned Partner / Contractor / Pooled Squad */}
               <div className="flex justify-between items-center pb-2.5 border-b border-slate-100">
                 <span className="text-xs text-slate-500">
-                  {isBulk ? (bulkOption === 'contractor' ? 'Contractor Squad' : 'Pooled Crew Roster') : 'Assigned Professional'}
+                  {isBulk ? (bulkOption === 'contractor' ? 'Contractor Squad' : 'Pooled Crew Roster') : t('assignedPartner')}
                 </span>
                 <div className="text-right">
                   <span className="font-semibold text-xs text-slate-900 block">
@@ -995,12 +985,12 @@ export const PostJob: React.FC = () => {
                       ? (bulkOption === 'contractor' 
                           ? activeSelectedContractor?.name 
                           : `${pooledWorkersSquad.map(w => w.name.split(' ')[0]).join(', ')}`)
-                      : activeSelectedWorker?.name}
+                      : t('autoDispatchTitle')}
                   </span>
                   <span className="text-[10px] text-slate-400">
                     {isBulk 
                       ? (bulkOption === 'contractor' ? `Lead: ${activeSelectedContractor?.leadName}` : `${workerCount} Certified Independent Partners`)
-                      : `${workerDistance} km away · ${activeSelectedWorker?.rating}★`}
+                      : t('fairRotationGuarantee')}
                   </span>
                 </div>
               </div>

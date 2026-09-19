@@ -1,10 +1,13 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { AppState, Job, JobStatus, Role, ServiceType, MentorshipSession, Worker, Tier, ContractorTeam, BulkOptionType } from '../types';
+import { AppState, Job, JobStatus, Role, ServiceType, MentorshipSession, Worker, Tier, ContractorTeam, BulkOptionType, Language } from '../types';
 import { mockCustomer, mockWorkers, initialWarrantyJob, initialPastJob, mockMentorshipSessions, mockContractorTeams } from '../data/mockData';
 import { classifyTier } from '../utils/tierClassification';
+import { getTranslation, Translations } from '../i18n/translations';
 
 interface AppContextType extends AppState {
   setRole: (role: Role) => void;
+  setLanguage: (lang: Language) => void;
+  t: (key: keyof Translations) => string;
   postJob: (jobData: Partial<Job>) => void;
   classifyJob: () => void;
   matchWorker: () => void;
@@ -30,6 +33,7 @@ interface AppContextType extends AppState {
 
 const defaultState: AppState = {
   role: 'customer',
+  language: 'en',
   currentJob: initialWarrantyJob,
   jobs: [initialWarrantyJob, initialPastJob],
   workers: mockWorkers,
@@ -49,6 +53,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         return {
           ...defaultState,
           ...parsed,
+          language: parsed.language || 'en',
           workers: parsed.workers || mockWorkers,
           contractorTeams: parsed.contractorTeams || mockContractorTeams,
           mentorshipSessions: parsed.mentorshipSessions || mockMentorshipSessions,
@@ -169,14 +174,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         return;
       }
 
-      // Solo single-worker booking
-      const preselectedWorker = state.workers.find((w) => w.id === state.currentJob?.workerId);
+      // Solo single-worker booking - Automatic Fair Round-Robin matching
+      const eligibleWorkers = state.workers.filter(
+        (w) => w.skill === state.currentJob?.service && w.tier >= jobTier
+      ).sort((a, b) => a.distance - b.distance);
       
-      const eligibleWorker = 
-        preselectedWorker ||
-        state.workers.find((w) => w.skill === state.currentJob?.service && w.tier >= jobTier) ||
-        state.workers.find((w) => w.tier >= jobTier) ||
-        state.workers[0];
+      const eligibleWorker = eligibleWorkers[0] || state.workers.find((w) => w.tier >= jobTier) || state.workers[0];
 
       updateJob({
         status: 'matched',
@@ -498,6 +501,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     });
   };
 
+  const setLanguage = (language: Language) => {
+    setState((prev) => ({ ...prev, language }));
+  };
+
+  const t = (key: keyof Translations): string => {
+    return getTranslation(state.language || 'en', key);
+  };
+
   const resetDemo = () => {
     localStorage.removeItem('workeasy_state');
     setState(defaultState);
@@ -508,6 +519,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       value={{
         ...state,
         setRole,
+        setLanguage,
+        t,
         postJob,
         classifyJob,
         matchWorker,
@@ -548,6 +561,7 @@ export const useApp = () => {
   const ctx = useAppContext();
   const { 
     role, 
+    language,
     currentJob, 
     jobs, 
     workers, 
@@ -555,6 +569,8 @@ export const useApp = () => {
     mentorshipSessions,
     customer, 
     setRole, 
+    setLanguage,
+    t,
     postJob, 
     classifyJob, 
     matchWorker, 
@@ -565,22 +581,24 @@ export const useApp = () => {
     completeJob, 
     verifyJob, 
     rateJob, 
-    addTipToJob,
-    requestMentorship,
-    logMentorshipHours,
-    upgradeApprenticeTier,
+    addTipToJob, 
+    requestMentorship, 
+    logMentorshipHours, 
+    upgradeApprenticeTier, 
     requestExtension, 
     approveExtension, 
     raiseWarrantyQuery, 
-    rebookSameWorkerFree,
+    rebookSameWorkerFree, 
     rebookWarrantyJob, 
     closeWarrantyWithoutRebooking, 
     resetDemo 
   } = ctx;
 
   return {
-    state: { role, currentJob, jobs, workers, contractorTeams, mentorshipSessions, customer },
+    state: { role, language, currentJob, jobs, workers, contractorTeams, mentorshipSessions, customer },
     setRole,
+    setLanguage,
+    t,
     postJob,
     classifyJob,
     matchWorker,

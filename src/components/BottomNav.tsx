@@ -6,7 +6,7 @@ import { useApp } from '../context/AppContext';
 export default function BottomNav() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { state } = useApp();
+  const { state, t } = useApp();
   
   if (state.role === 'admin') return null;
 
@@ -26,7 +26,7 @@ export default function BottomNav() {
           }`}
         >
           <Home className="w-5 h-5 mb-0.5" strokeWidth={isActive('/') ? 2.25 : 1.75} />
-          <span className="text-[10px] tracking-tight">Explore</span>
+          <span className="text-[10px] tracking-tight">{t('home')}</span>
         </button>
 
         {/* Bookings / Jobs */}
@@ -39,22 +39,22 @@ export default function BottomNav() {
           <div className="relative">
             <CalendarCheck2 className="w-5 h-5 mb-0.5" strokeWidth={isActive('/jobs') || isActive('/job-details') ? 2.25 : 1.75} />
             {state.currentJob && (
-              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-blue-600 rounded-full ring-2 ring-white" />
+              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-emerald-600 rounded-full ring-2 ring-white" />
             )}
           </div>
-          <span className="text-[10px] tracking-tight">{state.role === 'worker' ? 'Jobs' : 'Bookings'}</span>
+          <span className="text-[10px] tracking-tight">{t('orders')}</span>
         </button>
 
         {/* Primary Post / Dispatch Button */}
         {state.role === 'customer' && (
           <button
             onClick={() => navigate('/post-job')}
-            className="flex-1 flex flex-col items-center justify-center py-1 text-blue-600 hover:text-blue-700 transition-colors"
+            className="flex-1 flex flex-col items-center justify-center py-1 text-slate-900 hover:text-slate-700 transition-colors"
           >
-            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-xs">
+            <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center shadow-xs">
               <Plus className="w-5 h-5" strokeWidth={2.5} />
             </div>
-            <span className="text-[10px] font-semibold text-blue-700 tracking-tight mt-0.5">Book</span>
+            <span className="text-[10px] font-bold text-slate-900 tracking-tight mt-0.5">{t('confirm')}</span>
           </button>
         )}
 
@@ -66,7 +66,7 @@ export default function BottomNav() {
           }`}
         >
           <Clock3 className="w-5 h-5 mb-0.5" strokeWidth={isActive('/activity') ? 2.25 : 1.75} />
-          <span className="text-[10px] tracking-tight">Activity</span>
+          <span className="text-[10px] tracking-tight">{t('activity')}</span>
         </button>
 
         {/* Profile */}
@@ -77,7 +77,7 @@ export default function BottomNav() {
           }`}
         >
           <UserRound className="w-5 h-5 mb-0.5" strokeWidth={isActive('/profile') ? 2.25 : 1.75} />
-          <span className="text-[10px] tracking-tight">Account</span>
+          <span className="text-[10px] tracking-tight">{t('profile')}</span>
         </button>
       </div>
     </nav>

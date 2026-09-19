@@ -138,6 +138,8 @@ export interface Job {
   warrantyClaim?: WarrantyClaim;
 }
 
+export type Language = 'en' | 'ta' | 'hi';
+
 export interface Customer {
   id: string;
   name: string;
@@ -147,6 +149,7 @@ export interface Customer {
 
 export interface AppState {
   role: Role;
+  language: Language;
   currentJob: Job | null;
   jobs: Job[];
   workers: Worker[];

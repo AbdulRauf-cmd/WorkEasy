@@ -31,8 +31,18 @@ const categories = [
 
 export const CustomerHome: React.FC = () => {
   const navigate = useNavigate();
-  const { state } = useApp();
-  const { currentJob, customer, workers } = state;
+  const { state, t } = useApp();
+  const { currentJob, customer } = state;
+
+  const categories = [
+    { id: 'Tyre Puncture', name: t('roadsideHelp'), sub: t('roadsideHelpSub'), icon: Disc3, tier: 1, highlight: '⚡ 8-15m Dispatch' },
+    { id: 'Plumbing', name: t('plumbing'), sub: t('plumbingSub'), icon: Wrench, tier: 2 },
+    { id: 'Electrical', name: t('electrical'), sub: t('electricalSub'), icon: Zap, tier: 2 },
+    { id: 'Cleaning', name: t('cleaning'), sub: t('cleaningSub'), icon: Sparkles, tier: 1 },
+    { id: 'Appliance Repair', name: t('appliances'), sub: t('appliancesSub'), icon: Hammer, tier: 2 },
+    { id: 'Gardening', name: t('gardening'), sub: t('gardeningSub'), icon: Trees, tier: 1 },
+    { id: 'Custom Service', name: t('customService'), sub: t('customServiceSub'), icon: Hammer, tier: 2 },
+  ];
 
   return (
     <AnimatedPage className="pb-16 px-4 pt-4 bg-slate-50 min-h-screen">
@@ -42,7 +52,7 @@ export const CustomerHome: React.FC = () => {
           <MapPin size={16} className="text-slate-900" />
           <div>
             <div className="flex items-center gap-1">
-              <span className="text-xs font-bold text-slate-900 tracking-tight">RS Puram, Coimbatore</span>
+              <span className="text-xs font-bold text-slate-900 tracking-tight">{t('locationArea')}</span>
               <span className="text-[10px] text-slate-400">▼</span>
             </div>
             <span className="text-[10px] text-slate-500 font-normal block leading-tight">Tamil Nadu, 641002</span>
@@ -60,7 +70,7 @@ export const CustomerHome: React.FC = () => {
         className="bg-white rounded-xl border border-slate-200/90 px-3.5 py-2.5 flex items-center gap-2.5 text-slate-400 mb-4 cursor-pointer shadow-2xs hover:border-slate-300 transition-colors"
       >
         <Search size={16} className="text-slate-400" />
-        <span className="text-xs text-slate-500 font-normal">Search "leakage", "fan repair", "deep cleaning"...</span>
+        <span className="text-xs text-slate-500 font-normal">{t('searchPlaceholder')}</span>
       </div>
 
       {/* ACTIVE LIVE BOOKING (If present) */}
@@ -69,13 +79,13 @@ export const CustomerHome: React.FC = () => {
           <div className="flex items-center justify-between mb-1.5 px-0.5">
             <span className="text-[11px] font-bold text-slate-900 tracking-tight flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              Active Booking
+              {t('activeBooking')}
             </span>
             <button 
               onClick={() => navigate('/job-details')}
               className="text-[11px] font-semibold text-blue-600 hover:underline flex items-center gap-0.5"
             >
-              <span>Track</span>
+              <span>{t('track')}</span>
               <ChevronRight size={12} />
             </button>
           </div>
@@ -87,7 +97,7 @@ export const CustomerHome: React.FC = () => {
             {currentJob.status === 'worker_arrived' && (
               <div className="bg-amber-50 border border-amber-200 text-amber-900 text-[11px] font-medium px-2.5 py-1 rounded-lg mb-2.5 flex items-center justify-between">
                 <span className="flex items-center gap-1 font-semibold">
-                  <KeyRound size={13} className="text-amber-700" /> Professional Arrived
+                  <KeyRound size={13} className="text-amber-700" /> {t('workerOnWay')}
                 </span>
                 <span className="font-mono font-bold bg-white px-1.5 py-0.5 rounded border border-amber-300">
                   PIN: {currentJob.arrivalOtp || '4829'}
@@ -95,24 +105,13 @@ export const CustomerHome: React.FC = () => {
               </div>
             )}
 
-            {currentJob.title.includes('Warranty') && (
-              <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 text-[11px] font-medium px-2.5 py-1 rounded-lg mb-2.5 flex items-center justify-between">
-                <span className="flex items-center gap-1 font-semibold">
-                  <ShieldCheck size={13} className="text-emerald-700" /> Subsidized Warranty Re-service
-                </span>
-                <span className="font-bold text-emerald-800 text-[10px]">
-                  55% Off (Cooperative Funded)
-                </span>
-              </div>
-            )}
-
             {currentJob.bulkOption === 'contractor' && (
               <div className="bg-slate-900 text-white text-[11px] font-medium px-2.5 py-1 rounded-lg mb-2.5 flex items-center justify-between">
                 <span className="flex items-center gap-1 font-semibold text-white">
-                  <ShieldCheck size={13} className="text-amber-400" /> Contractor Squad ({currentJob.workerCount || 3} Workers)
+                  <ShieldCheck size={13} className="text-amber-400" /> {t('licensedTeam')} ({currentJob.workerCount || 3})
                 </span>
                 <span className="font-semibold text-slate-300 text-[10px]">
-                  {currentJob.contractorName || 'Supervised Crew'}
+                  {currentJob.contractorName || 'Supervised'}
                 </span>
               </div>
             )}
@@ -120,10 +119,10 @@ export const CustomerHome: React.FC = () => {
             {currentJob.bulkOption === 'skill_pool' && (
               <div className="bg-blue-50 border border-blue-200 text-blue-950 text-[11px] font-medium px-2.5 py-1 rounded-lg mb-2.5 flex items-center justify-between">
                 <span className="flex items-center gap-1 font-semibold text-blue-900">
-                  <Sparkles size={13} className="text-blue-600" /> Skill Pool Squad ({currentJob.workerCount || 3} Specialists)
+                  <Sparkles size={13} className="text-blue-600" /> {t('skilledGroup')} ({currentJob.workerCount || 3})
                 </span>
                 <span className="font-bold text-blue-700 text-[10px]">
-                  Synchronized
+                  ✓ {t('synchronizedSquad')}
                 </span>
               </div>
             )}
@@ -137,11 +136,8 @@ export const CustomerHome: React.FC = () => {
               </div>
               <div className="text-right">
                 <span className="text-xs font-bold text-slate-900">₹{currentJob.budget}</span>
-                {currentJob.title.includes('Warranty') && (
-                  <span className="block text-[9px] text-emerald-700 font-semibold">Subsidized Fare</span>
-                )}
                 {currentJob.workerCount && currentJob.workerCount > 1 && (
-                  <span className="block text-[9px] text-slate-500 font-medium">Bulk ({currentJob.workerCount} workers)</span>
+                  <span className="block text-[9px] text-slate-500 font-medium">Bulk ({currentJob.workerCount})</span>
                 )}
               </div>
             </div>
@@ -149,7 +145,7 @@ export const CustomerHome: React.FC = () => {
             <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-slate-100 text-[11px]">
               <TierBadge tier={currentJob.tier || 1} size="sm" />
               <span className="text-slate-600 font-medium capitalize">
-                Status: {currentJob.status.replace('_', ' ')}
+                {t('status')}: {currentJob.status.replace('_', ' ')}
               </span>
             </div>
           </div>
@@ -159,8 +155,8 @@ export const CustomerHome: React.FC = () => {
       {/* SERVICES DIRECTORY */}
       <div className="mb-5">
         <div className="flex items-center justify-between mb-2 px-0.5">
-          <h2 className="text-xs font-bold text-slate-900 tracking-tight">Browse Services</h2>
-          <span className="text-[11px] text-slate-400">Fixed upfront pricing</span>
+          <h2 className="text-xs font-bold text-slate-900 tracking-tight">{t('browseServices')}</h2>
+          <span className="text-[11px] text-slate-400">{t('fixedUpfrontPricing')}</span>
         </div>
 
         <div className="grid grid-cols-2 gap-2.5">
@@ -204,10 +200,10 @@ export const CustomerHome: React.FC = () => {
           </div>
           <div>
             <h4 className="text-xs font-bold text-white tracking-tight flex items-center gap-1.5">
-              <span>Platform Safety & Rebooking Policy</span>
+              <span>{t('escrowTrustTitle')}</span>
             </h4>
             <p className="text-[11px] text-slate-300 leading-normal mt-0.5">
-              Personal contact sharing or off-platform cash bookings are strictly prohibited and result in permanent account deactivation. Always book verified partners through WorkEasy for verified escrow & insurance.
+              {t('policyNote')}
             </p>
           </div>
         </div>
