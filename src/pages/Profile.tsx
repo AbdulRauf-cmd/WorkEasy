@@ -4,10 +4,11 @@ import { useApp } from '../context/AppContext';
 import AnimatedPage from '../components/AnimatedPage';
 import WorkerProfile from './worker/WorkerProfile';
 import CooperativeDashboard from './admin/CooperativeDashboard';
-import { User, Settings, HelpCircle, MapPin, ShieldCheck, RotateCcw, ChevronRight } from 'lucide-react';
+import { User, HelpCircle, MapPin, ShieldCheck, RotateCcw, ChevronRight, Globe } from 'lucide-react';
+import LanguageSwitch from '../components/LanguageSwitch';
 
 const Profile: React.FC = () => {
-  const { state, resetDemo } = useApp();
+  const { state, resetDemo, t } = useApp();
   const navigate = useNavigate();
 
   if (state.role === 'worker') {
@@ -42,11 +43,20 @@ const Profile: React.FC = () => {
       <div className="bg-white rounded-xl p-3.5 border border-slate-200 shadow-2xs mb-3.5">
         <div className="flex items-center gap-2 mb-1">
           <ShieldCheck size={16} className="text-slate-900" />
-          <span className="text-xs font-bold text-slate-900">Cooperative Escrow Protected</span>
+          <span className="text-xs font-bold text-slate-900">{t('escrowTrustTitle')}</span>
         </div>
         <p className="text-[11px] text-slate-500 leading-relaxed">
-          All service bookings are secured under WorkEasy cooperative standards with upfront transparent pricing.
+          {t('escrowTrustDesc')}
         </p>
+      </div>
+
+      {/* Language Selection Card */}
+      <div className="bg-white rounded-xl p-3.5 border border-slate-200 shadow-2xs mb-3.5 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Globe size={16} className="text-slate-700" />
+          <span className="text-xs font-bold text-slate-900">{t('languageSelection')}</span>
+        </div>
+        <LanguageSwitch />
       </div>
 
       {/* Menu Options */}
@@ -54,7 +64,7 @@ const Profile: React.FC = () => {
         <div className="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50">
           <div className="flex items-center gap-2.5">
             <User size={16} className="text-slate-400" />
-            <span className="text-xs font-medium text-slate-800">Personal Information</span>
+            <span className="text-xs font-medium text-slate-800">{t('accountSettings')}</span>
           </div>
           <ChevronRight size={14} className="text-slate-300" />
         </div>
@@ -62,7 +72,7 @@ const Profile: React.FC = () => {
         <div className="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50">
           <div className="flex items-center gap-2.5">
             <MapPin size={16} className="text-slate-400" />
-            <span className="text-xs font-medium text-slate-800">Saved Addresses</span>
+            <span className="text-xs font-medium text-slate-800">{t('addressLabel')}</span>
           </div>
           <span className="text-xs text-slate-400">RS Puram</span>
         </div>
@@ -70,9 +80,9 @@ const Profile: React.FC = () => {
         <div className="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50">
           <div className="flex items-center gap-2.5">
             <HelpCircle size={16} className="text-slate-400" />
-            <span className="text-xs font-medium text-slate-800">Help & Support</span>
+            <span className="text-xs font-medium text-slate-800">{t('emergencySos')}</span>
           </div>
-          <span className="text-[11px] text-blue-600 font-semibold">24/7 Helpline</span>
+          <span className="text-[11px] text-emerald-700 font-semibold">24/7 Helpline</span>
         </div>
       </div>
 

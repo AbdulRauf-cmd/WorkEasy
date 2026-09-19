@@ -32,9 +32,10 @@ export const CustomerJobDetails: React.FC = () => {
     state, 
     approveExtension, 
     raiseWarrantyQuery, 
-    rebookSameWorkerFree,
+    rebookSameWorkerFree, 
     rebookWarrantyJob, 
-    closeWarrantyWithoutRebooking 
+    closeWarrantyWithoutRebooking,
+    t
   } = useApp();
   const { currentJob, workers } = state;
   const [copiedOtp, setCopiedOtp] = useState(false);
@@ -50,13 +51,13 @@ export const CustomerJobDetails: React.FC = () => {
         <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-400">
           <AlertCircle size={24} />
         </div>
-        <h2 className="text-base font-bold text-slate-900 mb-1">No Active Booking</h2>
-        <p className="text-xs text-slate-500 mb-4">You have no live service appointments in progress.</p>
+        <h2 className="text-base font-bold text-slate-900 mb-1">{t('noActiveBooking')}</h2>
+        <p className="text-xs text-slate-500 mb-4">{t('noActiveBookingDesc')}</p>
         <button 
           onClick={() => navigate('/post-job')} 
           className="bg-slate-900 text-white font-semibold px-4 py-2.5 rounded-lg text-xs active:scale-95 transition"
         >
-          Book a Service
+          {t('bookAService')}
         </button>
       </AnimatedPage>
     );
@@ -95,8 +96,8 @@ export const CustomerJobDetails: React.FC = () => {
           <ArrowLeft size={16} />
         </button>
         <div className="text-center">
-          <h1 className="text-xs font-bold text-slate-900">Booking #{currentJob.id.slice(-4).toUpperCase()}</h1>
-          <span className="text-[10px] text-slate-500 font-medium">Live Order Status</span>
+          <h1 className="text-xs font-bold text-slate-900">{t('bookingNumber')} #{currentJob.id.slice(-4).toUpperCase()}</h1>
+          <span className="text-[10px] text-slate-500 font-medium">{t('liveStatus')}</span>
         </div>
         <div className="w-7" />
       </div>
@@ -112,7 +113,7 @@ export const CustomerJobDetails: React.FC = () => {
             <div className="flex items-center justify-between mb-1">
               <span className="text-xs font-bold uppercase tracking-tight flex items-center gap-1.5">
                 <Clock size={14} className={currentJob.extensionRequest.status === 'pending' ? 'text-amber-700' : 'text-emerald-700'} />
-                {currentJob.extensionRequest.status === 'pending' ? 'Extension Requested by Partner' : 'Extension Approved ✓'}
+                {currentJob.extensionRequest.status === 'pending' ? t('extensionRequested') : t('extensionApproved')}
               </span>
               <span className="text-[11px] font-bold bg-white px-2 py-0.5 rounded border border-current">
                 {currentJob.extensionRequest.additionalTime}
@@ -130,7 +131,7 @@ export const CustomerJobDetails: React.FC = () => {
                 className="w-full py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold shadow-xs active:scale-98 transition flex items-center justify-center gap-1"
               >
                 <Check size={13} />
-                <span>Acknowledge & Approve Extension</span>
+                <span>{t('approveExtension')}</span>
               </button>
             )}
           </div>
@@ -142,15 +143,15 @@ export const CustomerJobDetails: React.FC = () => {
             <div className="flex items-center justify-between mb-2">
               <span className="text-[11px] font-bold text-amber-900 uppercase tracking-tight flex items-center gap-1">
                 <KeyRound size={14} className="text-amber-700" />
-                Partner Arrived at Destination
+                {t('partnerArrivedDestination')}
               </span>
               <span className="text-[10px] bg-amber-100 text-amber-800 font-semibold px-2 py-0.5 rounded">
-                Action Required
+                {t('actionRequired')}
               </span>
             </div>
 
             <p className="text-xs text-slate-600 mb-3 leading-normal">
-              Share this 4-digit start PIN with <strong className="text-slate-900">{worker?.name}</strong> to verify identity and start service.
+              {t('sharePinToStart')} (<strong className="text-slate-900">{worker?.name}</strong>)
             </p>
 
             {/* Clean PIN boxes */}
@@ -188,16 +189,16 @@ export const CustomerJobDetails: React.FC = () => {
           <div className="bg-slate-900 text-white rounded-xl p-4 shadow-sm flex items-center justify-between">
             <div>
               <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-tight block">
-                Service Completed
+                {t('timelineServiceCompleted')}
               </span>
-              <h3 className="text-xs font-bold text-white mt-0.5">Ready for Verification</h3>
-              <p className="text-[11px] text-slate-400">Inspect the work and release escrow payment</p>
+              <h3 className="text-xs font-bold text-white mt-0.5">{t('inspectCompletedWork')}</h3>
+              <p className="text-[11px] text-slate-400">{t('moneySafeNote')}</p>
             </div>
             <button
               onClick={() => navigate('/verify')}
               className="bg-white text-slate-900 font-bold px-3.5 py-2 rounded-lg text-xs shadow-xs active:scale-95 transition shrink-0"
             >
-              Verify & Pay
+              {t('workLooksGoodPay')}
             </button>
           </div>
         )}
@@ -208,10 +209,10 @@ export const CustomerJobDetails: React.FC = () => {
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
                 <ShieldCheck size={16} className="text-slate-900" />
-                2 to 4 Days Quality Guarantee
+                {t('qualityGuaranteeTitle')}
               </span>
               <span className="text-[10px] bg-emerald-50 text-emerald-800 font-semibold px-2 py-0.5 rounded border border-emerald-200">
-                Day 2 of 4 Active
+                {t('guaranteeActiveDays')}
               </span>
             </div>
 
@@ -219,14 +220,14 @@ export const CustomerJobDetails: React.FC = () => {
             {!currentJob.warrantyClaim && (
               <div>
                 <p className="text-xs text-slate-600 mb-3 leading-relaxed">
-                  If you notice a workmanship fault between <strong>Day 2 and Day 4</strong> after service (e.g. recurring leak or loose fitting), flag it here to choose among 3 cooperative rebooking resolution paths.
+                  {t('policyNote')}
                 </p>
                 <button
                   onClick={() => setShowWarrantyModal(true)}
                   className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold transition active:scale-98 flex items-center justify-center gap-1.5 shadow-xs"
                 >
                   <AlertTriangle size={13} className="text-amber-400" />
-                  <span>Flag Quality Fault (2–4 Day Window)</span>
+                  <span>{t('reportProblem')}</span>
                 </button>
               </div>
             )}
@@ -613,9 +614,9 @@ export const CustomerJobDetails: React.FC = () => {
           /* SOLO WORKER DISPLAY */
           <div>
             <div className="flex items-center justify-between mb-1.5 px-0.5">
-              <h3 className="font-bold text-slate-900 text-xs tracking-tight">Assigned Professional</h3>
+              <h3 className="font-bold text-slate-900 text-xs tracking-tight">{t('assignedPartner')}</h3>
               <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-semibold border border-emerald-100">
-                Verified Partner
+                {t('verified')}
               </span>
             </div>
             
@@ -627,13 +628,13 @@ export const CustomerJobDetails: React.FC = () => {
                 onClick={() => alert(`Calling partner ${worker.name}...`)}
                 className="py-2 px-3 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 hover:bg-slate-50 transition active:scale-98"
               >
-                <Phone size={13} /> Call Partner
+                <Phone size={13} /> {t('callPartner')}
               </button>
               <button 
                 onClick={() => alert(`Opening chat with ${worker.name}...`)}
                 className="py-2 px-3 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 hover:bg-slate-50 transition active:scale-98"
               >
-                <MessageSquare size={13} /> Chat
+                <MessageSquare size={13} /> {t('chatPartner')}
               </button>
             </div>
           </div>
@@ -641,7 +642,7 @@ export const CustomerJobDetails: React.FC = () => {
 
         {/* Real-time Order Progress */}
         <div className="bg-white rounded-xl p-4 border border-slate-200/90 shadow-2xs">
-          <h3 className="font-bold text-slate-900 text-xs tracking-tight mb-3">Service Timeline</h3>
+          <h3 className="font-bold text-slate-900 text-xs tracking-tight mb-3">{t('serviceTimeline')}</h3>
           <StatusTimeline currentStatus={currentJob.status} />
         </div>
       </div>

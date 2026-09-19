@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
-import { Users, Briefcase, CheckSquare, CheckCircle2, ShieldCheck, RefreshCw, Award } from 'lucide-react';
+import { Users, Briefcase, CheckSquare, CheckCircle2, ShieldCheck, RefreshCw, Award, Globe } from 'lucide-react';
+import { useApp } from '../../context/AppContext';
+import LanguageSwitch from '../../components/LanguageSwitch';
 
 const CooperativeDashboard: React.FC = () => {
+  const { t } = useApp();
   const [reviewed, setReviewed] = useState(false);
   const [reviewStatus, setReviewStatus] = useState<'approve' | 'reject' | null>(null);
 
@@ -20,10 +23,10 @@ const CooperativeDashboard: React.FC = () => {
   return (
     <AnimatedPage className="pb-16 pt-4 px-4 bg-slate-50 min-h-screen">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-3">
         <div>
-          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-tight">Operations Console</span>
-          <h1 className="text-base font-bold text-slate-900 tracking-tight mt-0.5">Cooperative Administration</h1>
+          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-tight">Console</span>
+          <h1 className="text-base font-bold text-slate-900 tracking-tight mt-0.5">{t('cooperativeGovernance')}</h1>
         </div>
 
         <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
@@ -31,21 +34,30 @@ const CooperativeDashboard: React.FC = () => {
         </div>
       </div>
 
+      {/* Language Switch Card */}
+      <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs mb-3.5 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Globe size={16} className="text-slate-700" />
+          <span className="text-xs font-bold text-slate-900">{t('languageSelection')}</span>
+        </div>
+        <LanguageSwitch />
+      </div>
+
       {/* Metrics */}
       <div className="grid grid-cols-3 gap-2 mb-4">
         <div className="bg-white p-3 rounded-xl border border-slate-200/80 shadow-2xs text-center">
           <span className="text-sm font-bold text-slate-900 block">4</span>
-          <span className="text-[10px] text-slate-400 uppercase font-semibold">Active Partners</span>
+          <span className="text-[10px] text-slate-400 uppercase font-semibold">{t('activePartnersMetric')}</span>
         </div>
 
         <div className="bg-white p-3 rounded-xl border border-slate-200/80 shadow-2xs text-center">
           <span className="text-sm font-bold text-slate-900 block">1</span>
-          <span className="text-[10px] text-slate-400 uppercase font-semibold">Live Booking</span>
+          <span className="text-[10px] text-slate-400 uppercase font-semibold">{t('activeBooking')}</span>
         </div>
 
         <div className="bg-white p-3 rounded-xl border border-slate-200/80 shadow-2xs text-center">
           <span className="text-sm font-bold text-emerald-700 block">₹18,450</span>
-          <span className="text-[10px] text-slate-400 uppercase font-semibold">Disbursed</span>
+          <span className="text-[10px] text-slate-400 uppercase font-semibold">{t('totalEscrowHeldMetric')}</span>
         </div>
       </div>
 

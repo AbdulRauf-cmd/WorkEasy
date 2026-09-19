@@ -3,28 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
-import { Clock, CheckCircle2, Plus, KeyRound, ChevronRight } from 'lucide-react';
+import { Plus, KeyRound } from 'lucide-react';
 
 const CustomerJobs: React.FC = () => {
-  const { state } = useApp();
+  const { state, t } = useApp();
   const navigate = useNavigate();
 
   return (
     <AnimatedPage className="pb-16 pt-4 px-4 bg-slate-50 min-h-screen">
       <div className="flex items-center justify-between mb-3">
-        <h1 className="text-base font-bold text-slate-900 tracking-tight">Your Bookings</h1>
+        <h1 className="text-base font-bold text-slate-900 tracking-tight">{t('orders')}</h1>
         <button
           onClick={() => navigate('/post-job')}
           className="text-xs font-semibold text-slate-900 bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 flex items-center gap-1 shadow-2xs hover:bg-slate-50 transition active:scale-95"
         >
-          <Plus size={14} /> Book Service
+          <Plus size={14} /> {t('bookAService')}
         </button>
       </div>
 
       {state.currentJob ? (
         <div className="mb-5">
           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight block mb-1.5">
-            Active Order
+            {t('activeBooking')}
           </span>
           <div 
             onClick={() => navigate('/job-details')}
@@ -35,14 +35,14 @@ const CustomerJobs: React.FC = () => {
                 <span className="flex items-center gap-1">
                   <KeyRound size={12} className="text-amber-700" /> Start PIN: {state.currentJob.arrivalOtp || '4829'}
                 </span>
-                <span className="text-[10px] underline">View Details →</span>
+                <span className="text-[10px] underline">{t('track')} →</span>
               </div>
             )}
 
             <div className="flex justify-between items-start mb-1.5">
               <div>
                 <h3 className="font-semibold text-xs text-slate-900">{state.currentJob.title}</h3>
-                <span className="text-[11px] text-slate-500">{state.currentJob.service} Service</span>
+                <span className="text-[11px] text-slate-500">{state.currentJob.service}</span>
               </div>
               <span className="text-xs font-bold text-slate-900">₹{state.currentJob.budget}</span>
             </div>
@@ -54,39 +54,39 @@ const CustomerJobs: React.FC = () => {
             <div className="flex justify-between items-center pt-2 border-t border-slate-100 text-[11px]">
               <TierBadge tier={state.currentJob.tier || 1} size="sm" />
               <span className="text-slate-500 font-medium capitalize">
-                Status: {state.currentJob.status.replace('_', ' ')}
+                {t('status')}: {state.currentJob.status.replace('_', ' ')}
               </span>
             </div>
           </div>
         </div>
       ) : (
         <div className="mb-5 text-center p-6 bg-white rounded-xl border border-dashed border-slate-200">
-          <p className="text-xs text-slate-500">No active bookings in progress.</p>
+          <p className="text-xs text-slate-500">{t('noActiveBookingDesc')}</p>
           <button 
             onClick={() => navigate('/post-job')}
             className="mt-2 text-xs font-semibold text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition"
           >
-            Book a Service
+            {t('bookAService')}
           </button>
         </div>
       )}
 
       <div>
         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight block mb-2">
-          Past Bookings
+          {t('activityHistoryTitle')}
         </span>
         <div className="space-y-2">
           <div className="bg-white p-3 rounded-xl border border-slate-200/90 shadow-2xs">
             <div className="flex justify-between items-start">
               <div>
                 <h3 className="font-semibold text-xs text-slate-900">Ceiling Fan Wiring & Repair</h3>
-                <p className="text-[10px] text-slate-400 mt-0.5">Arjun Raj (Level 3 Master Electrician)</p>
+                <p className="text-[10px] text-slate-400 mt-0.5">Arjun Raj · Level 3 Electrician</p>
               </div>
               <span className="text-xs font-bold text-slate-900">₹350</span>
             </div>
             <div className="text-[10px] text-slate-400 mt-2 flex justify-between items-center border-t border-slate-100 pt-1.5">
-              <span>Oct 14 · Completed</span>
-              <span className="text-emerald-700 font-medium">✓ Paid via Escrow</span>
+              <span>{t('timelineServiceCompleted')}</span>
+              <span className="text-emerald-700 font-medium">✓ {t('timelinePaymentReleased')}</span>
             </div>
           </div>
           
@@ -94,13 +94,13 @@ const CustomerJobs: React.FC = () => {
             <div className="flex justify-between items-start">
               <div>
                 <h3 className="font-semibold text-xs text-slate-900">Deep House Sanitization</h3>
-                <p className="text-[10px] text-slate-400 mt-0.5">Meena Devi (Level 1 Specialist)</p>
+                <p className="text-[10px] text-slate-400 mt-0.5">Meena Devi · Level 1 Specialist</p>
               </div>
               <span className="text-xs font-bold text-slate-900">₹1,200</span>
             </div>
             <div className="text-[10px] text-slate-400 mt-2 flex justify-between items-center border-t border-slate-100 pt-1.5">
-              <span>Sep 28 · Completed</span>
-              <span className="text-emerald-700 font-medium">✓ Paid via Escrow</span>
+              <span>{t('timelineServiceCompleted')}</span>
+              <span className="text-emerald-700 font-medium">✓ {t('timelinePaymentReleased')}</span>
             </div>
           </div>
         </div>
@@ -108,5 +108,4 @@ const CustomerJobs: React.FC = () => {
     </AnimatedPage>
   );
 };
-
 export default CustomerJobs;

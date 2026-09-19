@@ -219,8 +219,8 @@ export const PostJob: React.FC = () => {
         {step === 1 && (
           <div className="flex flex-col flex-1">
             <div className="mb-3">
-              <h2 className="text-base font-bold text-slate-900 tracking-tight">Select service category</h2>
-              <p className="text-xs text-slate-500">Standard cooperative labor rates based on skill level</p>
+              <h2 className="text-base font-bold text-slate-900 tracking-tight">{t('selectServiceCategory')}</h2>
+              <p className="text-xs text-slate-500">{t('standardCoopRates')}</p>
             </div>
 
             <div className="space-y-2 flex-1">
@@ -257,8 +257,8 @@ export const PostJob: React.FC = () => {
                     </div>
 
                     <div className="text-right">
-                      <span className="text-xs font-bold text-slate-900 block">From ₹{s.baseRate}</span>
-                      <span className="text-[10px] text-slate-400">Base Labor</span>
+                      <span className="text-xs font-bold text-slate-900 block">{t('fromRate')} ₹{s.baseRate}</span>
+                      <span className="text-[10px] text-slate-400">{t('baseLaborLabel')}</span>
                     </div>
                   </button>
                 );
@@ -271,8 +271,8 @@ export const PostJob: React.FC = () => {
         {step === 2 && (
           <div className="flex flex-col flex-1">
             <div className="mb-3">
-              <h2 className="text-base font-bold text-slate-900 tracking-tight">Task & Material Selection</h2>
-              <p className="text-xs text-slate-500">Specify requirements and who supplies replacement parts</p>
+              <h2 className="text-base font-bold text-slate-900 tracking-tight">{t('taskAndMaterials')}</h2>
+              <p className="text-xs text-slate-500">{t('specifyRequirements')}</p>
             </div>
 
             <div className="space-y-3 flex-1">
@@ -282,7 +282,7 @@ export const PostJob: React.FC = () => {
                   {/* Vehicle Type Selector */}
                   <div className="bg-white p-3.5 rounded-xl border border-slate-200/80">
                     <label className="block text-[11px] font-semibold text-slate-700 uppercase tracking-tight mb-2">
-                      Vehicle Type
+                      {t('vehicleType')}
                     </label>
                     <div className="grid grid-cols-2 gap-2">
                       <button
@@ -303,7 +303,7 @@ export const PostJob: React.FC = () => {
                           <Bike size={18} />
                         </div>
                         <div>
-                          <span className="text-xs font-bold block">2-Wheeler</span>
+                          <span className="text-xs font-bold block">{t('twoWheeler')}</span>
                           <span className="text-[10px] text-slate-400 font-normal">Bike / Scooter</span>
                         </div>
                       </button>
@@ -326,8 +326,8 @@ export const PostJob: React.FC = () => {
                           <Car size={18} />
                         </div>
                         <div>
-                          <span className="text-xs font-bold block">4-Wheeler</span>
-                          <span className="text-[10px] text-slate-400 font-normal">Car / SUV / Van</span>
+                          <span className="text-xs font-bold block">{t('fourWheeler')}</span>
+                          <span className="text-[10px] text-slate-400 font-normal">Car / SUV</span>
                         </div>
                       </button>
                     </div>
@@ -533,7 +533,7 @@ export const PostJob: React.FC = () => {
               {service !== 'Tyre Puncture' && (
               <div className="bg-white p-3.5 rounded-xl border border-slate-200/80">
                 <label className="block text-[11px] font-semibold text-slate-700 uppercase tracking-tight mb-2">
-                  Materials & Replacement Parts
+                  {t('materialsReplacementParts')}
                 </label>
 
                 <div className="space-y-2">
@@ -554,16 +554,16 @@ export const PostJob: React.FC = () => {
                       </div>
                       <div>
                         <span className="text-xs font-bold text-slate-900 block">
-                          I will provide materials (Labor Only)
+                          {t('iWillProvideParts')}
                         </span>
                         <p className="text-[11px] text-slate-500 mt-0.5 leading-tight">
-                          You provide the parts (switch, tap, valve). Partner brings tools only.
+                          {t('iWillProvidePartsDesc')}
                         </p>
                       </div>
                     </div>
 
                     <div className="text-right shrink-0 ml-2">
-                      <span className="text-xs font-bold text-emerald-700">₹0 extra</span>
+                      <span className="text-xs font-bold text-emerald-700">{t('partsFeeZero')}</span>
                       <span className="text-[10px] text-slate-400">Parts fee</span>
                     </div>
                   </div>
@@ -585,10 +585,10 @@ export const PostJob: React.FC = () => {
                       </div>
                       <div>
                         <span className="text-xs font-bold text-slate-900 block">
-                          Partner procures materials (Labor + Parts)
+                          {t('partnerProcuresParts')}
                         </span>
                         <p className="text-[11px] text-slate-500 mt-0.5 leading-tight">
-                          Partner buys & brings certified replacement parts ({currentServiceConfig.materialName}).
+                          {t('partnerProcuresPartsDesc')}
                         </p>
                       </div>
                     </div>
@@ -605,7 +605,7 @@ export const PostJob: React.FC = () => {
               {/* Specific Requirements */}
               <div className="bg-white p-3.5 rounded-xl border border-slate-200/80">
                 <label className="block text-[11px] font-semibold text-slate-700 uppercase tracking-tight mb-1">
-                  Specific Requirements / Dimensions
+                  {t('specificRequirements')}
                 </label>
                 <textarea 
                   value={description} 
@@ -621,11 +621,11 @@ export const PostJob: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <MapPin size={16} className="text-slate-400 shrink-0" />
                   <div>
-                    <span className="text-[10px] font-semibold uppercase text-slate-400 tracking-tight block">Address</span>
+                    <span className="text-[10px] font-semibold uppercase text-slate-400 tracking-tight block">{t('addressLabel')}</span>
                     <span className="text-xs font-semibold text-slate-900">{location}</span>
                   </div>
                 </div>
-                <span className="text-[10px] text-blue-600 font-semibold cursor-pointer">Change</span>
+                <span className="text-[10px] text-blue-600 font-semibold cursor-pointer">{t('change')}</span>
               </div>
             </div>
 
@@ -659,26 +659,29 @@ export const PostJob: React.FC = () => {
               {/* Date & Time Selection */}
               <div className="bg-white p-3 rounded-xl border border-slate-200/80 space-y-2.5">
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 uppercase tracking-tight mb-1">Date</label>
+                  <label className="block text-[11px] font-semibold text-slate-700 uppercase tracking-tight mb-1">{t('scheduleDate')}</label>
                   <div className="grid grid-cols-2 gap-2">
-                    {['Today', 'Tomorrow'].map((d) => (
+                    {[
+                      { id: 'Today', label: t('today') },
+                      { id: 'Tomorrow', label: t('tomorrow') },
+                    ].map((d) => (
                       <button 
-                        key={d} 
-                        onClick={() => setDate(d)} 
+                        key={d.id} 
+                        onClick={() => setDate(d.id)} 
                         className={`py-2 rounded-lg border text-xs font-semibold transition-all ${
-                          date === d 
+                          date === d.id 
                             ? 'border-slate-900 bg-slate-900 text-white shadow-2xs' 
                             : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
                         }`}
                       >
-                        {d}
+                        {d.label}
                       </button>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 uppercase tracking-tight mb-1">Time Window</label>
+                  <label className="block text-[11px] font-semibold text-slate-700 uppercase tracking-tight mb-1">{t('timeWindow')}</label>
                   <div className="grid grid-cols-3 gap-1.5">
                     {[
                       { id: 'Morning (09:00 - 12:00)', label: '09:00 - 12:00' }, 
@@ -940,7 +943,7 @@ export const PostJob: React.FC = () => {
               onClick={handleNext} 
               className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold text-xs transition active:scale-98 shadow-xs mt-3 flex items-center justify-center gap-1.5"
             >
-              <span>Review Booking (₹{totalBudget})</span>
+              <span>{t('reviewBooking')} (₹{totalBudget})</span>
               <ChevronRight size={14} />
             </button>
           </div>
@@ -950,13 +953,13 @@ export const PostJob: React.FC = () => {
         {step === 4 && (
           <div className="flex flex-col flex-1">
             <div className="mb-3">
-              <h2 className="text-base font-bold text-slate-900 tracking-tight">Booking Summary</h2>
-              <p className="text-xs text-slate-500">Inspect transparent fare breakdown and workforce dispatch</p>
+              <h2 className="text-base font-bold text-slate-900 tracking-tight">{t('bookingSummaryTitle')}</h2>
+              <p className="text-xs text-slate-500">{t('inspectFareSummary')}</p>
             </div>
 
             <div className="bg-white rounded-xl border border-slate-200/90 p-4 space-y-3 flex-1 shadow-2xs">
               <div className="flex justify-between items-center pb-2.5 border-b border-slate-100">
-                <span className="text-xs text-slate-500">Service Category</span>
+                <span className="text-xs text-slate-500">{t('serviceCategoryLabel')}</span>
                 <div className="flex items-center gap-1.5">
                   <TierBadge tier={computedTier} size="sm" />
                   <span className="font-semibold text-xs text-slate-900">{service}</span>
@@ -964,7 +967,7 @@ export const PostJob: React.FC = () => {
               </div>
 
               <div className="flex justify-between items-center pb-2.5 border-b border-slate-100">
-                <span className="text-xs text-slate-500">Workforce Model</span>
+                <span className="text-xs text-slate-500">{t('workforceModelLabel')}</span>
                 <span className="font-bold text-xs text-slate-900 text-right">
                   {isBulk 
                     ? (bulkOption === 'contractor' 
@@ -1035,7 +1038,7 @@ export const PostJob: React.FC = () => {
                     </div>
                     {materialOption === 'worker_procures' && (
                       <div className="flex justify-between text-slate-500">
-                        <span>Replacement Materials</span>
+                        <span>{t('replacementParts')}</span>
                         <span>₹{bulkFare.partsFee}</span>
                       </div>
                     )}
@@ -1043,16 +1046,16 @@ export const PostJob: React.FC = () => {
                 ) : (
                   <>
                     <div className="flex justify-between text-slate-500">
-                      <span>Standard Labor Charge (Level {computedTier})</span>
+                      <span>{t('baseLaborCharge')}</span>
                       <span>₹{soloFare.baseLaborRate}</span>
                     </div>
                     <div className="flex justify-between text-slate-500">
-                      <span>Distance Transit Allowance ({workerDistance} km @ ₹15/km)</span>
+                      <span>{t('transitAllowance')} ({workerDistance} km)</span>
                       <span>₹{soloFare.transitFee}</span>
                     </div>
                     {materialOption === 'worker_procures' && (
                       <div className="flex justify-between text-slate-500">
-                        <span>Replacement Parts / Materials</span>
+                        <span>{t('replacementParts')}</span>
                         <span>₹{soloFare.partsFee}</span>
                       </div>
                     )}
@@ -1060,12 +1063,12 @@ export const PostJob: React.FC = () => {
                 )}
                 
                 <div className="flex justify-between text-slate-500">
-                  <span>Platform Commission</span>
-                  <span className="text-emerald-700 font-medium">₹0 (Cooperative Model)</span>
+                  <span>{t('platformCommission')}</span>
+                  <span className="text-emerald-700 font-medium">{t('zeroCommissionNote')}</span>
                 </div>
 
                 <div className="flex justify-between items-center pt-2.5 border-t border-slate-100 text-sm font-bold text-slate-900">
-                  <span>Total Guaranteed Escrow</span>
+                  <span>{t('totalEscrowAmount')}</span>
                   <span className="text-base font-extrabold text-slate-900">₹{totalBudget}</span>
                 </div>
               </div>
@@ -1075,7 +1078,7 @@ export const PostJob: React.FC = () => {
               onClick={handlePost} 
               className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold text-xs mt-4 transition active:scale-98 shadow-sm flex items-center justify-center gap-1.5"
             >
-              <span>Confirm & Dispatch {isBulk ? (bulkOption === 'contractor' ? 'Contractor Crew' : `${workerCount} Pooled Workers`) : 'Partner'} (₹{totalBudget})</span>
+              <span>{t('confirmAndDispatch')} (₹{totalBudget})</span>
               <ChevronRight size={14} />
             </button>
           </div>

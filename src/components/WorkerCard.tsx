@@ -1,7 +1,8 @@
 import React from 'react';
 import { Worker } from '../types';
-import { Star, ShieldCheck, MapPin, CheckCircle2 } from 'lucide-react';
+import { Star, MapPin, CheckCircle2 } from 'lucide-react';
 import TierBadge from './TierBadge';
+import { useApp } from '../context/AppContext';
 
 interface Props {
   worker: Worker;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export default function WorkerCard({ worker, budget, showActions, onAccept }: Props) {
+  const { t } = useApp();
   const initials = worker.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
 
   return (
@@ -42,7 +44,7 @@ export default function WorkerCard({ worker, budget, showActions, onAccept }: Pr
                   {worker.rating.toFixed(1)}
                 </span>
                 <span className="text-slate-300">·</span>
-                <span>{worker.completedJobs} bookings</span>
+                <span>{worker.completedJobs} {t('completedJobsLabel')}</span>
                 <span className="text-slate-300">·</span>
                 <span>{worker.experience}y exp</span>
               </div>
@@ -51,7 +53,7 @@ export default function WorkerCard({ worker, budget, showActions, onAccept }: Pr
             {budget && (
               <div className="text-right shrink-0">
                 <span className="text-sm font-bold text-slate-900">₹{budget}</span>
-                <span className="block text-[10px] text-slate-400 font-normal">Fixed rate</span>
+                <span className="block text-[10px] text-slate-400 font-normal">{t('fixedPrice')}</span>
               </div>
             )}
           </div>

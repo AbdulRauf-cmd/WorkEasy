@@ -22,6 +22,9 @@ export interface Translations {
   fixedPrice: string;
   total: string;
   language: string;
+  change: string;
+  today: string;
+  tomorrow: string;
 
   // Role Switcher
   roleCustomer: string;
@@ -64,16 +67,33 @@ export interface Translations {
   stepDetails: string;
   stepFareDispatch: string;
   stepSummary: string;
-  whatNeedsFixing: string;
-  taskDescription: string;
-  addPhotoOptional: string;
-  whoBringsParts: string;
-  iHaveParts: string;
-  workerBringsParts: string;
-  standardCatalogRate: string;
-  partsNeeded: string;
-  quantity: string;
-  
+  selectServiceCategory: string;
+  standardCoopRates: string;
+  fromRate: string;
+  baseLaborLabel: string;
+  taskAndMaterials: string;
+  specifyRequirements: string;
+  vehicleType: string;
+  twoWheelerBike: string;
+  fourWheelerCar: string;
+  punctureServiceType: string;
+  materialsReplacementParts: string;
+  iWillProvideParts: string;
+  iWillProvidePartsDesc: string;
+  partnerProcuresParts: string;
+  partnerProcuresPartsDesc: string;
+  partsFeeZero: string;
+  specificRequirements: string;
+  addressLabel: string;
+  scheduleDate: string;
+  timeWindow: string;
+  bookingSummaryTitle: string;
+  inspectFareSummary: string;
+  workforceModelLabel: string;
+  serviceCategoryLabel: string;
+  confirmAndDispatchPartner: string;
+  reviewBooking: string;
+
   // Workforce Mode
   workforceRequirement: string;
   oneWorker: string;
@@ -129,6 +149,16 @@ export interface Translations {
   extensionRequested: string;
   extensionApproved: string;
   approveExtension: string;
+  noActiveBooking: string;
+  noActiveBookingDesc: string;
+  bookAService: string;
+  partnerArrivedDestination: string;
+  actionRequired: string;
+  sharePinToStart: string;
+  activeServiceInProgress: string;
+  callPartner: string;
+  chatPartner: string;
+  viewVerificationChecklist: string;
 
   // Verification & Before/After
   checkTheWork: string;
@@ -136,6 +166,13 @@ export interface Translations {
   afterWork: string;
   workLooksGoodPay: string;
   reportProblem: string;
+  serviceSignOffTitle: string;
+  inspectCompletedWork: string;
+  taskExecutedSpec: string;
+  worksiteCleaned: string;
+  settlementAmount: string;
+  approveWorkReleasePayment: string;
+  reportIncompleteService: string;
 
   // Rating & Tip
   jobFinished: string;
@@ -146,8 +183,11 @@ export interface Translations {
   addTipOptional: string;
   tipGuarantee: string;
   submitFeedback: string;
+  paymentReleasedTitle: string;
+  tipAddedNote: string;
+  backToHome: string;
 
-  // Quality Guarantee
+  // Quality Guarantee & Warranty
   qualityGuaranteeTitle: string;
   guaranteeActiveDays: string;
   option1SameWorker: string;
@@ -157,6 +197,96 @@ export interface Translations {
   option3Refund: string;
   option3Desc: string;
   submitClaim: string;
+  warrantyQueryModalTitle: string;
+  freeRevisitBtn: string;
+  subsidizedRebookBtn: string;
+  directRefundBtn: string;
+  closeWarrantyModal: string;
+
+  // Classification Screen
+  matchingCertifiedPro: string;
+  auditingSafetyAvailability: string;
+  stepBookingRegistered: string;
+  stepBookingRegisteredDetail: string;
+  stepSkillAudit: string;
+  stepSkillAuditDetail: string;
+  stepAccreditationTier: string;
+  stepAccreditationTierDetail: string;
+  stepPartnerAllocation: string;
+  stepPartnerAllocationDetail: string;
+
+  // Matched Partner Screen
+  partnerAssignedTitle: string;
+  partnerPreparingDispatch: string;
+  verificationSafetySummary: string;
+  verifiedPartnerItem: string;
+  verifiedPartnerItemDesc: string;
+  certifiedSkillItem: string;
+  certifiedSkillItemDesc: string;
+  transparentDispatchItem: string;
+  transparentDispatchItemDesc: string;
+  trackLiveBookingBtn: string;
+
+  // Timeline & Tiers
+  timelineBookingPlaced: string;
+  timelineBookingPlacedDetail: string;
+  timelinePartnerAssigned: string;
+  timelinePartnerAssignedDetail: string;
+  timelineBookingConfirmed: string;
+  timelineBookingConfirmedDetail: string;
+  timelinePartnerArrived: string;
+  timelinePartnerArrivedDetail: string;
+  timelineServiceInProgress: string;
+  timelineServiceInProgressDetail: string;
+  timelineServiceCompleted: string;
+  timelineServiceCompletedDetail: string;
+  timelinePaymentReleased: string;
+  timelinePaymentReleasedDetail: string;
+  tierBasic: string;
+  tierSkilled: string;
+  tierSpecialized: string;
+
+  // Worker Screens
+  workerHub: string;
+  onlineStatus: string;
+  offlineStatus: string;
+  todaysPayout: string;
+  ratingLabel: string;
+  completedJobsLabel: string;
+  activeAssignment: string;
+  continueActiveAssignment: string;
+  availableDispatchRequests: string;
+  roundRobinQueue: string;
+  acceptDispatchBtn: string;
+  declineDispatchBtn: string;
+  navigatingToCustomer: string;
+  arrivedAtCustomerSite: string;
+  enterStartPin: string;
+  verifyPinAndStart: string;
+  requestTimeExtension: string;
+  captureBeforePhoto: string;
+  captureAfterPhoto: string;
+  markTaskComplete: string;
+  payoutSummary: string;
+  zeroCommissionKeep100: string;
+
+  // Profile & Activity
+  customerProfileTitle: string;
+  accountSettings: string;
+  cooperativeId: string;
+  languageSelection: string;
+  emergencySos: string;
+  activityHistoryTitle: string;
+  noPastBookingsYet: string;
+  viewReceipt: string;
+
+  // Admin / Cooperative Dashboard
+  cooperativeGovernance: string;
+  activePartnersMetric: string;
+  totalEscrowHeldMetric: string;
+  fairRotationRate: string;
+  zeroCommissionSaved: string;
+  liveAuditLog: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -181,6 +311,9 @@ export const translations: Record<Language, Translations> = {
     fixedPrice: 'Fixed Price',
     total: 'Total',
     language: 'Language',
+    change: 'Change',
+    today: 'Today',
+    tomorrow: 'Tomorrow',
 
     roleCustomer: 'Customer',
     roleWorker: 'Partner',
@@ -219,15 +352,32 @@ export const translations: Record<Language, Translations> = {
     stepDetails: 'Task & Materials',
     stepFareDispatch: 'Fare & Dispatch',
     stepSummary: 'Summary',
-    whatNeedsFixing: 'What needs fixing?',
-    taskDescription: 'Describe the task in detail',
-    addPhotoOptional: 'Add Photo of Issue (Optional)',
-    whoBringsParts: 'Who brings the replacement parts?',
-    iHaveParts: 'I have parts',
-    workerBringsParts: 'Worker brings parts',
-    standardCatalogRate: '+ Standard catalog rate',
-    partsNeeded: 'Parts Needed',
-    quantity: 'Quantity',
+    selectServiceCategory: 'Select service category',
+    standardCoopRates: 'Standard cooperative labor rates based on skill level',
+    fromRate: 'From',
+    baseLaborLabel: 'Base Labor',
+    taskAndMaterials: 'Task & Material Selection',
+    specifyRequirements: 'Specify requirements and who supplies replacement parts',
+    vehicleType: 'Vehicle Type',
+    twoWheelerBike: '2-Wheeler (Motorbike / Scooter)',
+    fourWheelerCar: '4-Wheeler (Car / SUV)',
+    punctureServiceType: 'Puncture Service Type',
+    materialsReplacementParts: 'Materials & Replacement Parts',
+    iWillProvideParts: 'I will provide materials (Labor Only)',
+    iWillProvidePartsDesc: 'You provide the parts (switch, tap, valve). Partner brings tools only.',
+    partnerProcuresParts: 'Partner procures materials (Labor + Parts)',
+    partnerProcuresPartsDesc: 'Partner buys & brings certified replacement parts at standard catalog price.',
+    partsFeeZero: '₹0 extra',
+    specificRequirements: 'Specific Requirements / Dimensions',
+    addressLabel: 'Service Address',
+    scheduleDate: 'Service Date',
+    timeWindow: 'Time Window',
+    bookingSummaryTitle: 'Booking Summary',
+    inspectFareSummary: 'Inspect transparent fare breakdown and workforce dispatch',
+    workforceModelLabel: 'Workforce Model',
+    serviceCategoryLabel: 'Service Category',
+    confirmAndDispatchPartner: 'Confirm & Dispatch Partner',
+    reviewBooking: 'Review Booking',
 
     workforceRequirement: 'Workforce Requirement',
     oneWorker: 'One Solo Professional',
@@ -280,12 +430,29 @@ export const translations: Record<Language, Translations> = {
     extensionRequested: 'Partner Requested Time Extension',
     extensionApproved: 'Extension Approved ✓',
     approveExtension: 'Acknowledge & Approve Extension',
+    noActiveBooking: 'No Active Booking',
+    noActiveBookingDesc: 'You have no live service appointments in progress.',
+    bookAService: 'Book a Service',
+    partnerArrivedDestination: 'Partner Arrived at Destination',
+    actionRequired: 'Action Required',
+    sharePinToStart: 'Share this start PIN with partner to begin work',
+    activeServiceInProgress: 'Service in Progress',
+    callPartner: 'Call Partner',
+    chatPartner: 'Chat Message',
+    viewVerificationChecklist: 'View Sign-off Checklist',
 
     checkTheWork: 'Check The Work & Release Payment',
     beforeWork: 'BEFORE WORK',
     afterWork: 'AFTER WORK',
     workLooksGoodPay: 'Work Looks Good — Release Payment',
     reportProblem: 'Something not right? Flag Quality Fault',
+    serviceSignOffTitle: 'Service Sign-Off',
+    inspectCompletedWork: 'Please inspect the completed work',
+    taskExecutedSpec: 'Task executed according to specifications',
+    worksiteCleaned: 'Worksite cleaned & restored',
+    settlementAmount: 'Settlement Amount',
+    approveWorkReleasePayment: 'Approve Work & Release Payment',
+    reportIncompleteService: 'Report Incomplete Service',
 
     jobFinished: 'Service Completed & Paid!',
     rateExperience: 'How was your experience?',
@@ -295,6 +462,9 @@ export const translations: Record<Language, Translations> = {
     addTipOptional: 'Add a Tip for Partner (Optional)',
     tipGuarantee: '💚 100% of your tip goes straight to the partner.',
     submitFeedback: 'Submit Rating & Feedback',
+    paymentReleasedTitle: 'Payment Released to Partner',
+    tipAddedNote: 'Your cooperative bonus has been added to their wallet.',
+    backToHome: 'Back to Home',
 
     qualityGuaranteeTitle: '2 to 4 Days Quality Guarantee',
     guaranteeActiveDays: 'Covered for 3 more days (Day 2 of 4)',
@@ -305,6 +475,90 @@ export const translations: Record<Language, Translations> = {
     option3Refund: 'Option 3: Escrow Settlement & Refund',
     option3Desc: 'Receive direct cooperative refund to your wallet without rebooking.',
     submitClaim: 'Submit Resolution Claim',
+    warrantyQueryModalTitle: 'Cooperative Guarantee Resolution',
+    freeRevisitBtn: 'Request Free Revisit (₹0)',
+    subsidizedRebookBtn: 'Book Senior Specialist (55% Off)',
+    directRefundBtn: 'Instant Escrow Refund',
+    closeWarrantyModal: 'Close & Dismiss',
+
+    matchingCertifiedPro: 'Matching Certified Professional',
+    auditingSafetyAvailability: 'Auditing safety requirements & partner availability',
+    stepBookingRegistered: 'Booking Registered',
+    stepBookingRegisteredDetail: 'Task recorded in local cooperative registry',
+    stepSkillAudit: 'Skill Qualification Audit',
+    stepSkillAuditDetail: 'Classifying technical safety requirements',
+    stepAccreditationTier: 'Accreditation Tier Assigned',
+    stepAccreditationTierDetail: 'Mandatory certification gate verified',
+    stepPartnerAllocation: 'Partner Allocation',
+    stepPartnerAllocationDetail: 'Selecting available partner via fair rotation',
+
+    partnerAssignedTitle: 'Partner Assigned',
+    partnerPreparingDispatch: 'Your service professional is preparing for dispatch',
+    verificationSafetySummary: 'Verification & Safety Summary',
+    verifiedPartnerItem: 'Verified Partner',
+    verifiedPartnerItemDesc: 'Government ID & police background verification completed',
+    certifiedSkillItem: 'Certified Technical Skill',
+    certifiedSkillItemDesc: 'Plumbing & Trade certification audited by cooperative',
+    transparentDispatchItem: 'Transparent Dispatch',
+    transparentDispatchItemDesc: 'Assigned through non-discriminatory rotation algorithm',
+    trackLiveBookingBtn: 'Track Live Booking & View PIN',
+
+    timelineBookingPlaced: 'Booking Placed',
+    timelineBookingPlacedDetail: 'Service request submitted',
+    timelinePartnerAssigned: 'Partner Assigned',
+    timelinePartnerAssignedDetail: 'Verified professional selected',
+    timelineBookingConfirmed: 'Booking Confirmed',
+    timelineBookingConfirmedDetail: 'Partner en route to location',
+    timelinePartnerArrived: 'Partner Arrived (PIN Verification)',
+    timelinePartnerArrivedDetail: 'Verification required to begin work',
+    timelineServiceInProgress: 'Service in Progress',
+    timelineServiceInProgressDetail: 'Work actively being performed',
+    timelineServiceCompleted: 'Service Completed',
+    timelineServiceCompletedDetail: 'Partner submitted final sign-off',
+    timelinePaymentReleased: 'Payment Released',
+    timelinePaymentReleasedDetail: 'Quality verified & payment settled',
+    tierBasic: 'Basic (Level 1)',
+    tierSkilled: 'Skilled (Level 2)',
+    tierSpecialized: 'Specialized (Level 3)',
+
+    workerHub: 'Coimbatore Hub',
+    onlineStatus: 'Online',
+    offlineStatus: 'Offline',
+    todaysPayout: "Today's Payout",
+    ratingLabel: 'Rating',
+    completedJobsLabel: 'Completed',
+    activeAssignment: 'Active Assignment',
+    continueActiveAssignment: 'Continue →',
+    availableDispatchRequests: 'Available Dispatch Requests',
+    roundRobinQueue: 'Round-Robin Fair Queue',
+    acceptDispatchBtn: 'Accept Assignment',
+    declineDispatchBtn: 'Decline',
+    navigatingToCustomer: 'Navigating to Customer Location',
+    arrivedAtCustomerSite: 'I Have Arrived at Location',
+    enterStartPin: 'Enter Customer 4-Digit Start PIN',
+    verifyPinAndStart: 'Verify PIN & Begin Work',
+    requestTimeExtension: 'Request 30m Time Extension',
+    captureBeforePhoto: 'Take Before-Work Photo',
+    captureAfterPhoto: 'Take After-Work Photo',
+    markTaskComplete: 'Submit Task for Customer Review',
+    payoutSummary: 'Daily Earnings Breakdown',
+    zeroCommissionKeep100: '0% platform cut — You keep 100% of your labor earnings.',
+
+    customerProfileTitle: 'User Profile & Settings',
+    accountSettings: 'Account Settings',
+    cooperativeId: 'Cooperative Member ID',
+    languageSelection: 'Language / மொழி / भाषा',
+    emergencySos: 'Emergency Safety Hotline (24x7)',
+    activityHistoryTitle: 'Activity & Booking History',
+    noPastBookingsYet: 'No past booking records yet.',
+    viewReceipt: 'View Full Invoice',
+
+    cooperativeGovernance: 'Cooperative Oversight & Fair Dispatch',
+    activePartnersMetric: 'Active Certified Partners',
+    totalEscrowHeldMetric: 'Total Escrow Protected',
+    fairRotationRate: 'Fair Rotation Compliance',
+    zeroCommissionSaved: 'Saved in Zero Commissions',
+    liveAuditLog: 'Live Algorithmic Allocation Stream',
   },
 
   ta: {
@@ -328,6 +582,9 @@ export const translations: Record<Language, Translations> = {
     fixedPrice: 'நிலையான கட்டணம்',
     total: 'மொத்தம்',
     language: 'மொழி',
+    change: 'மாற்று',
+    today: 'இன்று',
+    tomorrow: 'நாளை',
 
     roleCustomer: 'வாடிக்கையாளர்',
     roleWorker: 'தொழிலாளி',
@@ -366,15 +623,32 @@ export const translations: Record<Language, Translations> = {
     stepDetails: 'வேலை & பொருட்கள்',
     stepFareDispatch: 'கட்டணம் & ஒதுக்கீடு',
     stepSummary: 'சுருக்கம்',
-    whatNeedsFixing: 'என்ன பழுது சரிசெய்ய வேண்டும்?',
-    taskDescription: 'தேவையான வேலையை விவரிக்கவும்',
-    addPhotoOptional: 'பிரச்சனையின் புகைப்படம் (விருப்பத்தேர்வு)',
-    whoBringsParts: 'மாற்றுப் பொருட்களை யார் கொண்டு வருவது?',
-    iHaveParts: 'என்னிடம் பொருட்கள் உள்ளன',
-    workerBringsParts: 'தொழிலாளி வாங்கி வருவார்',
-    standardCatalogRate: '+ நிலையான பட்டியல் விலை',
-    partsNeeded: 'தேவைப்படும் பொருட்கள்',
-    quantity: 'எண்ணிக்கை',
+    selectServiceCategory: 'சேவை வகையைத் தேர்ந்தெடுக்கவும்',
+    standardCoopRates: 'திறன் நிலையின் அடிப்படையிலான நிலையான கூட்டுறவு கட்டணம்',
+    fromRate: 'தொடக்கக் கட்டணம்',
+    baseLaborLabel: 'அடிப்படை உழைப்பு',
+    taskAndMaterials: 'வேலை & பொருட்கள் தேர்வு',
+    specifyRequirements: 'வேலையை விவரித்து, மாற்றுப் பொருட்கள் யார் வழங்குவது எனக் குறிப்பிடவும்',
+    vehicleType: 'வாகன வகை',
+    twoWheelerBike: 'இருசக்கர வாகனம் (பைக் / ஸ்கூட்டர்)',
+    fourWheelerCar: 'நான்கு சக்கர வாகனம் (கார் / எஸ்யூவி)',
+    punctureServiceType: 'பஞ்சர் சேவை வகை',
+    materialsReplacementParts: 'பொருட்கள் மற்றும் உதிரிபாகங்கள்',
+    iWillProvideParts: 'பொருட்களை நானே வழங்குவேன் (வேலை மட்டும்)',
+    iWillProvidePartsDesc: 'பொருட்களை நீங்கள் வழங்க வேண்டும். தொழிலாளி கருவிகளை மட்டுமே கொண்டு வருவார்.',
+    partnerProcuresParts: 'தொழிலாளியே வாங்கி வருவார் (வேலை + பொருட்கள்)',
+    partnerProcuresPartsDesc: 'தொழிலாளி சான்றளிக்கப்பட்ட பாகங்களை நிலையான விலையில் வாங்கி வருவார்.',
+    partsFeeZero: '₹0 கூடுதல்',
+    specificRequirements: 'குறிப்பிட்ட தேவைகள் / விவரங்கள்',
+    addressLabel: 'சேவை முகவரி',
+    scheduleDate: 'சேவை தேதி',
+    timeWindow: 'நேர இடைவெளி',
+    bookingSummaryTitle: 'முன்பதிவு சுருக்கம்',
+    inspectFareSummary: 'வெளிப்படையான கட்டண விபரம் மற்றும் தொழிலாளர் ஒதுக்கீடு',
+    workforceModelLabel: 'தொழிலாளர் வகை',
+    serviceCategoryLabel: 'சேவை வகை',
+    confirmAndDispatchPartner: 'உறுதி செய்து தொழிலாளரை வரவழைக்க',
+    reviewBooking: 'முன்பதிவைச் சரிபார்க்கவும்',
 
     workforceRequirement: 'தொழிலாளர் தேவை',
     oneWorker: 'ஒரு தனி நிபுணர்',
@@ -427,12 +701,29 @@ export const translations: Record<Language, Translations> = {
     extensionRequested: 'தொழிலாளி கூடுதல் நேரம் கோரியுள்ளார்',
     extensionApproved: 'கூடுதல் நேரம் அனுமதிக்கப்பட்டது ✓',
     approveExtension: 'கூடுதல் நேரத்தை அங்கீகரிக்கவும்',
+    noActiveBooking: 'செயலில் முன்பதிவு இல்லை',
+    noActiveBookingDesc: 'தற்போது எந்தவொரு நேரலை சேவையும் நிலுவையில் இல்லை.',
+    bookAService: 'சேவையை முன்பதிவு செய்க',
+    partnerArrivedDestination: 'தொழிலாளி உங்கள் இருப்பிடத்திற்கு வந்துவிட்டார்',
+    actionRequired: 'உடனடி நடவடிக்கை தேவை',
+    sharePinToStart: 'வேலையைத் தொடங்க இந்த ரகசிய பின்னை தொழிலாளரிடம் பகிரவும்',
+    activeServiceInProgress: 'வேலை நடைபெற்று வருகிறது',
+    callPartner: 'அழைக்கவும்',
+    chatPartner: 'செய்தி அனுப்பவும்',
+    viewVerificationChecklist: 'சரிபார்ப்புப் பட்டியலைக் காண்க',
 
     checkTheWork: 'வேலையைச் சரிபார்த்து கட்டணம் செலுத்தவும்',
     beforeWork: 'வேலைக்கு முன்',
     afterWork: 'வேலைக்கு பின்',
     workLooksGoodPay: 'வேலை நன்றாக உள்ளது — பணம் செலுத்துக',
     reportProblem: 'சரியாக இல்லையா? குறை பதிவு செய்',
+    serviceSignOffTitle: 'சேவை சரிபார்ப்பு & ஒப்புதல்',
+    inspectCompletedWork: 'தயவுசெய்து முடிக்கப்பட்ட வேலையை ஆய்வு செய்யவும்',
+    taskExecutedSpec: 'கூறியபடி வேலை சரியாக செய்யப்பட்டுள்ளது',
+    worksiteCleaned: 'வேலை செய்த இடம் சுத்தமாக விடப்பட்டுள்ளது',
+    settlementAmount: 'வழங்கப்படும் தொகை',
+    approveWorkReleasePayment: 'வேலையை ஏற்று பணத்தை விடுவிக்கவும்',
+    reportIncompleteService: 'குறைபாட்டைப் புகாரளிக்கவும்',
 
     jobFinished: 'வேலை முடிந்தது & பணம் செலுத்தப்பட்டது!',
     rateExperience: 'உங்கள் அனுபவம் எப்படி இருந்தது?',
@@ -442,6 +733,9 @@ export const translations: Record<Language, Translations> = {
     addTipOptional: 'கூடுதல் டிப்ஸ் (விருப்பத்தேர்வு)',
     tipGuarantee: '💚 நீங்கள் கொடுக்கும் டிப்ஸ் 100% தொழிலாளருக்கே செல்கிறது.',
     submitFeedback: 'மதிப்பீடு சமர்ப்பிக்கவும்',
+    paymentReleasedTitle: 'தொழிலாளிக்கு பணம் விடுவிக்கப்பட்டது',
+    tipAddedNote: 'உங்கள் கூடுதல் போனஸ் தொழிலாளியின் கணக்கில் சேர்க்கப்பட்டது.',
+    backToHome: 'முகப்புக்குத் திரும்பு',
 
     qualityGuaranteeTitle: '2 முதல் 4 நாட்கள் தர உத்தரவாதம்',
     guaranteeActiveDays: 'இன்னும் 3 நாட்களுக்கு பாதுகாப்பு உண்டு',
@@ -452,6 +746,90 @@ export const translations: Record<Language, Translations> = {
     option3Refund: 'விருப்பம் 3: பணத்தை திரும்பப் பெற்று முடிக்க',
     option3Desc: 'கூட்டுறவு நிதியிலிருந்து உங்கள் பணப்பைக்கு பணம் திரும்பப் பெறப்படும்.',
     submitClaim: 'உத்தரவாதக் கோரிக்கையை அனுப்பு',
+    warrantyQueryModalTitle: 'கூட்டுறவு உத்தரவாத தீர்வு',
+    freeRevisitBtn: 'இலவச மறுபார்வை கோரவும் (₹0)',
+    subsidizedRebookBtn: 'மூத்த நிபுணரை புக் செய்க (55% தள்ளுபடி)',
+    directRefundBtn: 'உடனடி எஸ்க்ரோ ரீஃபண்ட்',
+    closeWarrantyModal: 'மூடுக',
+
+    matchingCertifiedPro: 'சான்றளிக்கப்பட்ட நிபுணர் ஒதுக்கீடு',
+    auditingSafetyAvailability: 'பாதுகாப்புத் தேவைகள் & தொழிலாளர் இருப்பு சரிபார்க்கப்படுகிறது',
+    stepBookingRegistered: 'முன்பதிவு பதிவு செய்யப்பட்டது',
+    stepBookingRegisteredDetail: 'உள்ளூர் கூட்டுறவுப் பதிவேட்டில் பணி குறிக்கப்பட்டது',
+    stepSkillAudit: 'திறன் தகுதி தணிக்கை',
+    stepSkillAuditDetail: 'தொழில்நுட்ப பாதுகாப்புத் தேவைகளை வகைப்படுத்துதல்',
+    stepAccreditationTier: 'அங்கீகார நிலை நிர்ணயிக்கப்பட்டது',
+    stepAccreditationTierDetail: 'கட்டாயச் சான்றிதழ் சரிபார்க்கப்பட்டது',
+    stepPartnerAllocation: 'தொழிலாளி ஒதுக்கீடு',
+    stepPartnerAllocationDetail: 'சுழற்சி முறையில் சிறந்த நிபுணர் ஒதுக்கப்படுகிறார்',
+
+    partnerAssignedTitle: 'தொழிலாளி ஒதுக்கப்பட்டார்',
+    partnerPreparingDispatch: 'தொழிலாளி புறப்படத் தயாராகிறார்',
+    verificationSafetySummary: 'சரிபார்ப்பு & பாதுகாப்புச் சுருக்கம்',
+    verifiedPartnerItem: 'சரிபார்க்கப்பட்ட தொழிலாளி',
+    verifiedPartnerItemDesc: 'அரசு அடையாள அட்டை & காவல் துறைப் பின்னணி சரிபார்க்கப்பட்டது',
+    certifiedSkillItem: 'சான்றளிக்கப்பட்ட தொழில்நுட்பத் திறன்',
+    certifiedSkillItemDesc: 'கூட்டுறவால் தணிக்கை செய்யப்பட்ட தொழில் சான்றிதழ்',
+    transparentDispatchItem: 'வெளிப்படையான ஒதுக்கீடு',
+    transparentDispatchItemDesc: 'பாகுபாடற்ற சுழற்சி முறை அல்காரிதம் மூலம் நியமிக்கப்பட்டார்',
+    trackLiveBookingBtn: 'நேரலையாகக் கண்காணிக்க & பின்னைப் பார்க்க',
+
+    timelineBookingPlaced: 'முன்பதிவு செய்யப்பட்டது',
+    timelineBookingPlacedDetail: 'சேவைக் கோரிக்கை சமர்ப்பிக்கப்பட்டது',
+    timelinePartnerAssigned: 'தொழிலாளி ஒதுக்கப்பட்டார்',
+    timelinePartnerAssignedDetail: 'சரிபார்க்கப்பட்ட நிபுணர் தேர்வு செய்யப்பட்டார்',
+    timelineBookingConfirmed: 'முன்பதிவு உறுதியானது',
+    timelineBookingConfirmedDetail: 'தொழிலாளி உங்கள் இடத்தை நோக்கி வருகிறார்',
+    timelinePartnerArrived: 'தொழிலாளி வந்தார் (பின் சரிபார்ப்பு)',
+    timelinePartnerArrivedDetail: 'வேலையைத் தொடங்க சரிபார்ப்பு அவசியம்',
+    timelineServiceInProgress: 'வேலை நடைபெறுகிறது',
+    timelineServiceInProgressDetail: 'பணி தீவிரமாக மேற்கொள்ளப்படுகிறது',
+    timelineServiceCompleted: 'வேலை முடிந்தது',
+    timelineServiceCompletedDetail: 'தொழிலாளி இறுதி ஒப்புதலைச் சமர்ப்பித்தார்',
+    timelinePaymentReleased: 'பணம் வழங்கப்பட்டது',
+    timelinePaymentReleasedDetail: 'தரம் சரிபார்க்கப்பட்டு பணம் விடுவிக்கப்பட்டது',
+    tierBasic: 'அடிப்படை (நிலை 1)',
+    tierSkilled: 'திறமையான (நிலை 2)',
+    tierSpecialized: 'சிறப்பு நிபுணர் (நிலை 3)',
+
+    workerHub: 'கோயம்புத்தூர் மையம்',
+    onlineStatus: 'ஆன்லைன்',
+    offlineStatus: 'ஆஃப்லைன்',
+    todaysPayout: 'இன்றைய வருமானம்',
+    ratingLabel: 'மதிப்பீடு',
+    completedJobsLabel: 'முடித்தவை',
+    activeAssignment: 'செயலில் உள்ள பணி',
+    continueActiveAssignment: 'தொடரவும் →',
+    availableDispatchRequests: 'கிடைக்கக்கூடிய பணிக் கோரிக்கைகள்',
+    roundRobinQueue: 'நியாயமான சுழற்சி வரிசை',
+    acceptDispatchBtn: 'பணியை ஏற்கவும்',
+    declineDispatchBtn: 'நிராகரி',
+    navigatingToCustomer: 'வாடிக்கையாளர் இருப்பிடத்திற்குச் செல்லுதல்',
+    arrivedAtCustomerSite: 'நான் இருப்பிடத்தை அடைந்துவிட்டேன்',
+    enterStartPin: 'வாடிக்கையாளரின் 4-இலக்க பின்னை உள்ளிடவும்',
+    verifyPinAndStart: 'பின்னைச் சரிபார்த்து பணியைத் தொடங்கவும்',
+    requestTimeExtension: '30 நிமிட கூடுதல் நேரம் கோரவும்',
+    captureBeforePhoto: 'வேலைக்கு முந்தைய புகைப்படம் எடுக்கவும்',
+    captureAfterPhoto: 'வேலைக்கு பிந்தைய புகைப்படம் எடுக்கவும்',
+    markTaskComplete: 'பணியை ஒப்புதலுக்கு அனுப்பவும்',
+    payoutSummary: 'தினசரி வருமான விவரம்',
+    zeroCommissionKeep100: '0% கமிஷன் — உங்கள் உழைப்பின் 100% வருமானம் உங்களுக்கே.',
+
+    customerProfileTitle: 'பயனர் சுயவிவரம் & அமைப்புகள்',
+    accountSettings: 'கணக்கு அமைப்புகள்',
+    cooperativeId: 'கூட்டுறவு உறுப்பினர் எண்',
+    languageSelection: 'மொழி / Language / भाषा',
+    emergencySos: 'அவசர உதவி எண் (24x7)',
+    activityHistoryTitle: 'செயல்பாடு & முன்பதிவு வரலாறு',
+    noPastBookingsYet: 'முந்தைய பதிவுகள் எதுவும் இல்லை.',
+    viewReceipt: 'முழு ரசீதைப் பார்க்கவும்',
+
+    cooperativeGovernance: 'கூட்டுறவு நிர்வாகம் & நியாயமான ஒதுக்கீடு',
+    activePartnersMetric: 'செயலில் உள்ள சான்றளிக்கப்பட்ட தொழிலாளர்கள்',
+    totalEscrowHeldMetric: 'பாதுகாக்கப்பட்ட எஸ்க்ரோ நிதி',
+    fairRotationRate: 'சுழற்சி முறை இணக்கம்',
+    zeroCommissionSaved: 'கமிஷன் இல்லாததால் மிச்சமான தொகை',
+    liveAuditLog: 'நேரலை ஒதுக்கீட்டுப் பதிவு',
   },
 
   hi: {
@@ -475,6 +853,9 @@ export const translations: Record<Language, Translations> = {
     fixedPrice: 'निश्चित किराया',
     total: 'कुल',
     language: 'भाषा',
+    change: 'बदलें',
+    today: 'आज',
+    tomorrow: 'कल',
 
     roleCustomer: 'ग्राहक',
     roleWorker: 'पार्टनर',
@@ -513,15 +894,32 @@ export const translations: Record<Language, Translations> = {
     stepDetails: 'काम और सामग्री',
     stepFareDispatch: 'किराया व आवंटन',
     stepSummary: 'विवरण',
-    whatNeedsFixing: 'क्या मरम्मत करवानी है?',
-    taskDescription: 'काम का विवरण लिखें',
-    addPhotoOptional: 'समस्या का फोटो जोड़ें (वैकल्पिक)',
-    whoBringsParts: 'सामान कौन लाएगा?',
-    iHaveParts: 'मेरे पास सामान है',
-    workerBringsParts: 'कारीगर लेकर आएगा',
-    standardCatalogRate: '+ मानक कैटलॉग मूल्य',
-    partsNeeded: 'आवश्यक पार्ट्स',
-    quantity: 'मात्रा',
+    selectServiceCategory: 'सेवा श्रेणी चुनें',
+    standardCoopRates: 'कौशल स्तर के अनुसार मानक सहकारी मजदूरी दरें',
+    fromRate: 'शुरुआती दर',
+    baseLaborLabel: 'मानक मजदूरी',
+    taskAndMaterials: 'काम और सामग्री चयन',
+    specifyRequirements: 'आवश्यकताएं बताएं और सामग्री कौन लाएगा चुनें',
+    vehicleType: 'वाहन का प्रकार',
+    twoWheelerBike: '2-पहिया (बाइक / स्कूटर)',
+    fourWheelerCar: '4-पहिया (कार / एसयूवी)',
+    punctureServiceType: 'पंचर सेवा का प्रकार',
+    materialsReplacementParts: 'सामग्री और स्पेयर पार्ट्स',
+    iWillProvideParts: 'सामान मैं दूंगा (केवल मजदूरी)',
+    iWillProvidePartsDesc: 'पार्ट्स आप उपलब्ध कराएंगे। कारीगर केवल उपकरण लाएगा।',
+    partnerProcuresParts: 'कारीगर सामान लेकर आएगा (मजदूरी + पार्ट्स)',
+    partnerProcuresPartsDesc: 'कारीगर मानक कैटलॉग दर पर प्रमाणित पार्ट्स खरीद कर लाएगा।',
+    partsFeeZero: '₹0 अतिरिक्त',
+    specificRequirements: 'विशेष निर्देश / विवरण',
+    addressLabel: 'सेवा का पता',
+    scheduleDate: 'सेवा की तारीख',
+    timeWindow: 'समय स्लॉट',
+    bookingSummaryTitle: 'बुकिंग सारांश',
+    inspectFareSummary: 'पारदर्शी किराया विवरण और कारीगर आवंटन जांचें',
+    workforceModelLabel: 'कारीगर मॉडल',
+    serviceCategoryLabel: 'सेवा श्रेणी',
+    confirmAndDispatchPartner: 'पुष्टि करें और कारीगर बुलाएं',
+    reviewBooking: 'बुकिंग की समीक्षा करें',
 
     workforceRequirement: 'आवश्यक कारीगर',
     oneWorker: 'एक स्वतंत्र कुशल कारीगर',
@@ -574,12 +972,29 @@ export const translations: Record<Language, Translations> = {
     extensionRequested: 'कारीगर ने अतिरिक्त समय मांगा है',
     extensionApproved: 'अतिरिक्त समय स्वीकृत ✓',
     approveExtension: 'अतिरिक्त समय स्वीकार करें',
+    noActiveBooking: 'कोई सक्रिय बुकिंग नहीं है',
+    noActiveBookingDesc: 'वर्तमान में कोई सेवा प्रगति में नहीं है।',
+    bookAService: 'सेवा बुक करें',
+    partnerArrivedDestination: 'कारीगर आपके पते पर पहुंच गया है',
+    actionRequired: 'कार्रवाई आवश्यक',
+    sharePinToStart: 'काम शुरू करने के लिए यह पिन कारीगर को बताएं',
+    activeServiceInProgress: 'सेवा प्रगति पर है',
+    callPartner: 'कॉल करें',
+    chatPartner: 'मैसेज भेजें',
+    viewVerificationChecklist: 'सत्यापन चेकलिस्ट देखें',
 
     checkTheWork: 'काम जांचें और भुगतान रिलीज करें',
     beforeWork: 'काम से पहले',
     afterWork: 'काम के बाद',
     workLooksGoodPay: 'काम बढ़िया है — भुगतान करें',
     reportProblem: 'कोई समस्या है? शिकायत दर्ज करें',
+    serviceSignOffTitle: 'सेवा सत्यापन व स्वीकृति',
+    inspectCompletedWork: 'कृपया पूरे किए गए काम का निरीक्षण करें',
+    taskExecutedSpec: 'निर्देशानुसार काम पूरा किया गया है',
+    worksiteCleaned: 'कार्यस्थल को साफ-सुथरा कर दिया गया है',
+    settlementAmount: 'भुगतान राशि',
+    approveWorkReleasePayment: 'काम स्वीकार करें और भुगतान जारी करें',
+    reportIncompleteService: 'अधूरे काम की रिपोर्ट करें',
 
     jobFinished: 'काम पूरा हुआ और भुगतान हो गया!',
     rateExperience: 'आपका अनुभव कैसा रहा?',
@@ -589,6 +1004,9 @@ export const translations: Record<Language, Translations> = {
     addTipOptional: 'कारीगर के लिए टिप (वैकल्पिक)',
     tipGuarantee: '💚 आपकी 100% टिप सीधे कारीगर को मिलती है।',
     submitFeedback: 'रेटिंग सबमिट करें',
+    paymentReleasedTitle: 'कारीगर को भुगतान जारी कर दिया गया',
+    tipAddedNote: 'आपका अतिरिक्त बोनस कारीगर के वॉलेट में जोड़ दिया गया है।',
+    backToHome: 'होम पर वापस जाएं',
 
     qualityGuaranteeTitle: '2 से 4 दिन की गुणवत्ता गारंटी',
     guaranteeActiveDays: '3 और दिनों के लिए सुरक्षित (दिन 2/4)',
@@ -599,6 +1017,90 @@ export const translations: Record<Language, Translations> = {
     option3Refund: 'विकल्प 3: रिफंड और समाधान',
     option3Desc: 'सहकारी फंड से सीधे आपके वॉलेट में राशि वापस की जाएगी।',
     submitClaim: 'गारंटी क्लेम सबमिट करें',
+    warrantyQueryModalTitle: 'सहकारी गारंटी समाधान',
+    freeRevisitBtn: 'निःशुल्क दौरा मांगें (₹0)',
+    subsidizedRebookBtn: 'सीनियर कारीगर बुक करें (55% छूट)',
+    directRefundBtn: 'तुरंत एस्क्रो रिफंड',
+    closeWarrantyModal: 'बंद करें',
+
+    matchingCertifiedPro: 'प्रमाणित कारीगर का मिलान',
+    auditingSafetyAvailability: 'सुरक्षा आवश्यकताओं और कारीगर की उपलब्धता की जांच',
+    stepBookingRegistered: 'बुकिंग पंजीकृत',
+    stepBookingRegisteredDetail: 'कार्य स्थानीय सहकारी रजिस्टर में दर्ज',
+    stepSkillAudit: 'कौशल योग्यता ऑडिट',
+    stepSkillAuditDetail: 'तकनीकी सुरक्षा आवश्यकताओं का वर्गीकरण',
+    stepAccreditationTier: 'मान्यता स्तर निर्धारित',
+    stepAccreditationTierDetail: 'अनिवार्य प्रमाणीकरण सत्यापित',
+    stepPartnerAllocation: 'कारीगर आवंटन',
+    stepPartnerAllocationDetail: 'निष्पक्ष रोटेशन द्वारा उपलब्ध कारीगर का चयन',
+
+    partnerAssignedTitle: 'कारीगर आवंटित',
+    partnerPreparingDispatch: 'आपके कारीगर प्रस्थान की तैयारी कर रहे हैं',
+    verificationSafetySummary: 'सत्यापन एवं सुरक्षा सारांश',
+    verifiedPartnerItem: 'सत्यापित कारीगर',
+    verifiedPartnerItemDesc: 'सरकारी पहचान पत्र एवं पुलिस रिकॉर्ड सत्यापन पूर्ण',
+    certifiedSkillItem: 'प्रमाणित तकनीकी कौशल',
+    certifiedSkillItemDesc: 'सहकारी समिति द्वारा सत्यापित ट्रेड सर्टिफिकेशन',
+    transparentDispatchItem: 'पारदर्शी आवंटन',
+    transparentDispatchItemDesc: 'बिना भेदभाव के रोटेशन एल्गोरिदम द्वारा आवंटित',
+    trackLiveBookingBtn: 'लाइव बुकिंग ट्रैक करें और पिन देखें',
+
+    timelineBookingPlaced: 'बुकिंग दर्ज',
+    timelineBookingPlacedDetail: 'सेवा अनुरोध सबमिट किया गया',
+    timelinePartnerAssigned: 'कारीगर आवंटित',
+    timelinePartnerAssignedDetail: 'सत्यापित कारीगर चुना गया',
+    timelineBookingConfirmed: 'बुकिंग पुष्ट',
+    timelineBookingConfirmedDetail: 'कारीगर आपके स्थान के लिए रवाना',
+    timelinePartnerArrived: 'कारीगर पहुंचा (पिन सत्यापन)',
+    timelinePartnerArrivedDetail: 'काम शुरू करने के लिए सत्यापन आवश्यक',
+    timelineServiceInProgress: 'सेवा प्रगति पर',
+    timelineServiceInProgressDetail: 'काम सक्रिय रूप से किया जा रहा है',
+    timelineServiceCompleted: 'काम पूरा हुआ',
+    timelineServiceCompletedDetail: 'कारीगर ने अंतिम साइन-ऑफ सबमिट किया',
+    timelinePaymentReleased: 'भुगतान जारी',
+    timelinePaymentReleasedDetail: 'गुणवत्ता सत्यापित और भुगतान निपटाया गया',
+    tierBasic: 'बुनियादी (स्तर 1)',
+    tierSkilled: 'कुशल (स्तर 2)',
+    tierSpecialized: 'विशेषज्ञ (स्तर 3)',
+
+    workerHub: 'कोयंबटूर हब',
+    onlineStatus: 'ऑनलाइन',
+    offlineStatus: 'ऑफ़लाइन',
+    todaysPayout: 'आज की कमाई',
+    ratingLabel: 'रेटिंग',
+    completedJobsLabel: 'पूरे कार्य',
+    activeAssignment: 'सक्रिय असाइनमेंट',
+    continueActiveAssignment: 'आगे बढ़ें →',
+    availableDispatchRequests: 'उपलब्ध प्रेषण अनुरोध',
+    roundRobinQueue: 'निष्पक्ष राउंड-रॉबिन कतार',
+    acceptDispatchBtn: 'काम स्वीकार करें',
+    declineDispatchBtn: 'अस्वीकार',
+    navigatingToCustomer: 'ग्राहक के स्थान पर नेविगेट कर रहे हैं',
+    arrivedAtCustomerSite: 'मैं स्थान पर पहुंच गया हूं',
+    enterStartPin: 'ग्राहक का 4-अंकों का स्टार्ट पिन दर्ज करें',
+    verifyPinAndStart: 'पिन सत्यापित करें और काम शुरू करें',
+    requestTimeExtension: '30 मिनट अतिरिक्त समय मांगें',
+    captureBeforePhoto: 'काम से पहले की फोटो लें',
+    captureAfterPhoto: 'काम के बाद की फोटो लें',
+    markTaskComplete: 'ग्राहक समीक्षा के लिए सबमिट करें',
+    payoutSummary: 'दैनिक आय विवरण',
+    zeroCommissionKeep100: '0% कमीशन — आपकी मेहनत की 100% कमाई आपकी।',
+
+    customerProfileTitle: 'उपयोगकर्ता प्रोफ़ाइल और सेटिंग्स',
+    accountSettings: 'खाता सेटिंग्स',
+    cooperativeId: 'सहकारी सदस्य आईडी',
+    languageSelection: 'भाषा / மொழி / Language',
+    emergencySos: 'आपातकालीन सहायता हेल्पलाइन (24x7)',
+    activityHistoryTitle: 'गतिविधि और बुकिंग इतिहास',
+    noPastBookingsYet: 'अभी तक कोई पुराना रिकॉर्ड नहीं है।',
+    viewReceipt: 'पूरा चालान देखें',
+
+    cooperativeGovernance: 'सहकारी शासन और निष्पक्ष आवंटन',
+    activePartnersMetric: 'सक्रिय प्रमाणित कारीगर',
+    totalEscrowHeldMetric: 'सुरक्षित एस्क्रो राशि',
+    fairRotationRate: 'निष्पक्ष रोटेशन अनुपालन',
+    zeroCommissionSaved: 'कमीशन न कटने से बचत',
+    liveAuditLog: 'लाइव आवंटन स्ट्रीम',
   },
 };
 

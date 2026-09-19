@@ -18,9 +18,11 @@ import {
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { ServiceType } from '../../types';
+import LanguageSwitch from '../../components/LanguageSwitch';
+import { Globe } from 'lucide-react';
 
 export const WorkerProfile: React.FC = () => {
-  const { state, requestMentorship, logMentorshipHours, upgradeApprenticeTier } = useApp();
+  const { state, requestMentorship, logMentorshipHours, upgradeApprenticeTier, t } = useApp();
   
   // Choose which worker profile to view for demonstration (Ramesh Kumar L2, Suresh Babu L1, Meena Devi L1)
   const [activeWorkerId, setActiveWorkerId] = useState<string>('w4'); // Suresh Babu L1 by default to showcase low-level tutoring
@@ -86,7 +88,7 @@ export const WorkerProfile: React.FC = () => {
             <h1 className="text-sm font-bold text-slate-900">{currentWorker.name}</h1>
             <CheckCircle2 size={14} className="text-emerald-600" />
           </div>
-          <p className="text-xs text-slate-500">{currentWorker.skill} Specialist · Coimbatore Hub</p>
+          <p className="text-xs text-slate-500">{currentWorker.skill} · {t('workerHub')}</p>
           <div className="mt-1 flex items-center gap-1.5">
             <TierBadge tier={currentWorker.tier} size="sm" />
             <span className="text-[10px] text-slate-400">Partner #{currentWorker.id.toUpperCase()}</span>
@@ -94,26 +96,35 @@ export const WorkerProfile: React.FC = () => {
         </div>
       </div>
 
+      {/* Language Switch Card */}
+      <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs mb-3.5 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Globe size={16} className="text-slate-700" />
+          <span className="text-xs font-bold text-slate-900">{t('languageSelection')}</span>
+        </div>
+        <LanguageSwitch />
+      </div>
+
       {/* Stats Summary */}
       <div className="grid grid-cols-3 gap-2.5 mb-3.5">
         <div className="bg-white p-3 rounded-xl border border-slate-200/80 text-center shadow-2xs">
-          <span className="text-[10px] text-slate-400 uppercase font-semibold block mb-0.5">Rating</span>
+          <span className="text-[10px] text-slate-400 uppercase font-semibold block mb-0.5">{t('ratingLabel')}</span>
           <span className="font-bold text-slate-900 text-sm flex items-center justify-center gap-0.5">
             {currentWorker.rating} <Star size={12} className="text-amber-400 fill-amber-400" />
           </span>
-          <span className="text-[10px] text-slate-400">Cooperative Audited</span>
+          <span className="text-[10px] text-slate-400">Audited</span>
         </div>
 
         <div className="bg-white p-3 rounded-xl border border-slate-200/80 text-center shadow-2xs">
           <span className="text-[10px] text-slate-400 uppercase font-semibold block mb-0.5">Experience</span>
           <span className="font-bold text-slate-900 text-sm block">{currentWorker.experience} Yrs</span>
-          <span className="text-[10px] text-slate-400">Verified</span>
+          <span className="text-[10px] text-slate-400">{t('verified')}</span>
         </div>
 
         <div className="bg-white p-3 rounded-xl border border-slate-200/80 text-center shadow-2xs">
-          <span className="text-[10px] text-slate-400 uppercase font-semibold block mb-0.5">Bookings</span>
+          <span className="text-[10px] text-slate-400 uppercase font-semibold block mb-0.5">{t('completedJobsLabel')}</span>
           <span className="font-bold text-slate-900 text-sm block">{currentWorker.completedJobs}</span>
-          <span className="text-[10px] text-slate-400">Completed</span>
+          <span className="text-[10px] text-slate-400">{t('done')}</span>
         </div>
       </div>
 

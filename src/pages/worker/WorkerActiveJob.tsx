@@ -4,10 +4,10 @@ import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
 import StatusTimeline from '../../components/StatusTimeline';
-import { MapPin, Phone, ShieldCheck, KeyRound, Check, AlertCircle, ArrowRight, Navigation, Clock, CheckCircle2 } from 'lucide-react';
+import { MapPin, Phone, KeyRound, AlertCircle, Navigation, Clock, CheckCircle2 } from 'lucide-react';
 
 const WorkerActiveJob: React.FC = () => {
-  const { state, markArrived, verifyArrivalOtp, startJob, requestExtension } = useApp();
+  const { state, markArrived, verifyArrivalOtp, requestExtension, t } = useApp();
   const navigate = useNavigate();
   const job = state.currentJob;
 
@@ -20,7 +20,6 @@ const WorkerActiveJob: React.FC = () => {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [otpError, setOtpError] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
-  const [otpSuccess, setOtpSuccess] = useState(false);
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -40,13 +39,13 @@ const WorkerActiveJob: React.FC = () => {
         <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-3 text-slate-400">
           <AlertCircle size={24} />
         </div>
-        <h2 className="text-base font-bold text-slate-900 mb-1">No Active Assignment</h2>
-        <p className="text-xs text-slate-500 mb-4">You have no live bookings assigned right now.</p>
+        <h2 className="text-base font-bold text-slate-900 mb-1">{t('noActiveBooking')}</h2>
+        <p className="text-xs text-slate-500 mb-4">{t('noActiveBookingDesc')}</p>
         <button 
           onClick={() => navigate('/')}
           className="bg-slate-900 text-white font-semibold px-4 py-2.5 rounded-lg text-xs active:scale-95 transition"
         >
-          View Available Requests
+          {t('availableDispatchRequests')}
         </button>
       </AnimatedPage>
     );
@@ -101,12 +100,7 @@ const WorkerActiveJob: React.FC = () => {
     setTimeout(() => {
       const isValid = verifyArrivalOtp(fullOtp);
       setIsVerifying(false);
-      if (isValid) {
-        setOtpSuccess(true);
-        setTimeout(() => {
-          setOtpSuccess(false);
-        }, 1000);
-      } else {
+      if (!isValid) {
         setOtpError('Invalid PIN code. Please confirm with the customer.');
       }
     }, 450);
@@ -118,18 +112,18 @@ const WorkerActiveJob: React.FC = () => {
       <div className="bg-white rounded-xl shadow-2xs border border-slate-200/90 p-4 mb-3.5">
         <div className="flex items-start justify-between mb-2">
           <div>
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Active Task</span>
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">{t('activeAssignment')}</span>
             <h1 className="text-sm font-bold text-slate-900 mt-0.5">{job.title}</h1>
           </div>
           <div className="text-right">
             <span className="text-sm font-bold text-slate-900">₹{job.budget}</span>
-            <span className="block text-[10px] text-slate-400 font-normal">Payout</span>
+            <span className="block text-[10px] text-slate-400 font-normal">{t('fixedPrice')}</span>
           </div>
         </div>
 
         <div className="flex items-center gap-2 mb-3">
           <TierBadge tier={job.tier || 2} size="sm" />
-          <span className="text-[11px] text-slate-500 font-medium">Fixed rate guaranteed</span>
+          <span className="text-[11px] text-slate-500 font-medium">{t('zeroCommissionKeep100')}</span>
         </div>
         
         {/* Customer Location Info */}
@@ -147,7 +141,7 @@ const WorkerActiveJob: React.FC = () => {
                 onClick={() => alert(`Calling customer ${state.customer.name}...`)}
                 className="px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-[11px] font-semibold flex items-center gap-1 transition"
               >
-                <Phone size={12} /> Call
+                <Phone size={12} /> {t('call')}
               </button>
               <button 
                 onClick={() => alert("Opening GPS navigation...")}
@@ -175,7 +169,7 @@ const WorkerActiveJob: React.FC = () => {
         {job.status === 'accepted' && (
           <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
             <div className="mb-3">
-              <h3 className="text-xs font-bold text-slate-900">En Route to Customer</h3>
+              <h3 className="text-xs font-bold text-slate-900">{t('navigatingToCustomer')}</h3>
               <p className="text-[11px] text-slate-500">Tap below once you have arrived at {state.customer.name}'s door.</p>
             </div>
 
@@ -183,7 +177,7 @@ const WorkerActiveJob: React.FC = () => {
               onClick={() => markArrived()}
               className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 rounded-lg text-xs shadow-xs transition active:scale-98"
             >
-              Mark Arrived at Location
+              {t('arrivedAtCustomerSite')}
             </button>
           </div>
         )}
@@ -194,9 +188,9 @@ const WorkerActiveJob: React.FC = () => {
             <div className="mb-3">
               <div className="flex items-center gap-1.5 mb-1">
                 <KeyRound size={15} className="text-slate-900" />
-                <h3 className="font-bold text-xs text-slate-900">Enter Customer Start PIN</h3>
+                <h3 className="font-bold text-xs text-slate-900">{t('enterStartPin')}</h3>
               </div>
-              <p className="text-[11px] text-slate-500">Ask {state.customer.name} for the 4-digit PIN on their screen to start the job.</p>
+              <p className="text-[11px] text-slate-500">{t('sharePinToStart')}</p>
             </div>
 
             {/* 4 Digit Boxes */}
@@ -241,7 +235,7 @@ const WorkerActiveJob: React.FC = () => {
               onClick={handleVerifyOtp}
               className="w-full bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white font-semibold py-3 rounded-lg text-xs shadow-xs transition active:scale-98"
             >
-              {isVerifying ? 'Verifying PIN...' : 'Verify PIN & Start Service'}
+              {isVerifying ? 'Verifying...' : t('verifyPinAndStart')}
             </button>
           </div>
         )}
@@ -252,9 +246,9 @@ const WorkerActiveJob: React.FC = () => {
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 uppercase tracking-tight">
-                  Service In Progress
+                  {t('timelineServiceInProgress')}
                 </span>
-                <h3 className="font-semibold text-xs text-slate-900 mt-1">Performing Plumbing Repair</h3>
+                <h3 className="font-semibold text-xs text-slate-900 mt-1">{job.title}</h3>
               </div>
               <span className="text-[11px] font-mono text-slate-500">PIN Verified ✓</span>
             </div>
@@ -269,7 +263,7 @@ const WorkerActiveJob: React.FC = () => {
                 <div className="flex items-center justify-between font-bold mb-0.5">
                   <span className="flex items-center gap-1">
                     <Clock size={13} />
-                    Extension {job.extensionRequest.status === 'approved' ? 'Approved ✓' : 'Requested ⏳'}
+                    {t('extensionRequested')}: {job.extensionRequest.status === 'approved' ? 'Approved ✓' : 'Pending ⏳'}
                   </span>
                   <span className="text-[10px] bg-white px-1.5 py-0.5 rounded border border-current">
                     {job.extensionRequest.additionalTime}
@@ -282,7 +276,7 @@ const WorkerActiveJob: React.FC = () => {
             )}
 
             <p className="text-[11px] text-slate-500">
-              When finished, submit the completion notice so the customer can inspect work and release payment.
+              {t('timelineServiceCompletedDetail')}
             </p>
 
             <div className="space-y-2 pt-1">
@@ -290,7 +284,7 @@ const WorkerActiveJob: React.FC = () => {
                 onClick={() => navigate('/worker/completion')}
                 className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 rounded-lg text-xs shadow-xs transition active:scale-98"
               >
-                Mark Work as Completed
+                {t('markTaskComplete')}
               </button>
 
               {/* REQUEST EXTENSION BUTTON */}
@@ -300,7 +294,7 @@ const WorkerActiveJob: React.FC = () => {
                   className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-lg text-xs transition flex items-center justify-center gap-1.5"
                 >
                   <Clock size={13} />
-                  <span>Need More Time? Request Extension</span>
+                  <span>{t('requestTimeExtension')}</span>
                 </button>
               )}
             </div>
@@ -310,9 +304,9 @@ const WorkerActiveJob: React.FC = () => {
         {/* STEP 4: COMPLETED -> AWAITING VERIFICATION */}
         {job.status === 'completed' && (
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-3.5 text-center">
-            <p className="font-semibold text-xs text-amber-900">Awaiting Customer Verification</p>
+            <p className="font-semibold text-xs text-amber-900">{t('timelineServiceCompleted')}</p>
             <p className="text-[11px] text-amber-700 mt-0.5">
-              Payment of ₹{job.budget} will settle directly upon customer approval.
+              ₹{job.budget} {t('timelinePaymentReleasedDetail')}
             </p>
           </div>
         )}
@@ -321,8 +315,8 @@ const WorkerActiveJob: React.FC = () => {
         {job.status === 'verified' && (
           <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 text-center">
             <CheckCircle2 size={20} className="text-emerald-600 mx-auto mb-1" />
-            <p className="font-semibold text-xs text-emerald-900">Service Complete & Payout Released</p>
-            <p className="text-[11px] text-emerald-700 mt-0.5">₹{job.budget} deposited to your partner balance.</p>
+            <p className="font-semibold text-xs text-emerald-900">{t('timelinePaymentReleased')}</p>
+            <p className="text-[11px] text-emerald-700 mt-0.5">₹{job.budget} deposited directly.</p>
           </div>
         )}
       </div>
@@ -334,7 +328,7 @@ const WorkerActiveJob: React.FC = () => {
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-1.5">
                 <Clock size={16} className="text-slate-900" />
-                <h3 className="text-xs font-bold text-slate-900">Request Extension / Extra Time</h3>
+                <h3 className="text-xs font-bold text-slate-900">{t('requestTimeExtension')}</h3>
               </div>
               <button 
                 onClick={() => setShowExtensionModal(false)}
@@ -344,101 +338,51 @@ const WorkerActiveJob: React.FC = () => {
               </button>
             </div>
 
-            <p className="text-[11px] text-slate-500 mb-3">
-              Notify {state.customer.name} why additional labor hours or curing time are required.
-            </p>
-
-            <div className="space-y-3 mb-4">
+            <div className="space-y-3">
               <div>
-                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-tight block mb-1.5">
-                  Additional Time Needed
+                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-tight mb-1">
+                  Additional Time Needed:
                 </label>
-                <div className="grid grid-cols-2 gap-1.5">
-                  {['+45 mins', '+2 hours', '+4 hours', '+1 day'].map((t) => (
+                <div className="grid grid-cols-3 gap-2">
+                  {['+15 mins', '+30 mins', '+45 mins'].map((tm) => (
                     <button
-                      key={t}
+                      key={tm}
                       type="button"
-                      onClick={() => setExtensionTime(t)}
-                      className={`py-2 px-2.5 rounded-lg border text-xs font-semibold text-center transition ${
-                        extensionTime === t 
-                          ? 'border-slate-900 bg-slate-900 text-white' 
-                          : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
+                      onClick={() => setExtensionTime(tm)}
+                      className={`py-2 rounded-lg text-xs font-semibold border transition ${
+                        extensionTime === tm
+                          ? 'border-slate-900 bg-slate-900 text-white'
+                          : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      {t}
+                      {tm}
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-tight block mb-1.5">
-                  Reason for Extension
+                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-tight mb-1">
+                  Technical Reason:
                 </label>
-                <div className="space-y-1.5 mb-2">
-                  {[
-                    'Adhesive / Sealant requires curing before pressure test',
-                    'Discovered hidden pipe corrosion needing extra labor',
-                    'Waiting for specialized hardware part delivery'
-                  ].map((r) => (
-                    <button
-                      key={r}
-                      type="button"
-                      onClick={() => setExtensionReason(r)}
-                      className={`w-full text-left p-2 rounded-lg border text-[11px] transition ${
-                        extensionReason === r 
-                          ? 'border-slate-900 bg-slate-50 text-slate-900 font-medium' 
-                          : 'border-slate-200 text-slate-600 hover:bg-slate-50'
-                      }`}
-                    >
-                      {r}
-                    </button>
-                  ))}
-                </div>
-
                 <textarea
                   value={extensionReason}
                   onChange={(e) => setExtensionReason(e.target.value)}
                   rows={2}
-                  placeholder="Or enter custom reason for customer..."
-                  className="w-full p-2 text-xs bg-slate-50 border border-slate-200 rounded-lg outline-none focus:bg-white focus:border-slate-900"
+                  className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:bg-white focus:border-slate-900 resize-none"
                 />
               </div>
-            </div>
 
-            <div className="flex gap-2">
               <button
-                type="button"
-                onClick={() => setShowExtensionModal(false)}
-                className="flex-1 py-2.5 bg-slate-100 text-slate-700 font-semibold rounded-xl text-xs hover:bg-slate-200 transition"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                disabled={!extensionReason.trim()}
                 onClick={() => {
                   requestExtension(extensionTime, extensionReason);
                   setShowExtensionModal(false);
                 }}
-                className="flex-1 py-2.5 bg-slate-900 text-white font-semibold rounded-xl text-xs hover:bg-slate-800 disabled:opacity-50 transition"
+                className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold shadow-xs active:scale-98 transition"
               >
-                Submit Extension
+                {t('confirm')}
               </button>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* Verification Success Toast */}
-      {otpSuccess && (
-        <div className="fixed inset-0 z-50 bg-slate-900/30 backdrop-blur-2xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-5 text-center shadow-xl max-w-xs w-full border border-slate-200">
-            <div className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto mb-2">
-              <Check size={20} strokeWidth={2.5} />
-            </div>
-            <h4 className="text-sm font-bold text-slate-900">PIN Verified</h4>
-            <p className="text-xs text-slate-500 mt-0.5">Service initiated successfully.</p>
           </div>
         </div>
       )}

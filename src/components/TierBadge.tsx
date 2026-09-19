@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tier } from '../types';
+import { useApp } from '../context/AppContext';
 
 interface Props {
   tier: Tier;
@@ -7,23 +8,25 @@ interface Props {
 }
 
 export default function TierBadge({ tier, size = 'md' }: Props) {
+  const { t } = useApp();
+
   const getBadgeConfig = () => {
     switch (tier) {
       case 1:
         return {
-          label: 'Level 1 · Standard',
+          label: t('tierBasic'),
           bg: 'bg-emerald-50 text-emerald-800 border-emerald-200/80',
           dot: 'bg-emerald-600',
         };
       case 2:
         return {
-          label: 'Level 2 · Certified',
+          label: t('tierSkilled'),
           bg: 'bg-amber-50 text-amber-900 border-amber-200/80',
           dot: 'bg-amber-600',
         };
       case 3:
         return {
-          label: 'Level 3 · Master',
+          label: t('tierSpecialized'),
           bg: 'bg-rose-50 text-rose-900 border-rose-200/80',
           dot: 'bg-rose-600',
         };

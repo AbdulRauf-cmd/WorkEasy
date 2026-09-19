@@ -1,17 +1,17 @@
 import React from 'react';
 import AnimatedPage from '../components/AnimatedPage';
 import { useApp } from '../context/AppContext';
-import { Clock3, Check, KeyRound, Wrench, ShieldCheck } from 'lucide-react';
+import { Check, KeyRound, Wrench, ShieldCheck } from 'lucide-react';
 import TierBadge from '../components/TierBadge';
 
 const Activity: React.FC = () => {
-  const { state } = useApp();
+  const { state, t } = useApp();
   
   return (
     <AnimatedPage className="pb-16 pt-4 px-4 bg-slate-50 min-h-screen">
       <div className="mb-3">
-        <h1 className="text-base font-bold text-slate-900 tracking-tight">Audit & Activity Log</h1>
-        <p className="text-xs text-slate-500">Real-time cooperative event stream</p>
+        <h1 className="text-base font-bold text-slate-900 tracking-tight">{t('activityHistoryTitle')}</h1>
+        <p className="text-xs text-slate-500">{t('liveAuditLog')}</p>
       </div>
 
       <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-2xs">
@@ -22,9 +22,9 @@ const Activity: React.FC = () => {
               <div className="absolute -left-[21px] top-0.5 w-4 h-4 bg-slate-900 text-white rounded-full flex items-center justify-center">
                 <Check size={10} strokeWidth={2.5} />
               </div>
-              <p className="font-semibold text-xs text-slate-900">Service Request Created</p>
+              <p className="font-semibold text-xs text-slate-900">{t('timelineBookingPlaced')}</p>
               <p className="text-[11px] text-slate-500 mt-0.5">
-                {state.currentJob.title} · Fixed Escrow: ₹{state.currentJob.budget}
+                {state.currentJob.title} · {t('total')}: ₹{state.currentJob.budget}
               </p>
             </div>
             
@@ -35,10 +35,10 @@ const Activity: React.FC = () => {
                   <Check size={10} strokeWidth={2.5} />
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <p className="font-semibold text-xs text-slate-900">Skill Level Audited</p>
+                  <p className="font-semibold text-xs text-slate-900">{t('stepSkillAudit')}</p>
                   <TierBadge tier={state.currentJob.tier || 2} size="sm" />
                 </div>
-                <p className="text-[11px] text-slate-500 mt-0.5">Classified according to cooperative technical guidelines.</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">{t('stepSkillAuditDetail')}</p>
               </div>
             )}
 
@@ -48,8 +48,8 @@ const Activity: React.FC = () => {
                 <div className="absolute -left-[21px] top-0.5 w-4 h-4 bg-slate-900 text-white rounded-full flex items-center justify-center">
                   <Check size={10} strokeWidth={2.5} />
                 </div>
-                <p className="font-semibold text-xs text-slate-900">Partner Assigned</p>
-                <p className="text-[11px] text-slate-500 mt-0.5">Ramesh Kumar dispatched via rotation algorithm.</p>
+                <p className="font-semibold text-xs text-slate-900">{t('timelinePartnerAssigned')}</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">{t('autoDispatchDesc')}</p>
               </div>
             )}
 
@@ -59,8 +59,8 @@ const Activity: React.FC = () => {
                 <div className="absolute -left-[21px] top-0.5 w-4 h-4 bg-slate-900 text-white rounded-full flex items-center justify-center">
                   <Check size={10} strokeWidth={2.5} />
                 </div>
-                <p className="font-semibold text-xs text-slate-900">Partner En Route</p>
-                <p className="text-[11px] text-slate-500 mt-0.5">Dispatch acknowledged and verified.</p>
+                <p className="font-semibold text-xs text-slate-900">{t('timelineBookingConfirmed')}</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">{t('workerOnWay')}</p>
               </div>
             )}
 
@@ -70,9 +70,9 @@ const Activity: React.FC = () => {
                 <div className="absolute -left-[21px] top-0.5 w-4 h-4 bg-amber-500 text-white rounded-full flex items-center justify-center">
                   <KeyRound size={9} />
                 </div>
-                <p className="font-semibold text-xs text-slate-900">Arrival & Security Handshake</p>
+                <p className="font-semibold text-xs text-slate-900">{t('timelinePartnerArrived')}</p>
                 <p className="text-[11px] text-slate-500 mt-0.5">
-                  Start PIN generated: <strong className="font-mono text-slate-900">{state.currentJob.arrivalOtp || '4829'}</strong>
+                  Start PIN: <strong className="font-mono text-slate-900">{state.currentJob.arrivalOtp || '4829'}</strong>
                 </p>
               </div>
             )}
@@ -83,8 +83,8 @@ const Activity: React.FC = () => {
                 <div className="absolute -left-[21px] top-0.5 w-4 h-4 bg-blue-600 text-white rounded-full flex items-center justify-center">
                   <Wrench size={9} />
                 </div>
-                <p className="font-semibold text-xs text-slate-900">PIN Verified & Work Started</p>
-                <p className="text-[11px] text-slate-500 mt-0.5">Professional is actively working on site.</p>
+                <p className="font-semibold text-xs text-slate-900">{t('timelineServiceInProgress')}</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">{t('timelineServiceInProgressDetail')}</p>
               </div>
             )}
 
@@ -94,20 +94,18 @@ const Activity: React.FC = () => {
                 <div className="absolute -left-[21px] top-0.5 w-4 h-4 bg-emerald-600 text-white rounded-full flex items-center justify-center">
                   <ShieldCheck size={9} />
                 </div>
-                <p className="font-semibold text-xs text-slate-900">Service Finished & Inspected</p>
-                <p className="text-[11px] text-slate-500 mt-0.5">Completion sign-off completed.</p>
+                <p className="font-semibold text-xs text-slate-900">{t('timelineServiceCompleted')}</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">{t('timelinePaymentReleasedDetail')}</p>
               </div>
             )}
           </div>
         ) : (
           <div className="text-center py-6 text-slate-400">
-            <Clock3 size={24} className="mx-auto mb-1.5 opacity-40" />
-            <p className="text-xs">No active order events.</p>
+            <p className="text-xs">{t('noPastBookingsYet')}</p>
           </div>
         )}
       </div>
     </AnimatedPage>
   );
 };
-
 export default Activity;

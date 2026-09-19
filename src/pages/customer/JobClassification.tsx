@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
-import { Check, ShieldCheck, UserCheck, Loader2 } from 'lucide-react';
+import { Check, Loader2 } from 'lucide-react';
 
 export const JobClassification: React.FC = () => {
   const navigate = useNavigate();
-  const { state, classifyJob, matchWorker } = useApp();
+  const { state, classifyJob, matchWorker, t } = useApp();
   const [step, setStep] = useState(0);
 
   useEffect(() => {
@@ -39,10 +39,10 @@ export const JobClassification: React.FC = () => {
   }, [classifyJob, matchWorker, navigate]);
 
   const items = [
-    { label: 'Booking Registered', detail: 'Task recorded in local cooperative registry' },
-    { label: 'Skill Qualification Audit', detail: 'Classifying technical safety requirements' },
-    { label: 'Accreditation Tier Assigned', detail: 'Mandatory certification gate verified' },
-    { label: 'Partner Allocation', detail: 'Selecting available partner via fair rotation' },
+    { label: t('stepBookingRegistered'), detail: t('stepBookingRegisteredDetail') },
+    { label: t('stepSkillAudit'), detail: t('stepSkillAuditDetail') },
+    { label: t('stepAccreditationTier'), detail: t('stepAccreditationTierDetail') },
+    { label: t('stepPartnerAllocation'), detail: t('stepPartnerAllocationDetail') },
   ];
 
   return (
@@ -53,8 +53,8 @@ export const JobClassification: React.FC = () => {
           <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center mx-auto mb-3 shadow-xs">
             <Loader2 size={20} className="animate-spin" />
           </div>
-          <h1 className="text-base font-bold text-slate-900 tracking-tight">Matching Certified Professional</h1>
-          <p className="text-xs text-slate-500 mt-0.5">Auditing safety requirements & partner availability</p>
+          <h1 className="text-base font-bold text-slate-900 tracking-tight">{t('matchingCertifiedPro')}</h1>
+          <p className="text-xs text-slate-500 mt-0.5">{t('auditingSafetyAvailability')}</p>
         </div>
 
         {/* Verification Checklist */}
@@ -99,7 +99,7 @@ export const JobClassification: React.FC = () => {
               <TierBadge tier={state.currentJob?.tier || 2} size="md" />
             </div>
             <p className="text-xs font-medium text-slate-700">
-              Assigned to a certified technician with verified technical credentials.
+              {t('stepAccreditationTierDetail')}
             </p>
           </div>
         )}

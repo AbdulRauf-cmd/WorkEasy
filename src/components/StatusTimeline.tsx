@@ -1,28 +1,25 @@
 import React from 'react';
 import { JobStatus } from '../types';
-import { Check, Clock3 } from 'lucide-react';
+import { Check } from 'lucide-react';
+import { useApp } from '../context/AppContext';
 
 interface Props {
   currentStatus: JobStatus;
 }
 
-interface StatusItem {
-  id: JobStatus;
-  label: string;
-  detail: string;
-}
-
-const statusOrder: StatusItem[] = [
-  { id: 'posted', label: 'Booking Placed', detail: 'Service request submitted' },
-  { id: 'matched', label: 'Partner Assigned', detail: 'Verified professional selected' },
-  { id: 'accepted', label: 'Booking Confirmed', detail: 'Partner en route to location' },
-  { id: 'worker_arrived', label: 'Partner Arrived (PIN Verification)', detail: 'Verification required to begin work' },
-  { id: 'in_progress', label: 'Service in Progress', detail: 'Work actively being performed' },
-  { id: 'completed', label: 'Service Completed', detail: 'Partner submitted final sign-off' },
-  { id: 'verified', label: 'Payment Released', detail: 'Quality verified & payment settled' },
-];
-
 export default function StatusTimeline({ currentStatus }: Props) {
+  const { t } = useApp();
+
+  const statusOrder = [
+    { id: 'posted' as JobStatus, label: t('timelineBookingPlaced'), detail: t('timelineBookingPlacedDetail') },
+    { id: 'matched' as JobStatus, label: t('timelinePartnerAssigned'), detail: t('timelinePartnerAssignedDetail') },
+    { id: 'accepted' as JobStatus, label: t('timelineBookingConfirmed'), detail: t('timelineBookingConfirmedDetail') },
+    { id: 'worker_arrived' as JobStatus, label: t('timelinePartnerArrived'), detail: t('timelinePartnerArrivedDetail') },
+    { id: 'in_progress' as JobStatus, label: t('timelineServiceInProgress'), detail: t('timelineServiceInProgressDetail') },
+    { id: 'completed' as JobStatus, label: t('timelineServiceCompleted'), detail: t('timelineServiceCompletedDetail') },
+    { id: 'verified' as JobStatus, label: t('timelinePaymentReleased'), detail: t('timelinePaymentReleasedDetail') },
+  ];
+
   const currentIndex = statusOrder.findIndex(s => s.id === currentStatus);
   const normalizedIndex = currentIndex === -1 ? 0 : currentIndex;
 
@@ -74,7 +71,7 @@ export default function StatusTimeline({ currentStatus }: Props) {
 
                 {isCurrent && (
                   <span className="text-[10px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
-                    In Progress
+                    {t('liveStatus')}
                   </span>
                 )}
               </div>
@@ -85,7 +82,7 @@ export default function StatusTimeline({ currentStatus }: Props) {
                 'text-slate-400'
               }`}>
                 {status.id === 'worker_arrived' && isCurrent 
-                  ? 'Share 4-digit PIN with partner at your door'
+                  ? t('arrivalPinNote')
                   : status.detail}
               </p>
             </div>
