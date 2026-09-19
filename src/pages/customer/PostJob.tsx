@@ -50,7 +50,7 @@ const services = [
 export const PostJob: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { state, postJob, t } = useApp();
+  const { state, postJob, t, loc } = useApp();
   
   const [step, setStep] = useState(1);
   const [service, setService] = useState<ServiceType>('Plumbing');
@@ -975,7 +975,7 @@ export const PostJob: React.FC = () => {
                 <span className="text-xs text-slate-500">{t('serviceCategoryLabel')}</span>
                 <div className="flex items-center gap-1.5">
                   <TierBadge tier={computedTier} size="sm" />
-                  <span className="font-semibold text-xs text-slate-900">{service}</span>
+                  <span className="font-semibold text-xs text-slate-900">{loc(service)}</span>
                 </div>
               </div>
 
@@ -999,13 +999,13 @@ export const PostJob: React.FC = () => {
                   <span className="font-semibold text-xs text-slate-900 block">
                     {isBulk 
                       ? (bulkOption === 'contractor' 
-                          ? activeSelectedContractor?.name 
-                          : `${pooledWorkersSquad.map(w => w.name.split(' ')[0]).join(', ')}`)
+                          ? loc(activeSelectedContractor?.name) 
+                          : `${pooledWorkersSquad.map(w => loc(w.name.split(' ')[0])).join(', ')}`)
                       : t('autoDispatchTitle')}
                   </span>
                   <span className="text-[10px] text-slate-400">
                     {isBulk 
-                      ? (bulkOption === 'contractor' ? `Lead: ${activeSelectedContractor?.leadName}` : `${workerCount} Certified Independent Partners`)
+                      ? (bulkOption === 'contractor' ? `Lead: ${loc(activeSelectedContractor?.leadName)}` : `${workerCount} Certified Independent Partners`)
                       : t('fairRotationGuarantee')}
                   </span>
                 </div>
@@ -1023,12 +1023,12 @@ export const PostJob: React.FC = () => {
 
               <div className="flex justify-between items-center pb-2.5 border-b border-slate-100">
                 <span className="text-xs text-slate-500">Location</span>
-                <span className="font-semibold text-xs text-slate-900">{location}</span>
+                <span className="font-semibold text-xs text-slate-900">{loc(location)}</span>
               </div>
 
               <div className="flex justify-between items-center pb-2.5 border-b border-slate-100">
                 <span className="text-xs text-slate-500">Schedule</span>
-                <span className="font-semibold text-xs text-slate-900">{date}, {time.split(' ')[0]}</span>
+                <span className="font-semibold text-xs text-slate-900">{loc(date)}, {loc(time.split(' ')[0])}</span>
               </div>
 
               {/* Itemized bill */}

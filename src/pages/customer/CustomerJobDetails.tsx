@@ -37,7 +37,8 @@ export const CustomerJobDetails: React.FC = () => {
     rebookSameWorkerFree, 
     rebookWarrantyJob, 
     closeWarrantyWithoutRebooking,
-    t
+    t,
+    loc
   } = useApp();
   const { currentJob, workers } = state;
   const [copiedOtp, setCopiedOtp] = useState(false);
@@ -140,7 +141,7 @@ export const CustomerJobDetails: React.FC = () => {
             </div>
 
             <p className="text-xs text-slate-700 mb-2.5 leading-relaxed">
-              <strong className="text-slate-900">{worker?.name}</strong> requested additional time: 
+              <strong className="text-slate-900">{loc(worker?.name)}</strong> requested additional time: 
               <span className="italic ml-1">"{currentJob.extensionRequest.reason}"</span>
             </p>
 
@@ -170,7 +171,7 @@ export const CustomerJobDetails: React.FC = () => {
             </div>
 
             <p className="text-xs text-slate-600 mb-3 leading-normal">
-              {t('sharePinToStart')} (<strong className="text-slate-900">{worker?.name}</strong>)
+              {t('sharePinToStart')} (<strong className="text-slate-900">{loc(worker?.name)}</strong>)
             </p>
 
             {/* Clean PIN boxes */}
@@ -413,30 +414,30 @@ export const CustomerJobDetails: React.FC = () => {
         <div className="bg-white rounded-xl p-4 border border-slate-200/90 shadow-2xs">
           <div className="flex justify-between items-start mb-2">
             <div>
-              <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-tight">{currentJob.service}</span>
-              <h2 className="text-sm font-bold text-slate-900 mt-0.5">{currentJob.title}</h2>
+              <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-tight">{loc(currentJob.service)}</span>
+              <h2 className="text-sm font-bold text-slate-900 mt-0.5">{loc(currentJob.title)}</h2>
             </div>
             <div className="text-right">
               <span className="text-sm font-bold text-slate-900">₹{currentJob.budget}</span>
-              <span className="block text-[10px] text-slate-400">Fixed Rate</span>
+              <span className="block text-[10px] text-slate-400">{loc('Fixed Rate')}</span>
             </div>
           </div>
 
           <div className="flex items-center gap-2 mb-2.5">
             <TierBadge tier={currentJob.tier || 1} size="sm" />
             <span className="text-[11px] text-slate-500 flex items-center gap-1">
-              <MapPin size={12} className="text-slate-400" /> {currentJob.location}
+              <MapPin size={12} className="text-slate-400" /> {loc(currentJob.location)}
             </span>
           </div>
 
           <p className="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-lg border border-slate-100 mb-3">
-            {currentJob.description}
+            {loc(currentJob.description)}
           </p>
 
         {/* Itemized Guaranteed Fare Breakdown */}
           <div className="pt-2.5 border-t border-slate-100 space-y-1.5 text-xs">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight block mb-1">
-              Fare Breakdown (Standardized Cooperative Rates)
+              {loc('Fare Breakdown (Standardized Cooperative Rates)')}
             </span>
             {currentJob.bulkOption === 'contractor' ? (
               <>

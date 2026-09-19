@@ -32,7 +32,7 @@ const categories = [
 
 export const CustomerHome: React.FC = () => {
   const navigate = useNavigate();
-  const { state, t } = useApp();
+  const { state, t, loc } = useApp();
   const { currentJob, customer } = state;
 
   const categories = [
@@ -133,9 +133,9 @@ export const CustomerHome: React.FC = () => {
 
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="font-semibold text-xs text-slate-900">{currentJob.title}</h3>
+                <h3 className="font-semibold text-xs text-slate-900">{loc(currentJob.title)}</h3>
                 <p className="text-[11px] text-slate-500 mt-0.5">
-                  {currentJob.service} · {currentJob.date}, {currentJob.time}
+                  {loc(currentJob.service)} · {loc(currentJob.date)}, {loc(currentJob.time)}
                 </p>
               </div>
               <div className="text-right">
@@ -149,7 +149,7 @@ export const CustomerHome: React.FC = () => {
             <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-slate-100 text-[11px]">
               <TierBadge tier={currentJob.tier || 1} size="sm" />
               <span className="text-slate-600 font-medium capitalize">
-                {t('status')}: {currentJob.status.replace('_', ' ')}
+                {t('status')}: {loc(currentJob.status)}
               </span>
             </div>
           </div>

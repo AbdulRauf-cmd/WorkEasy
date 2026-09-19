@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function WorkerCard({ worker, budget, showActions, onAccept }: Props) {
-  const { t } = useApp();
+  const { t, loc } = useApp();
   const initials = worker.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
 
   return (
@@ -35,7 +35,7 @@ export default function WorkerCard({ worker, budget, showActions, onAccept }: Pr
           <div className="flex justify-between items-start">
             <div>
               <div className="flex items-center gap-1.5">
-                <h3 className="font-semibold text-slate-900 text-sm truncate">{worker.name}</h3>
+                <h3 className="font-semibold text-slate-900 text-sm truncate">{loc(worker.name)}</h3>
               </div>
               
               <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-0.5">
@@ -46,7 +46,7 @@ export default function WorkerCard({ worker, budget, showActions, onAccept }: Pr
                 <span className="text-slate-300">·</span>
                 <span>{worker.completedJobs} {t('completedJobsLabel')}</span>
                 <span className="text-slate-300">·</span>
-                <span>{worker.experience}y exp</span>
+                <span>{worker.experience} {t('yearsExp')}</span>
               </div>
             </div>
             
@@ -63,7 +63,7 @@ export default function WorkerCard({ worker, budget, showActions, onAccept }: Pr
             
             <div className="flex items-center gap-1 text-[11px] text-slate-500 font-medium">
               <MapPin className="w-3.5 h-3.5 text-slate-400" />
-              <span>{worker.distance || '2.4'} km away</span>
+              <span>{worker.distance || '2.4'} {t('kmAway')}</span>
             </div>
           </div>
         </div>

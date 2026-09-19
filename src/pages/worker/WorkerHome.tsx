@@ -7,7 +7,7 @@ import LanguageSwitch from '../../components/LanguageSwitch';
 import { Lock, Navigation } from 'lucide-react';
 
 const WorkerHome: React.FC = () => {
-  const { state, acceptJob, t } = useApp();
+  const { state, acceptJob, t, loc } = useApp();
   const navigate = useNavigate();
   const [isOnline, setIsOnline] = useState(true);
 
@@ -26,7 +26,7 @@ const WorkerHome: React.FC = () => {
             <span>{t('workerHub')}</span>
           </div>
           <h1 className="text-base font-bold text-slate-900 tracking-tight mt-0.5">
-            Ramesh Kumar
+            {loc('Ramesh Kumar')}
           </h1>
         </div>
 
@@ -91,8 +91,8 @@ const WorkerHome: React.FC = () => {
             <span className="text-[10px] font-bold uppercase tracking-tight text-emerald-400">
               {t('activeAssignment')}
             </span>
-            <h3 className="font-semibold text-xs text-white mt-0.5">{state.currentJob.title}</h3>
-            <p className="text-[11px] text-slate-400">{state.customer.name} · ₹{state.currentJob.budget}</p>
+            <h3 className="font-semibold text-xs text-white mt-0.5">{loc(state.currentJob.title)}</h3>
+            <p className="text-[11px] text-slate-400">{loc(state.customer.name)} · ₹{state.currentJob.budget}</p>
           </div>
           <button className="bg-white text-slate-900 font-bold px-3 py-1.5 rounded-lg text-xs shadow-xs active:scale-95 transition">
             {t('continueActiveAssignment')}
@@ -115,8 +115,8 @@ const WorkerHome: React.FC = () => {
                 <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 uppercase tracking-tight">
                   {t('autoDispatchTitle')}
                 </span>
-                <h3 className="font-bold text-sm text-slate-900 mt-1.5">{state.currentJob.title}</h3>
-                <p className="text-xs text-slate-500 mt-0.5">{state.customer.name} · {state.currentJob.location}</p>
+                <h3 className="font-bold text-sm text-slate-900 mt-1.5">{loc(state.currentJob.title)}</h3>
+                <p className="text-xs text-slate-500 mt-0.5">{loc(state.customer.name)} · {loc(state.currentJob.location)}</p>
               </div>
               <div className="text-right">
                 <span className="text-sm font-bold text-slate-900">₹{state.currentJob.budget}</span>

@@ -7,7 +7,7 @@ import LanguageSwitch from '../../components/LanguageSwitch';
 import { Plus, KeyRound } from 'lucide-react';
 
 const CustomerJobs: React.FC = () => {
-  const { state, t } = useApp();
+  const { state, t, loc } = useApp();
   const navigate = useNavigate();
 
   return (
@@ -45,20 +45,20 @@ const CustomerJobs: React.FC = () => {
 
             <div className="flex justify-between items-start mb-1.5">
               <div>
-                <h3 className="font-semibold text-xs text-slate-900">{state.currentJob.title}</h3>
-                <span className="text-[11px] text-slate-500">{state.currentJob.service}</span>
+                <h3 className="font-semibold text-xs text-slate-900">{loc(state.currentJob.title)}</h3>
+                <span className="text-[11px] text-slate-500">{loc(state.currentJob.service)}</span>
               </div>
               <span className="text-xs font-bold text-slate-900">₹{state.currentJob.budget}</span>
             </div>
             
             <p className="text-xs text-slate-600 mb-2.5 bg-slate-50 p-2 rounded-lg border border-slate-100">
-              {state.currentJob.description}
+              {loc(state.currentJob.description)}
             </p>
             
             <div className="flex justify-between items-center pt-2 border-t border-slate-100 text-[11px]">
               <TierBadge tier={state.currentJob.tier || 1} size="sm" />
               <span className="text-slate-500 font-medium capitalize">
-                {t('status')}: {state.currentJob.status.replace('_', ' ')}
+                {t('status')}: {loc(state.currentJob.status)}
               </span>
             </div>
           </div>
@@ -83,8 +83,8 @@ const CustomerJobs: React.FC = () => {
           <div className="bg-white p-3 rounded-xl border border-slate-200/90 shadow-2xs">
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="font-semibold text-xs text-slate-900">Ceiling Fan Wiring & Repair</h3>
-                <p className="text-[10px] text-slate-400 mt-0.5">Arjun Raj · Level 3 Electrician</p>
+                <h3 className="font-semibold text-xs text-slate-900">{loc('Ceiling Fan Sparking & Bearing Noise')}</h3>
+                <p className="text-[10px] text-slate-400 mt-0.5">{loc('Arjun Raj')} · {loc('Electrical')}</p>
               </div>
               <span className="text-xs font-bold text-slate-900">₹350</span>
             </div>
@@ -97,8 +97,8 @@ const CustomerJobs: React.FC = () => {
           <div className="bg-white p-3 rounded-xl border border-slate-200/90 shadow-2xs">
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="font-semibold text-xs text-slate-900">Deep House Sanitization</h3>
-                <p className="text-[10px] text-slate-400 mt-0.5">Meena Devi · Level 1 Specialist</p>
+                <h3 className="font-semibold text-xs text-slate-900">{loc('Full House Deep Cleaning')}</h3>
+                <p className="text-[10px] text-slate-400 mt-0.5">{loc('Meena Devi')} · {loc('Cleaning')}</p>
               </div>
               <span className="text-xs font-bold text-slate-900">₹1,200</span>
             </div>

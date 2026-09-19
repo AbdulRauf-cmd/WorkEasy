@@ -6,7 +6,7 @@ import TierBadge from '../components/TierBadge';
 import LanguageSwitch from '../components/LanguageSwitch';
 
 const Activity: React.FC = () => {
-  const { state, t } = useApp();
+  const { state, t, loc } = useApp();
   
   return (
     <AnimatedPage className="pb-16 pt-3 px-4 bg-slate-50 min-h-screen">
@@ -28,7 +28,7 @@ const Activity: React.FC = () => {
               </div>
               <p className="font-semibold text-xs text-slate-900">{t('timelineBookingPlaced')}</p>
               <p className="text-[11px] text-slate-500 mt-0.5">
-                {state.currentJob.title} · {t('total')}: ₹{state.currentJob.budget}
+                {loc(state.currentJob.title)} · {t('total')}: ₹{state.currentJob.budget}
               </p>
             </div>
             

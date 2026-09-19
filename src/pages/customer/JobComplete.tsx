@@ -8,7 +8,7 @@ import LanguageSwitch from '../../components/LanguageSwitch';
 
 export const JobComplete: React.FC = () => {
   const navigate = useNavigate();
-  const { state, rateJob, t } = useApp();
+  const { state, rateJob, t, loc } = useApp();
   const [rating, setRating] = useState(5);
   const [selectedTags, setSelectedTags] = useState<string[]>([t('tagOnTime'), t('tagPolite')]);
   const [feedback, setFeedback] = useState('');
@@ -53,7 +53,7 @@ export const JobComplete: React.FC = () => {
           </div>
           <h1 className="text-base font-bold text-slate-900 tracking-tight">{t('jobFinished')}</h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            ₹{totalSettled} {t('paymentReleasedTitle')} ({worker.name})
+            ₹{totalSettled} {t('paymentReleasedTitle')} ({loc(worker.name)})
           </p>
         </div>
 

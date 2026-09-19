@@ -8,7 +8,7 @@ import { User, HelpCircle, MapPin, ShieldCheck, RotateCcw, ChevronRight, Globe }
 import LanguageSwitch from '../components/LanguageSwitch';
 
 const Profile: React.FC = () => {
-  const { state, resetDemo, t } = useApp();
+  const { state, resetDemo, t, loc } = useApp();
   const navigate = useNavigate();
 
   if (state.role === 'worker') {
@@ -32,9 +32,9 @@ const Profile: React.FC = () => {
           {state.customer?.avatar || 'PS'}
         </div>
         <div>
-          <h1 className="text-sm font-bold text-slate-900">{state.customer?.name || 'Priya Sharma'}</h1>
+          <h1 className="text-sm font-bold text-slate-900">{loc(state.customer?.name || 'Priya Sharma')}</h1>
           <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-            <MapPin size={12} className="text-slate-400" /> {state.customer?.location || 'Coimbatore'}, Tamil Nadu
+            <MapPin size={12} className="text-slate-400" /> {loc(state.customer?.location || 'Coimbatore')}
           </p>
         </div>
       </div>

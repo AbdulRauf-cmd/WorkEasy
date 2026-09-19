@@ -25,7 +25,7 @@ import {
 } from '../../utils/geoUtils';
 
 const WorkerCompletion: React.FC = () => {
-  const { state, completeJob, t } = useApp();
+  const { state, completeJob, t, loc } = useApp();
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
 
@@ -149,8 +149,8 @@ const WorkerCompletion: React.FC = () => {
 
         ctx.fillStyle = '#ffffff';
         ctx.font = '18px sans-serif';
-        ctx.fillText(`Job: ${state.currentJob?.title || 'Service Repair'}`, 40, 220);
-        ctx.fillText(`Customer: ${state.customer.name} (RS Puram)`, 40, 250);
+        ctx.fillText(`Job: ${loc(state.currentJob?.title || 'Service Repair')}`, 40, 220);
+        ctx.fillText(`Customer: ${loc(state.customer.name)} (${loc('RS Puram')})`, 40, 250);
       }
 
       // Burn-in Cryptographic Watermark Bar at Bottom of Image
@@ -235,12 +235,12 @@ const WorkerCompletion: React.FC = () => {
           <div className="bg-white rounded-xl p-3.5 border border-slate-200/90 shadow-2xs mb-3 space-y-2 text-xs">
             <div className="flex justify-between items-center pb-2 border-b border-slate-100">
               <span className="text-slate-500">{t('serviceCategoryLabel')}</span>
-              <span className="font-semibold text-slate-900">{state.currentJob?.title || 'Tap Leakage Repair'}</span>
+              <span className="font-semibold text-slate-900">{loc(state.currentJob?.title || 'Tap Leakage Repair')}</span>
             </div>
 
             <div className="flex justify-between items-center pb-2 border-b border-slate-100">
               <span className="text-slate-500">{t('roleCustomer')}</span>
-              <span className="font-semibold text-slate-900">{state.customer.name}</span>
+              <span className="font-semibold text-slate-900">{loc(state.customer.name)}</span>
             </div>
 
             <div className="flex justify-between items-center pb-2 border-b border-slate-100">

@@ -25,7 +25,7 @@ import {
 } from '../../utils/geoUtils';
 
 const WorkerActiveJob: React.FC = () => {
-  const { state, markArrived, verifyArrivalOtp, requestExtension, t } = useApp();
+  const { state, markArrived, verifyArrivalOtp, requestExtension, t, loc } = useApp();
   const navigate = useNavigate();
   const job = state.currentJob;
 
@@ -160,7 +160,7 @@ const WorkerActiveJob: React.FC = () => {
       <div className="bg-white rounded-xl shadow-2xs border border-slate-200/90 p-4 mb-3.5">
         <div className="flex items-start justify-between mb-2">
           <div>
-            <h1 className="text-sm font-bold text-slate-900 mt-0.5">{job.title}</h1>
+            <h1 className="text-sm font-bold text-slate-900 mt-0.5">{loc(job.title)}</h1>
             <span className="text-[10px] text-slate-500 font-mono block">Order #{job.id.slice(-4).toUpperCase()}</span>
           </div>
           <div className="text-right">
@@ -178,9 +178,9 @@ const WorkerActiveJob: React.FC = () => {
         <div className="bg-slate-50 rounded-xl p-3 border border-slate-200/60 space-y-2 text-xs text-slate-600 mb-3">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-semibold text-slate-900">{state.customer.name}</p>
+              <p className="font-semibold text-slate-900">{loc(state.customer.name)}</p>
               <p className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
-                <MapPin size={12} className="text-slate-400" /> {job.location} ({otpDistanceMeters}m away)
+                <MapPin size={12} className="text-slate-400" /> {loc(job.location)} ({otpDistanceMeters}m away)
               </p>
               <div className="flex items-center gap-1 mt-1">
                 <span className="text-[9px] font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-1.5 py-0.5 rounded flex items-center gap-0.5">
@@ -198,7 +198,7 @@ const WorkerActiveJob: React.FC = () => {
                 <Phone size={12} /> {t('call')}
               </button>
               <button 
-                onClick={() => alert(`Opening GPS navigation to ${job.location}...`)}
+                onClick={() => alert(`${loc('Opening GPS navigation to ')}${loc(job.location)}...`)}
                 className="px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-[11px] font-semibold flex items-center gap-1 transition"
               >
                 <Navigation size={12} /> Map
@@ -358,7 +358,7 @@ const WorkerActiveJob: React.FC = () => {
                 <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 uppercase tracking-tight">
                   {t('timelineServiceInProgress')}
                 </span>
-                <h3 className="font-semibold text-xs text-slate-900 mt-1">{job.title}</h3>
+                <h3 className="font-semibold text-xs text-slate-900 mt-1">{loc(job.title)}</h3>
               </div>
               <span className="text-[11px] font-mono text-emerald-700 font-bold">PIN & Geo Verified ✓</span>
             </div>

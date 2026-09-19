@@ -7,7 +7,7 @@ import LanguageSwitch from '../../components/LanguageSwitch';
 
 export const CustomerVerification: React.FC = () => {
   const navigate = useNavigate();
-  const { state, verifyJob, t } = useApp();
+  const { state, verifyJob, t, loc } = useApp();
   const worker = state.workers.find(w => w.id === state.currentJob?.workerId) || state.workers[0];
 
   const handleVerify = () => {
@@ -42,12 +42,12 @@ export const CustomerVerification: React.FC = () => {
         <div className="bg-white rounded-xl p-4 border border-slate-200/90 shadow-2xs space-y-3 mb-4">
           <div className="flex justify-between items-center text-xs pb-2 border-b border-slate-100">
             <span className="text-slate-500">{t('serviceCategoryLabel')}</span>
-            <span className="font-semibold text-slate-900">{state.currentJob.title}</span>
+            <span className="font-semibold text-slate-900">{loc(state.currentJob.title)}</span>
           </div>
 
           <div className="flex justify-between items-center text-xs pb-2 border-b border-slate-100">
             <span className="text-slate-500">{t('assignedPartner')}</span>
-            <span className="font-semibold text-slate-900">{worker.name}</span>
+            <span className="font-semibold text-slate-900">{loc(worker.name)}</span>
           </div>
 
           <div className="flex justify-between items-center text-xs pb-2 border-b border-slate-100">

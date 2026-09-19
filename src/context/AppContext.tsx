@@ -2,12 +2,14 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { AppState, Job, JobStatus, Role, ServiceType, MentorshipSession, Worker, Tier, ContractorTeam, BulkOptionType, Language } from '../types';
 import { mockCustomer, mockWorkers, initialWarrantyJob, initialPastJob, mockMentorshipSessions, mockContractorTeams } from '../data/mockData';
 import { classifyTier } from '../utils/tierClassification';
-import { getTranslation, Translations } from '../i18n/translations';
+import { getTranslation, Translations, localizeText, localizeJob } from '../i18n/translations';
 
 interface AppContextType extends AppState {
   setRole: (role: Role) => void;
   setLanguage: (lang: Language) => void;
   t: (key: keyof Translations) => string;
+  loc: (text: string | undefined | null) => string;
+  localizeJob: (job: Job | null | undefined) => Job | null;
   postJob: (jobData: Partial<Job>) => void;
   classifyJob: () => void;
   matchWorker: () => void;
@@ -514,6 +516,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setState(defaultState);
   };
 
+  const loc = (text: string | undefined | null) => localizeText(text, state.language);
+  const localizeJobHelper = (job: Job | null | undefined) => localizeJob(job, state.language);
+
   return (
     <AppContext.Provider
       value={{
@@ -521,6 +526,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setRole,
         setLanguage,
         t,
+        loc,
+        localizeJob: localizeJobHelper,
         postJob,
         classifyJob,
         matchWorker,
@@ -571,6 +578,8 @@ export const useApp = () => {
     setRole, 
     setLanguage,
     t,
+    loc,
+    localizeJob,
     postJob, 
     classifyJob, 
     matchWorker, 
@@ -599,6 +608,8 @@ export const useApp = () => {
     setRole,
     setLanguage,
     t,
+    loc,
+    localizeJob,
     postJob,
     classifyJob,
     matchWorker,

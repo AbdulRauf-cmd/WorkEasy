@@ -1,3 +1,5 @@
+import { Job, ServiceType } from '../types';
+
 export type Language = 'en' | 'ta' | 'hi';
 
 export interface Translations {
@@ -25,6 +27,8 @@ export interface Translations {
   change: string;
   today: string;
   tomorrow: string;
+  kmAway: string;
+  yearsExp: string;
 
   // Role Switcher
   roleCustomer: string;
@@ -342,6 +346,8 @@ export const translations: Record<Language, Translations> = {
     change: 'Change',
     today: 'Today',
     tomorrow: 'Tomorrow',
+    kmAway: 'km away',
+    yearsExp: 'y exp',
 
     roleCustomer: 'Customer',
     roleWorker: 'Partner',
@@ -641,6 +647,8 @@ export const translations: Record<Language, Translations> = {
     change: 'மாற்று',
     today: 'இன்று',
     tomorrow: 'நாளை',
+    kmAway: 'கி.மீ தூரம்',
+    yearsExp: 'ஆண்டு அனுபவம்',
 
     roleCustomer: 'வாடிக்கையாளர்',
     roleWorker: 'தொழிலாளி',
@@ -940,6 +948,8 @@ export const translations: Record<Language, Translations> = {
     change: 'बदलें',
     today: 'आज',
     tomorrow: 'कल',
+    kmAway: 'किमी दूर',
+    yearsExp: 'वर्ष अनुभव',
 
     roleCustomer: 'ग्राहक',
     roleWorker: 'पार्टनर',
@@ -1219,4 +1229,323 @@ export const translations: Record<Language, Translations> = {
 export const getTranslation = (lang: Language, key: keyof Translations): string => {
   const dict = translations[lang] || translations.en;
   return dict[key] || translations.en[key] || (key as string);
+};
+
+export const phraseTranslations: Record<'ta' | 'hi', Record<string, string>> = {
+  ta: {
+    // Job Titles
+    'Tap Leakage Repair': 'குழாய் கசிவு பழுதுபார்ப்பு',
+    '[Warranty Re-service] Tap Leakage Repair': '[உத்தரவாத மறு சேவை] குழாய் கசிவு பழுதுபார்ப்பு',
+    '[Complimentary Warranty Revisit] Tap Leakage Repair': '[இலவச உத்தரவாத மறு வருகை] குழாய் கசிவு பழுதுபார்ப்பு',
+    'Switchboard Replacement': 'ஸ்விட்ச்போர்டு மாற்றுதல்',
+    'Ceiling Fan Sparking & Bearing Noise': 'மின்விசிறி தீப்பொறி மற்றும் சத்தம் சரிசெய்தல்',
+    'Full House Deep Cleaning': 'முழு வீடு தீவிர தூய்மை பணி',
+    'Kitchen & Bathroom Sanitization': 'சமையலறை மற்றும் குளியலறை தூய்மை பணி',
+    'Lawn Mowing & Maintenance': 'புல்வெளி வெட்டுதல் மற்றும் பராமரிப்பு',
+    'Lawn Mowing & Hedge Trimming': 'புல்வெளி வெட்டுதல் மற்றும் வேலி சீரமைப்பு',
+    'AC General Service': 'ஏசி பொதுவான பராமரிப்பு சேவை',
+    'Washing Machine Water Drainage Issue': 'துணி துவைக்கும் இயந்திர நீர் வடிகால் பிரச்சனை',
+    'Tubeless Tyre Puncture Repair': 'டியூப்லெஸ் டயர் பஞ்சர் பழுது',
+    'Motorcycle Tubeless Puncture Fix': 'மோட்டார் சைக்கிள் டியூப்லெஸ் பஞ்சர் பழுது',
+    'Custom Handyman Task': 'பிற வீட்டு பராமரிப்பு வேலை',
+    'Custom Service Request': 'விருப்ப சேவை கோரிக்கை',
+    'Tap Leakage Fault (Observed Day 2)': 'குழாய் கசிவு குறைபாடு (2வது நாள்)',
+    '3-Phase Distribution Box Setup': '3-பேஸ் விநியோக பெட்டி பொருத்துதல்',
+    'Earth Wire Grounding Check': 'பூமி கம்பி கிரவுண்டிங் சோதனை',
+    'Kitchen tap leakage fixed & pressure tested': 'சமையலறை குழாய் கசிவு சரிசெய்யப்பட்டு அழுத்தம் சோதிக்கப்பட்டது',
+    'Service Repair': 'பழுதுபார்ப்பு சேவை',
+    'Kitchen faucet washer replacement': 'சமையலறை குழாய் வாஷர் மாற்றுதல்',
+
+    // Job Descriptions
+    'Kitchen faucet is dripping continuously. Replacement washer needed.': 'சமையலறை குழாய் தொடர்ந்து சொட்டுகிறது. புதிய வாஷர் மாற்ற வேண்டும்.',
+    'Kitchen faucet washer replacement. Leaked again on day 2.': 'சமையலறை குழாய் வாஷர் மாற்றுதல். 2 நாட்களுக்குப் பிறகு மீண்டும் கசிந்தது.',
+    'Cooperative warranty corrective dispatch. Original Issue: Tap started leaking again after 2 days. Subsidized lesser budget estimate (55% off).': 'கூட்டுறவு உத்தரவாத திருத்த நடவடிக்கை. அசல் பிரச்சனை: 2 நாட்களுக்குப் பிறகு குழாய் மீண்டும் கசியத் தொடங்கியது. 55% கட்டணத் தள்ளுபடி.',
+    'Tap started leaking again after 2 days of service': 'வேலை முடிந்து 2 நாட்களுக்குப் பிறகு குழாய் மீண்டும் கசியத் தொடங்கியது',
+    'Master bedroom main switchboard socket malfunction.': 'முதன்மை படுக்கையறை மெயின் ஸ்விட்ச்போர்டு சாக்கெட் பழுது.',
+    'Fan regulator and capacitor replacement': 'மின்விசிறி ரெகுலேட்டர் மற்றும் மின்தேக்கி மாற்றுதல்',
+    '2BHK complete floor, kitchen, and bathroom sanitization.': '2BHK முழு தரை, சமையலறை மற்றும் கழிப்பறை சுத்திகரிப்பு.',
+    'Deep floor scrubbing and tile grime removal': 'தரை மற்றும் டைல்ஸ் முழுமையான ஆழமான சுத்தம்',
+    'Front lawn hedge trimming and weed removal.': 'முன் புல்வெளி வேலி சீரமைப்பு மற்றும் களை நீக்கம்.',
+    'Split AC filter cleanup and refrigerant pressure check.': 'ஸ்பிளிட் ஏசி ஃபில்டர் சுத்தம் மற்றும் குளிரூட்டி வாயு அழுத்தம் சரிபார்த்தல்.',
+    'Rear tyre puncture on bike / car. Emergency on-site roadside repair.': 'பைக் / காரின் பின் டயர் பஞ்சர். அவசர சாலை ஓர உதவி.',
+    'Tyre mushroom patch & high pressure air refill': 'டயர் காளான் பேட்ச் மற்றும் உயர் அழுத்த காற்று நிரப்புதல்',
+    'Door lock installation, furniture assembly, or custom maintenance.': 'கதவு பூட்டு பொருத்துதல், மரச்சாமான்கள் பொருத்துதல் அல்லது இதர வேலை.',
+
+    // Services
+    'Plumbing': 'பிளம்பிங் (குழாய் வேலை)',
+    'Electrical': 'எலக்ட்ரிக்கல் (மின் வேலை)',
+    'Cleaning': 'துப்புரவு (வீடு சுத்தம்)',
+    'Home Cleaning': 'வீடு சுத்தம்',
+    'Gardening': 'தோட்ட பராமரிப்பு',
+    'Appliance Repair': 'மின்சாதன பழுது',
+    'Appliance Care': 'மின்சாதன பராமரிப்பு',
+    'Tyre Puncture': 'டயர் பஞ்சர் & சாலை உதவி',
+    'Tyre Puncture & Roadside': 'டயர் பஞ்சர் & சாலை உதவி',
+    'Roadside Help': 'சாலை ஓர உதவி',
+    'Gas-related': 'எரிவாயு / கேஸ் சேவை',
+    'Specialized Care': 'சிறப்பு தொழில்நுட்ப பராமரிப்பு',
+    'Custom Service': 'பிற சேவைகள்',
+    'Custom / Other': 'பிற சேவைகள்',
+
+    // Material Names
+    'Brass Washer & Sealant': 'பித்தளை வாஷர் மற்றும் சீலண்ட்',
+    'Modular Switch & Socket': 'மட்டு சுவிட்ச் மற்றும் சாக்கெட்',
+    'Eco Chemicals & Consumables': 'சுற்றுச்சூழல் நட்பு ரசாயனங்கள் & பொருட்கள்',
+    'Plant Fertilizer & Seeds': 'தாவர உரம் மற்றும் விதைகள்',
+    'Refrigerant & Filter Spare': 'குளிரூட்டி வாயு & ஃபில்டர் உதிரிபாகம்',
+    'Heavy-duty Puncture Strips & Valve': 'ஹெவி-டியூட்டி பஞ்சர் ஸ்ட்ரிப்ஸ் & வால்வு',
+    'Custom Hardware & Screws': 'தனிப்பயன் திருகுகள் மற்றும் பாகங்கள்',
+    'Heavy-duty Capacitor 2.5uF': 'ஹெவி-டியூட்டி மின்தேக்கி 2.5uF',
+    'Hospital-grade Disinfectant & Eco Scrub': 'மருத்துவமனை தர கிருமிநாசினி & எக்கோ ஸ்க்ரப்',
+    'Cold Vulcanizing Mushroom Patch': 'கோல்ட் வல்கனைசிங் காளான் பேட்ச்',
+
+    // Locations & Areas
+    'RS Puram, Coimbatore': 'ஆர்.எஸ். புரம், கோயம்புத்தூர்',
+    'Coimbatore': 'கோயம்புத்தூர்',
+    'Gandhipuram, Coimbatore': 'காந்திபுரம், கோயம்புத்தூர்',
+    'Saibaba Colony, Coimbatore': 'சாயிபாபா காலனி, கோயம்புத்தூர்',
+    'Peelamedu, Coimbatore': 'பீளமேடு, கோயம்புத்தூர்',
+    'Saravanampatti, Coimbatore': 'சரவணம்பட்டி, கோயம்புத்தூர்',
+    'Ukkadam, Coimbatore': 'உக்கடம், கோயம்புத்தூர்',
+    'Singanallur, Coimbatore': 'சிங்காநல்லூர், கோயம்புத்தூர்',
+    'Town Hall, Coimbatore': 'டவுன் ஹால், கோயம்புத்தூர்',
+    'Vadavalli, Coimbatore': 'வடவள்ளி, கோயம்புத்தூர்',
+    'Ramanathapuram, Coimbatore': 'ராமநாதபுரம், கோயம்புத்தூர்',
+    'RS Puram': 'ஆர்.எஸ். புரம்',
+    'Gandhipuram': 'காந்திபுரம்',
+    'Saibaba Colony': 'சாயிபாபா காலனி',
+    'Peelamedu': 'பீளமேடு',
+    'Saravanampatti': 'சரவணம்பட்டி',
+
+    // Names
+    'Ramesh Kumar': 'ரமேஷ் குமார்',
+    'Meena Devi': 'மீனா தேவி',
+    'Arjun Raj': 'அர்ஜுன் ராஜ்',
+    'Suresh Babu': 'சுரேஷ் பாபு',
+    'Priya Sharma': 'பிரியா சர்மா',
+    'Priya Sundaram': 'பிரியா சுந்தரம்',
+    'Kavitha Selvam': 'கவிதா செல்வம்',
+    'Senthil Nathan': 'செந்தில் நாதன்',
+    'Deepak Verma': 'தீபக் வர்மா',
+    'Lakshmi Narayanan': 'லட்சுமி நாராயணன்',
+    'Muthu Vel': 'முத்து வேல்',
+    'Murugan & Team': 'முருகன் & குழு',
+    'Coimbatore Power & Wire Squad': 'கோவை பவர் & ஒயர் படை',
+    'GreenThumb Care Team': 'கிரீன் தம்ப் பராமரிப்பு குழு',
+
+    // Dates & Times
+    'Today': 'இன்று',
+    'Tomorrow': 'நாளை',
+    '2 Days Ago': '2 நாட்களுக்கு முன்பு',
+    'Morning (09:00 - 12:00)': 'காலை (09:00 - 12:00)',
+    'Afternoon (12:00 - 16:00)': 'மதியம் (12:00 - 16:00)',
+    'Evening (16:00 - 19:00)': 'மாலை (16:00 - 19:00)',
+    'Express Dispatch (8-15 mins)': 'விரைவு அனுப்புதல் (8-15 நிமிடம்)',
+    'Express Dispatch (within 30m)': 'விரைவு அனுப்புதல் (30 நிமிடத்திற்குள்)',
+    'Now (within 20m)': 'உடனடி (20 நிமிடத்திற்குள்)',
+    'Later Today (Evening)': 'இன்று மாலை',
+    'Tomorrow Morning': 'நாளை காலை',
+    '10:00 AM': 'காலை 10:00',
+
+    // Statuses
+    'posted': 'பதிவு செய்யப்பட்டது',
+    'classified': 'வகைப்படுத்தப்பட்டது',
+    'matched': 'தொழிலாளி ஒதுக்கப்பட்டார்',
+    'accepted': 'ஏற்றுக்கொள்ளப்பட்டது',
+    'worker_arrived': 'தொழிலாளி வந்தார்',
+    'in_progress': 'வேலை நடக்கிறது',
+    'completed': 'வேலை முடிந்தது',
+    'verified': 'சரிபார்க்கப்பட்டது',
+
+    // UI Extra
+    'Fixed Rate': 'நிலையான கட்டணம்',
+    'Fare Breakdown (Standardized Cooperative Rates)': 'கட்டண விவரம் (தரப்படுத்தப்பட்ட கூட்டுறவு விகிதங்கள்)',
+    'Inspection & Transit Fee': 'ஆய்வு மற்றும் பயணக் கட்டணம்',
+    'Base Labor Fee': 'அடிப்படை உழைப்புக் கட்டணம்',
+    'Materials & Consumables': 'பொருட்கள் மற்றும் உதிரிபாகங்கள்',
+    'Zero Platform Cut (0%)': 'பூஜ்ஜிய கமிஷன் (0%)',
+    'Total Escrow Deposit': 'மொத்த பாதுகாப்பு வைப்பு',
+    'Opening GPS navigation to ': 'ஜிபிஎஸ் வழிசெலுத்தலைத் திறக்கிறது: ',
+  },
+  hi: {
+    // Job Titles
+    'Tap Leakage Repair': 'नल रिसाव मरम्मत',
+    '[Warranty Re-service] Tap Leakage Repair': '[वारंटी पुनः सेवा] नल रिसाव मरम्मत',
+    '[Complimentary Warranty Revisit] Tap Leakage Repair': '[मुफ़्त वारंटी पुनः सेवा] नल रिसाव मरम्मत',
+    'Switchboard Replacement': 'स्विचबोर्ड बदलना',
+    'Ceiling Fan Sparking & Bearing Noise': 'सीलिंग फैन स्पार्किंग और बियरिंग शोर मरम्मत',
+    'Full House Deep Cleaning': 'पूरे घर की गहरी सफाई',
+    'Kitchen & Bathroom Sanitization': 'रसोई और बाथरूम का गहरा सैनिटाइजेशन',
+    'Lawn Mowing & Maintenance': 'घास काटना और लॉन रखरखाव',
+    'Lawn Mowing & Hedge Trimming': 'घास काटना और बाड़ छांटना',
+    'AC General Service': 'एसी सामान्य सर्विस',
+    'Washing Machine Water Drainage Issue': 'वॉशिंग मशीन पानी निकासी समस्या',
+    'Tubeless Tyre Puncture Repair': 'ट्यूबलेस टायर पंचर मरम्मत',
+    'Motorcycle Tubeless Puncture Fix': 'मोटरसाइकिल ट्यूबलेस पंचर मरम्मत',
+    'Custom Handyman Task': 'कस्टम हैंडीमैन कार्य',
+    'Custom Service Request': 'कस्टम सेवा अनुरोध',
+    'Tap Leakage Fault (Observed Day 2)': 'नल रिसाव दोष (दिन 2)',
+    '3-Phase Distribution Box Setup': '3-फेज डिस्ट्रीब्यूशन बॉक्स सेटअप',
+    'Earth Wire Grounding Check': 'अर्थ वायर ग्राउंडिंग जांच',
+    'Kitchen tap leakage fixed & pressure tested': 'रसोई के नल का रिसाव ठीक किया गया और दबाव परीक्षण किया गया',
+    'Service Repair': 'सर्विस मरम्मत',
+    'Kitchen faucet washer replacement': 'रसोई के नल का वॉशर बदलना',
+
+    // Job Descriptions
+    'Kitchen faucet is dripping continuously. Replacement washer needed.': 'रसोई का नल लगातार टपक रहा है। नया वॉशर लगाना आवश्यक है।',
+    'Kitchen faucet washer replacement. Leaked again on day 2.': 'रसोई के नल का वाशर बदला गया था। 2 दिन बाद दोबारा रिसाव शुरू हुआ।',
+    'Cooperative warranty corrective dispatch. Original Issue: Tap started leaking again after 2 days. Subsidized lesser budget estimate (55% off).': 'सहकारी वारंटी सुधारात्मक कार्य। मूल समस्या: 2 दिन बाद नल फिर से टपकने लगा। 55% कम बजट अनुमान।',
+    'Tap started leaking again after 2 days of service': 'सेवा के 2 दिनों के बाद नल फिर से लीक होने लगा',
+    'Master bedroom main switchboard socket malfunction.': 'मास्टर बेडरूम के मुख्य स्विचबोर्ड का सॉकेट खराब है।',
+    'Fan regulator and capacitor replacement': 'फैन रेगुलेटर और कैपेसिटर रिप्लेसमेंट',
+    '2BHK complete floor, kitchen, and bathroom sanitization.': '2BHK का पूरा फर्श, रसोई और बाथरूम की गहन सफाई।',
+    'Deep floor scrubbing and tile grime removal': 'फर्श और टाइल्स की गहरी स्क्रबिंग और सफाई',
+    'Front lawn hedge trimming and weed removal.': 'सामने के लॉन की बाड़ की छंटाई और खरपतवार निकालना।',
+    'Split AC filter cleanup and refrigerant pressure check.': 'स्प्लिट एसी फिल्टर सफाई और गैस दबाव की जांच।',
+    'Rear tyre puncture on bike / car. Emergency on-site roadside repair.': 'बाइक / कार का पिछला टायर पंचर। मौके पर आपातकालीन सड़क सहायता।',
+    'Tyre mushroom patch & high pressure air refill': 'टायर मशरूम पैच और हाई प्रेशर हवा भरना',
+    'Door lock installation, furniture assembly, or custom maintenance.': 'दरवाजे का ताला लगाना, फर्नीचर असेंबली या अन्य रखरखाव कार्य।',
+
+    // Services
+    'Plumbing': 'नलसाजी (प्लंबिंग)',
+    'Electrical': 'बिजली कार्य (इलेक्ट्रिकल)',
+    'Cleaning': 'सफाई सेवा',
+    'Home Cleaning': 'घर की सफाई',
+    'Gardening': 'बागवानी कार्य',
+    'Appliance Repair': 'उपकरण मरम्मत',
+    'Appliance Care': 'उपकरण देखभाल',
+    'Tyre Puncture': 'टायर पंचर और सड़क सहायता',
+    'Tyre Puncture & Roadside': 'टायर पंचर और सड़क सहायता',
+    'Roadside Help': 'सड़क किनारे सहायता',
+    'Gas-related': 'गैस संबंधित कार्य',
+    'Specialized Care': 'विशेष देखभाल कार्य',
+    'Custom Service': 'अन्य सेवाएं',
+    'Custom / Other': 'अन्य सेवाएं',
+
+    // Material Names
+    'Brass Washer & Sealant': 'पीतल वॉशर और सीलेंट',
+    'Modular Switch & Socket': 'मॉड्यूलर स्विच और सॉकेट',
+    'Eco Chemicals & Consumables': 'इको रसायन और सामग्री',
+    'Plant Fertilizer & Seeds': 'पौधों की खाद और बीज',
+    'Refrigerant & Filter Spare': 'गैस और फिल्टर स्पेयर पार्ट',
+    'Heavy-duty Puncture Strips & Valve': 'मजबूत पंचर स्ट्रिप्स और वाल्व',
+    'Custom Hardware & Screws': 'कस्टम हार्डवेयर और स्क्रू',
+    'Heavy-duty Capacitor 2.5uF': 'हेवी-ड्यूटी कैपेसिटर 2.5uF',
+    'Hospital-grade Disinfectant & Eco Scrub': 'अस्पताल-ग्रेड कीटाणुनाशक और इको स्क्रब',
+    'Cold Vulcanizing Mushroom Patch': 'कोल्ड वल्कनाइजिंग मशरूम पैच',
+
+    // Locations & Areas
+    'RS Puram, Coimbatore': 'आर.एस. पुरम, कोयंबटूर',
+    'Coimbatore': 'कोयंबटूर',
+    'Gandhipuram, Coimbatore': 'गांधीपुरम, कोयंबटूर',
+    'Saibaba Colony, Coimbatore': 'साईबाबा कॉलोनी, कोयंबटूर',
+    'Peelamedu, Coimbatore': 'पीलामेडू, कोयंबटूर',
+    'Saravanampatti, Coimbatore': 'सरवनमपट्टी, कोयंबटूर',
+    'Ukkadam, Coimbatore': 'उक्कदम, कोयंबटूर',
+    'Singanallur, Coimbatore': 'सिंगनल्लूर, कोयंबटूर',
+    'Town Hall, Coimbatore': 'टाउन हॉल, कोयंबटूर',
+    'Vadavalli, Coimbatore': 'वडवल्ली, कोयंबटूर',
+    'Ramanathapuram, Coimbatore': 'रामानाथपुरम, कोयंबटूर',
+    'RS Puram': 'आर.एस. पुरम',
+    'Gandhipuram': 'गांधीपुरम',
+    'Saibaba Colony': 'साईबाबा कॉलोनी',
+    'Peelamedu': 'पीलामेडू',
+    'Saravanampatti': 'सरवनमपट्टी',
+
+    // Names
+    'Ramesh Kumar': 'रमेश कुमार',
+    'Meena Devi': 'मीना देवी',
+    'Arjun Raj': 'अर्जुन राज',
+    'Suresh Babu': 'सुरेश बाबू',
+    'Priya Sharma': 'प्रिया शर्मा',
+    'Priya Sundaram': 'प्रिया सुंदरम',
+    'Kavitha Selvam': 'कविता सेल्वम',
+    'Senthil Nathan': 'सेंथिल नाथन',
+    'Deepak Verma': 'दीपक वर्मा',
+    'Lakshmi Narayanan': 'लक्ष्मी नारायणन',
+    'Muthu Vel': 'मुथु वेल',
+    'Murugan & Team': 'मुरुगन और टीम',
+    'Coimbatore Power & Wire Squad': 'कोयंबटूर पावर और वायर दस्ता',
+    'GreenThumb Care Team': 'ग्रीन थंब देखभाल दल',
+
+    // Dates & Times
+    'Today': 'आज',
+    'Tomorrow': 'कल',
+    '2 Days Ago': '2 दिन पहले',
+    'Morning (09:00 - 12:00)': 'सुबह (09:00 - 12:00)',
+    'Afternoon (12:00 - 16:00)': 'दोपहर (12:00 - 16:00)',
+    'Evening (16:00 - 19:00)': 'शाम (16:00 - 19:00)',
+    'Express Dispatch (8-15 mins)': 'त्वरित प्रेषण (8-15 मिनट)',
+    'Express Dispatch (within 30m)': 'त्वरित प्रेषण (30 मिनट में)',
+    'Now (within 20m)': 'अभी (20 मिनट में)',
+    'Later Today (Evening)': 'आज शाम को',
+    'Tomorrow Morning': 'कल सुबह',
+    '10:00 AM': 'सुबह 10:00 बजे',
+
+    // Statuses
+    'posted': 'दर्ज किया गया',
+    'classified': 'वर्गीकृत',
+    'matched': 'कारीगर चुना गया',
+    'accepted': 'स्वीकार किया गया',
+    'worker_arrived': 'कारीगर पहुँच गया',
+    'in_progress': 'कार्य प्रगति पर है',
+    'completed': 'कार्य पूरा हुआ',
+    'verified': 'सत्यापित',
+
+    // UI Extra
+    'Fixed Rate': 'निश्चित किराया',
+    'Fare Breakdown (Standardized Cooperative Rates)': 'किराया विवरण (मानकीकृत सहकारी दरें)',
+    'Inspection & Transit Fee': 'निरीक्षण और यात्रा शुल्क',
+    'Base Labor Fee': 'मूल श्रम शुल्क',
+    'Materials & Consumables': 'सामग्री और उपभोग्य वस्तुएं',
+    'Zero Platform Cut (0%)': 'शून्य कमीशन (0%)',
+    'Total Escrow Deposit': 'कुल एस्क्रो जमा',
+    'Opening GPS navigation to ': 'जीपीएस नेविगेशन खोला जा रहा है: ',
+  },
+};
+
+export const localizeText = (text: string | undefined | null, lang: Language): string => {
+  if (!text) return '';
+  if (lang === 'en') return text;
+  
+  const dict = phraseTranslations[lang];
+  if (!dict) return text;
+  
+  if (dict[text]) return dict[text];
+
+  // Handle prefix patterns like "[Warranty Re-service] ..." or "[Complimentary Warranty Revisit] ..."
+  if (text.startsWith('[Warranty Re-service] ')) {
+    const sub = text.replace('[Warranty Re-service] ', '');
+    const prefix = lang === 'ta' ? '[உத்தரவாத மறு சேவை] ' : '[वारंटी पुनः सेवा] ';
+    return prefix + (dict[sub] || sub);
+  }
+  if (text.startsWith('[Complimentary Warranty Revisit] ')) {
+    const sub = text.replace('[Complimentary Warranty Revisit] ', '');
+    const prefix = lang === 'ta' ? '[இலவச உத்தரவாத மறு வருகை] ' : '[मुफ़्त वारंटी पुनः सेवा] ';
+    return prefix + (dict[sub] || sub);
+  }
+
+  // Handle substring replacements for known locations, services, and names inside composite strings
+  let result = text;
+  for (const [enKey, localizedVal] of Object.entries(dict)) {
+    if (enKey.length > 3 && result.includes(enKey)) {
+      result = result.split(enKey).join(localizedVal);
+    }
+  }
+
+  return result;
+};
+
+export const localizeJob = (job: Job | null | undefined, lang: Language): Job | null => {
+  if (!job) return null;
+  if (lang === 'en') return job;
+  return {
+    ...job,
+    title: localizeText(job.title, lang),
+    description: localizeText(job.description, lang),
+    service: localizeText(job.service, lang) as ServiceType,
+    location: localizeText(job.location, lang),
+    date: localizeText(job.date, lang),
+    time: localizeText(job.time, lang),
+  };
 };
