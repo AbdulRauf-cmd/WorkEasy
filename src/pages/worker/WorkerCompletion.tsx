@@ -466,9 +466,9 @@ const WorkerCompletion: React.FC = () => {
             <CheckCircle2 size={24} />
           </div>
           
-          <h2 className="text-base font-bold text-slate-900 tracking-tight mb-1">{t('timelineServiceCompleted')}</h2>
+          <h2 className="text-base font-bold text-slate-900 tracking-tight mb-1">{t('workerAwaitingVerificationTitle')}</h2>
           <p className="text-xs text-slate-500 mb-6 max-w-xs leading-normal">
-            {state.customer.name} received notification along with tamper-proof photo audit. Escrow settlement of ₹{state.currentJob?.budget || 450} is ready for client sign-off.
+            {state.customer.name} received notification along with the tamper-proof photo audit. Guaranteed payment of ₹{state.currentJob?.budget || 450} is safely held in Escrow and will be released to your account upon customer quality approval.
           </p>
 
           <div className="space-y-2 w-full mt-auto">

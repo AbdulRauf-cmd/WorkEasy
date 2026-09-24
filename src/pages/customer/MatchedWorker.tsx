@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Check, ChevronRight } from 'lucide-react';
+import { ShieldCheck, Check, ChevronRight, Lock } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import WorkerCard from '../../components/WorkerCard';
-import { Lock } from 'lucide-react';
+import DemoRouteMap from '../../components/DemoRouteMap';
 
 export const MatchedWorker: React.FC = () => {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ export const MatchedWorker: React.FC = () => {
 
         {/* Assigned Partner Profile Card */}
         {worker && (
-          <div className="mb-3">
+          <div className="mb-3.5">
             <WorkerCard worker={worker} budget={state.currentJob?.budget || 450} />
             <div className="mt-2 bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-2.5 flex items-center justify-between text-[11px] text-emerald-800">
               <span className="flex items-center gap-1 font-medium">
@@ -46,8 +46,19 @@ export const MatchedWorker: React.FC = () => {
           </div>
         )}
 
+        {/* LIVE DEMO ROUTE MAP: WORKER ORIGIN TO CUSTOMER */}
+        <div className="mb-3.5">
+          <DemoRouteMap
+            workerName={worker?.name || 'Ramesh Kumar'}
+            workerSkill={worker?.skill || 'Plumbing'}
+            customerLocation={state.currentJob?.location || 'Coimbatore'}
+            distanceKm={worker?.distance || 2.4}
+            compact={true}
+          />
+        </div>
+
         {/* Credential Rationale */}
-        <div className="bg-white rounded-xl p-4 border border-slate-200/90 shadow-2xs mb-6">
+        <div className="bg-white rounded-xl p-4 border border-slate-200/90 shadow-2xs mb-4">
           <h3 className="text-xs font-bold text-slate-900 tracking-tight mb-3 flex items-center gap-1.5">
             <ShieldCheck size={16} className="text-slate-900" />
             {t('verificationSafetySummary')}
@@ -80,4 +91,5 @@ export const MatchedWorker: React.FC = () => {
     </AnimatedPage>
   );
 };
+
 export default MatchedWorker;

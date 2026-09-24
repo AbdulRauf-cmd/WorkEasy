@@ -319,6 +319,41 @@ export interface Translations {
   testSimulateOnsite: string;
   testSimulateOffsite: string;
   watermarkVerified: string;
+
+  // Rating Submission & Invoice
+  submitRatingBtn: string;
+  submitRatingSuccess: string;
+  skipRating: string;
+  invoiceTitle: string;
+  itemizedServiceProvided: string;
+  serviceItemTotal: string;
+  billDetails: string;
+  serviceLaborTotal: string;
+  partnerTip: string;
+  totalPaid: string;
+  paidViaEscrowUPI: string;
+  closeInvoice: string;
+  paymentSettled: string;
+  escrowSecured: string;
+  releasedDirectlyToWorker: string;
+  heldSafelyUntilCustomerApproval: string;
+  serviceLocation: string;
+  bookingDate: string;
+  includedFree: string;
+  warrantyCoverageActive: string;
+  warrantyCoverageNotice: string;
+
+  // Map & Route Tracking
+  dispatchingFrom: string;
+  onTheWay: string;
+  speedNormal: string;
+  enRouteCustomer: string;
+
+  // Worker verification status
+  workerAwaitingVerificationTitle: string;
+  workerAwaitingVerificationDesc: string;
+  workerPaymentSettledTitle: string;
+  workerPaymentSettledDesc: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -621,6 +656,41 @@ export const translations: Record<Language, Translations> = {
     testSimulateOnsite: 'Simulate On-Site (14m)',
     testSimulateOffsite: 'Simulate Off-Site (2.4 km)',
     watermarkVerified: 'Tamper-Proof Geo Verification',
+
+    // Rating Submission & Invoice
+    submitRatingBtn: 'Submit Rating & Review',
+    submitRatingSuccess: 'Rating submitted successfully! Thank you for supporting cooperative partners.',
+    skipRating: 'Skip Rating & Return Home',
+    invoiceTitle: 'Invoice & Service Breakdown',
+    itemizedServiceProvided: 'Services Provided',
+    serviceItemTotal: 'Item Total',
+    billDetails: 'Bill Details',
+    serviceLaborTotal: 'Service Labor Charge',
+    partnerTip: 'Delivery / Partner Tip',
+    totalPaid: 'Grand Total',
+    paidViaEscrowUPI: 'Settled via Escrow / UPI',
+    closeInvoice: 'Close Invoice',
+    paymentSettled: 'Payment Settled',
+    escrowSecured: 'Escrow Secured',
+    releasedDirectlyToWorker: 'Directly released to worker without commission',
+    heldSafelyUntilCustomerApproval: 'Held safely in Escrow until your approval',
+    serviceLocation: 'Location',
+    bookingDate: 'Date & Time',
+    includedFree: 'Included (₹0)',
+    warrantyCoverageActive: '48-Hour Quality Guarantee Active',
+    warrantyCoverageNotice: 'If any defect recurs within 48 hours, free re-work or immediate refund is covered by the cooperative escrow.',
+
+    // Map & Route Tracking
+    dispatchingFrom: 'Dispatching From',
+    onTheWay: 'Partner on the way',
+    speedNormal: 'Normal City Traffic',
+    enRouteCustomer: 'is travelling to your doorstep',
+
+    // Worker verification status
+    workerAwaitingVerificationTitle: 'Work Completed — Awaiting Customer Verification',
+    workerAwaitingVerificationDesc: 'Payment is held safely in Escrow and will be released to your account once customer confirms quality.',
+    workerPaymentSettledTitle: 'Payment Settled & Deposited',
+    workerPaymentSettledDesc: 'Quality verified! Payment has been deposited directly into your cooperative bank account with 0% commission deduction.',
   },
 
   ta: {
@@ -922,6 +992,41 @@ export const translations: Record<Language, Translations> = {
     testSimulateOnsite: 'தளத்தில் இருத்தல் (14 மீ)',
     testSimulateOffsite: 'வெளியில் இருத்தல் (2.4 கி.மீ)',
     watermarkVerified: 'சரிபார்க்கப்பட்ட பாதுகாப்பான புவி-முத்திரை',
+
+    // Rating Submission & Invoice
+    submitRatingBtn: 'மதிப்பீடு & கருத்து சமர்ப்பி',
+    submitRatingSuccess: 'மதிப்பீடு வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது! கூட்டுறவு தொழிலாளரை ஆதரித்ததற்கு நன்றி.',
+    skipRating: 'மதிப்பீட்டைத் தவிர்த்து முகப்புக்குச் செல்',
+    invoiceTitle: 'ரசீது & சேவை விவரங்கள்',
+    itemizedServiceProvided: 'வழங்கப்பட்ட சேவைகள்',
+    serviceItemTotal: 'சேவை மொத்தத் தொகை',
+    billDetails: 'கட்டண விவரங்கள்',
+    serviceLaborTotal: 'தொழிலாளர் கூலி',
+    partnerTip: 'தொழிலாளிக்கான அன்பளிப்பு (Tip)',
+    totalPaid: 'செலுத்தப்பட்ட மொத்தத் தொகை',
+    paidViaEscrowUPI: 'எஸ்க்ரோ / UPI மூலம் செலுத்தப்பட்டது',
+    closeInvoice: 'ரசீதை மூடு',
+    paymentSettled: 'பணம் விடுவிக்கப்பட்டது',
+    escrowSecured: 'எஸ்க்ரோ பாதுகாப்பானது',
+    releasedDirectlyToWorker: 'கமிஷன் இன்றி நேரடியாக தொழிலாளிக்கு சென்றடைந்தது',
+    heldSafelyUntilCustomerApproval: 'வாடிக்கையாளர் ஒப்புதல் அளிக்கும் வரை எஸ்க்ரோவில் பாதுகாப்பாக உள்ளது',
+    serviceLocation: 'சேவை இடம்',
+    bookingDate: 'தேதி & நேரம்',
+    includedFree: 'இலவசம் (₹0)',
+    warrantyCoverageActive: '48-மணிநேர தர உத்தரவாதம் செயல்பாட்டில் உள்ளது',
+    warrantyCoverageNotice: '48 மணி நேரத்திற்குள் ஏதேனும் குறைபாடு ஏற்பட்டால், இலவச மறுபணி அல்லது முழுத் தொகை உடனடியாக கூட்டுறவு மூலம் திருப்பித் தரப்படும்.',
+
+    // Map & Route Tracking
+    dispatchingFrom: 'புறப்படும் இடம்',
+    onTheWay: 'தொழிலாளி வரும் வழியில் உள்ளார்',
+    speedNormal: 'சாதாரண நகர போக்குவரத்து',
+    enRouteCustomer: 'உங்கள் முகவரியை நோக்கி வந்துகொண்டிருக்கிறார்',
+
+    // Worker verification status
+    workerAwaitingVerificationTitle: 'வேலை முடிந்தது — வாடிக்கையாளர் சரிபார்ப்பிற்காக காத்திருக்கிறது',
+    workerAwaitingVerificationDesc: 'பணம் எஸ்க்ரோவில் பாதுகாப்பாக வைக்கப்பட்டுள்ளது. வாடிக்கையாளர் சரிபார்த்தவுடன் உங்கள் கணக்கில் சேர்க்கப்படும்.',
+    workerPaymentSettledTitle: 'பணம் கணக்கில் வரவு வைக்கப்பட்டது',
+    workerPaymentSettledDesc: 'வாடிக்கையாளர் சரிபார்த்தார்! 0% கமிஷன் பிடித்தம் இன்றி முழுப் பணமும் உங்கள் வங்கிக் கணக்கில் வரவு வைக்கப்பட்டது.',
   },
 
   hi: {
@@ -1223,6 +1328,41 @@ export const translations: Record<Language, Translations> = {
     testSimulateOnsite: 'साइट पर स्थिति (14 मी)',
     testSimulateOffsite: 'साइट से बाहर स्थिति (2.4 किमी)',
     watermarkVerified: 'छेड़छाड़-मुक्त जियो सत्यापन',
+
+    // Rating Submission & Invoice
+    submitRatingBtn: 'रेटिंग और समीक्षा सबमिट करें',
+    submitRatingSuccess: 'रेटिंग सफलतापूर्वक सबमिट हो गई! सहकारी कारीगर का समर्थन करने के लिए धन्यवाद।',
+    skipRating: 'रेटिंग छोड़ें और होम पर जाएं',
+    invoiceTitle: 'चालान और सेवा विवरण',
+    itemizedServiceProvided: 'प्रदान की गई सेवाएं',
+    serviceItemTotal: 'आइटम कुल योग',
+    billDetails: 'बिल विवरण',
+    serviceLaborTotal: 'कारीगर मजदूरी शुल्क',
+    partnerTip: 'कारीगर के लिए टिप',
+    totalPaid: 'कुल देय राशि',
+    paidViaEscrowUPI: 'एस्क्रो / यूपीआई द्वारा भुगतान किया गया',
+    closeInvoice: 'चालान बंद करें',
+    paymentSettled: 'भुगतान जारी',
+    escrowSecured: 'एस्क्रो सुरक्षित',
+    releasedDirectlyToWorker: 'बिना कमीशन के सीधे कारीगर को भुगतान',
+    heldSafelyUntilCustomerApproval: 'आपकी मंज़ूरी तक एस्क्रो में सुरक्षित',
+    serviceLocation: 'स्थान',
+    bookingDate: 'तारीख और समय',
+    includedFree: 'शामिल (₹0)',
+    warrantyCoverageActive: '48 घंटे की गुणवत्ता गारंटी सक्रिय',
+    warrantyCoverageNotice: 'यदि 48 घंटों के भीतर कोई समस्या दोबारा होती है, तो सहकारी एस्क्रो द्वारा मुफ्त काम या पूरा रिफंड मिलेगा।',
+
+    // Map & Route Tracking
+    dispatchingFrom: 'रवाना होने का स्थान',
+    onTheWay: 'कारीगर रास्ते में है',
+    speedNormal: 'सामान्य शहर यातायात',
+    enRouteCustomer: 'आपके पते की ओर आ रहा है',
+
+    // Worker verification status
+    workerAwaitingVerificationTitle: 'कार्य पूर्ण — ग्राहक सत्यापन की प्रतीक्षा है',
+    workerAwaitingVerificationDesc: 'भुगतान एस्क्रो में सुरक्षित रखा गया है। ग्राहक द्वारा काम स्वीकृत करने पर तुरंत आपके खाते में जमा होगा।',
+    workerPaymentSettledTitle: 'भुगतान स्वीकृत और जमा किया गया',
+    workerPaymentSettledDesc: 'गुणवत्ता सत्यापित! बिना किसी कमीशन कटौती के पूरा पैसा सीधे आपके बैंक खाते में जमा हो गया है।',
   },
 };
 

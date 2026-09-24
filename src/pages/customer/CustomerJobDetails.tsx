@@ -17,7 +17,8 @@ import {
   UserCheck,
   Star,
   CheckCircle2,
-  XCircle
+  XCircle,
+  ReceiptText
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
@@ -25,6 +26,8 @@ import TierBadge from '../../components/TierBadge';
 import StatusTimeline from '../../components/StatusTimeline';
 import WorkerCard from '../../components/WorkerCard';
 import MaskedCallModal from '../../components/MaskedCallModal';
+import DemoRouteMap from '../../components/DemoRouteMap';
+import ServiceInvoiceModal from '../../components/ServiceInvoiceModal';
 import { Worker, ContractorTeam } from '../../types';
 
 export const CustomerJobDetails: React.FC = () => {
@@ -49,6 +52,7 @@ export const CustomerJobDetails: React.FC = () => {
   
   // Masked calling state (Secure Virtual Number)
   const [showMaskedCallModal, setShowMaskedCallModal] = useState(false);
+  const [showInvoiceModal, setShowInvoiceModal] = useState(false);
   const [calleeInfo, setCalleeInfo] = useState({
     name: 'Ramesh Kumar',
     role: 'Certified Partner',
@@ -122,6 +126,17 @@ export const CustomerJobDetails: React.FC = () => {
       </div>
 
       <div className="p-4 space-y-3.5">
+        {/* LIVE WORKER ROUTE TRACKING MAP (When confirmed/en-route/arrived) */}
+        {['matched', 'accepted', 'worker_arrived'].includes(currentJob.status) && (
+          <DemoRouteMap
+            workerName={worker?.name || 'Ramesh Kumar'}
+            workerSkill={worker?.skill || currentJob.service}
+            customerLocation={currentJob.location || 'Coimbatore'}
+            distanceKm={worker?.distance || 2.4}
+            compact={false}
+          />
+        )}
+
         {/* WORKER TIME EXTENSION REQUEST BANNER */}
         {currentJob.extensionRequest && (
           <div className={`p-4 rounded-xl border-2 shadow-2xs ${
@@ -491,6 +506,15 @@ export const CustomerJobDetails: React.FC = () => {
               <span>Total Guaranteed Escrow</span>
               <span>₹{currentJob.budget}</span>
             </div>
+
+            {/* View Detailed Swiggy-Style Invoice */}
+            <button
+              onClick={() => setShowInvoiceModal(true)}
+              className="w-full mt-2.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98"
+            >
+              <ReceiptText size={14} className="text-slate-700" />
+              <span>{t('viewReceipt')}</span>
+            </button>
           </div>
         </div>
 
@@ -795,6 +819,14 @@ export const CustomerJobDetails: React.FC = () => {
         calleeName={calleeInfo.name}
         calleeRole={calleeInfo.role}
         maskedNumber={calleeInfo.maskedNumber}
+      />
+
+      {/* Swiggy-Style Detailed Service Invoice Modal */}
+      <ServiceInvoiceModal
+        isOpen={showInvoiceModal}
+        onClose={() => setShowInvoiceModal(false)}
+        job={currentJob}
+        worker={worker}
       />
     </AnimatedPage>
   );

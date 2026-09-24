@@ -83,29 +83,55 @@ const WorkerActiveJob: React.FC = () => {
   }
 
   const handleOtpChange = (index: number, value: string) => {
-    if (value.length > 1) {
-      const digits = value.replace(/\D/g, '').slice(0, 4).split('');
+    const cleanValue = value.replace(/\D/g, '');
+    
+    // In case mobile keyboard / browser fires onChange with multiple digits (paste)
+    if (cleanValue.length > 1) {
+      const digits = cleanValue.slice(0, 4).split('');
       const newOtp = [...otp];
       digits.forEach((d, i) => {
         if (i < 4) newOtp[i] = d;
       });
       setOtp(newOtp);
       setOtpError('');
-      if (digits.length === 4) {
-        inputRefs[3].current?.focus();
-      }
+      const lastIdx = Math.min(digits.length, 3);
+      inputRefs[lastIdx].current?.focus();
       return;
     }
 
-    const digit = value.replace(/\D/g, '');
     const newOtp = [...otp];
-    newOtp[index] = digit;
+    newOtp[index] = cleanValue;
     setOtp(newOtp);
     setOtpError('');
 
-    if (digit && index < 3) {
+    if (cleanValue && index < 3) {
       inputRefs[index + 1].current?.focus();
     }
+  };
+
+  const handlePaste = (index: number, e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text');
+    const digits = pastedData.replace(/\D/g, '').slice(0, 4);
+    if (!digits) return;
+
+    const newOtp = [...otp];
+    // If 4 digits are pasted, always fill from index 0
+    const startFrom = digits.length >= 3 ? 0 : index;
+    
+    digits.split('').forEach((d, i) => {
+      if (startFrom + i < 4) {
+        newOtp[startFrom + i] = d;
+      }
+    });
+
+    setOtp(newOtp);
+    setOtpError('');
+
+    // Focus last filled box or next available
+    const lastFilled = Math.min(startFrom + digits.length - 1, 3);
+    const nextToFocus = lastFilled < 3 ? lastFilled + 1 : 3;
+    inputRefs[nextToFocus].current?.focus();
   };
 
   const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -314,6 +340,7 @@ const WorkerActiveJob: React.FC = () => {
                     value={digit}
                     onChange={(e) => handleOtpChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
+                    onPaste={(e) => handlePaste(index, e)}
                     className="w-10 h-11 text-center text-lg font-bold rounded-lg border border-slate-300 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none transition-all font-mono"
                   />
                 ))}
@@ -409,22 +436,51 @@ const WorkerActiveJob: React.FC = () => {
           </div>
         )}
 
-        {/* STEP 4: COMPLETED -> AWAITING VERIFICATION */}
+        {/* STEP 4: COMPLETED -> AWAITING CUSTOMER QUALITY SIGN-OFF */}
         {job.status === 'completed' && (
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-3.5 text-center">
-            <p className="font-semibold text-xs text-amber-900">{t('timelineServiceCompleted')}</p>
-            <p className="text-[11px] text-amber-700 mt-0.5">
-              ₹{job.budget} {t('timelinePaymentReleasedDetail')}
-            </p>
+          <div className="bg-amber-50 border border-amber-200/90 rounded-2xl p-4 text-center shadow-2xs space-y-2">
+            <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center mx-auto">
+              <Clock size={16} className="animate-spin-slow" />
+            </div>
+            <div>
+              <p className="font-bold text-xs text-amber-950">
+                {t('workerAwaitingVerificationTitle')}
+              </p>
+              <p className="text-[11px] text-amber-800 mt-0.5 leading-relaxed">
+                {t('workerAwaitingVerificationDesc')}
+              </p>
+            </div>
+            <div className="bg-white/80 rounded-xl p-2.5 border border-amber-200 flex items-center justify-between text-xs">
+              <span className="text-slate-600 font-medium">Guaranteed Escrow:</span>
+              <span className="font-mono font-black text-slate-900">₹{job.budget}</span>
+            </div>
+            <span className="inline-block text-[10px] font-bold bg-amber-200/70 text-amber-900 px-2.5 py-0.5 rounded-full">
+              ⏳ Awaiting Customer Quality Sign-Off (Escrow Pending)
+            </span>
           </div>
         )}
 
-        {/* STEP 5: VERIFIED */}
+        {/* STEP 5: VERIFIED -> PAYMENT RELEASED & SETTLED */}
         {job.status === 'verified' && (
-          <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 text-center">
-            <CheckCircle2 size={20} className="text-emerald-600 mx-auto mb-1" />
-            <p className="font-semibold text-xs text-emerald-900">{t('timelinePaymentReleased')}</p>
-            <p className="text-[11px] text-emerald-700 mt-0.5">₹{job.budget} deposited directly.</p>
+          <div className="bg-emerald-50 border border-emerald-200/90 rounded-2xl p-4 text-center shadow-2xs space-y-2">
+            <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center mx-auto">
+              <CheckCircle2 size={18} className="text-emerald-700" />
+            </div>
+            <div>
+              <p className="font-bold text-xs text-emerald-950">
+                {t('workerPaymentSettledTitle')}
+              </p>
+              <p className="text-[11px] text-emerald-800 mt-0.5 leading-relaxed">
+                {t('workerPaymentSettledDesc')}
+              </p>
+            </div>
+            <div className="bg-white/80 rounded-xl p-2.5 border border-emerald-200 flex items-center justify-between text-xs">
+              <span className="text-slate-600 font-medium">Direct Bank Settlement:</span>
+              <span className="font-mono font-black text-emerald-800 text-sm">₹{job.budget}</span>
+            </div>
+            <span className="inline-block text-[10px] font-bold bg-emerald-200/70 text-emerald-900 px-2.5 py-0.5 rounded-full">
+              ✓ 100% Payout Deposited (₹0 Platform Fee)
+            </span>
           </div>
         )}
       </div>
