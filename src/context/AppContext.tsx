@@ -52,11 +52,28 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
+        // Sanitize any cached worker names to prevent customer/worker name conflict
+        const sanitizedWorkers = (parsed.workers || mockWorkers).map((w: Worker) => {
+          if (w.id === 'w6' && (w.name.includes('Priya') || w.name === 'Priya Sundaram')) {
+            return { ...w, name: 'Karthik Sundaram', avatar: 'KS', distance: 3.2 };
+          }
+          if (w.id === 'w1') {
+            return { ...w, distance: 1.4 };
+          }
+          return w;
+        });
+
+        let sanitizedJob = parsed.currentJob || defaultState.currentJob;
+        if (sanitizedJob?.workerId === 'w6') {
+          sanitizedJob = { ...sanitizedJob, workerId: 'w1' };
+        }
+
         return {
           ...defaultState,
           ...parsed,
+          currentJob: sanitizedJob,
           language: parsed.language || 'en',
-          workers: parsed.workers || mockWorkers,
+          workers: sanitizedWorkers,
           contractorTeams: parsed.contractorTeams || mockContractorTeams,
           mentorshipSessions: parsed.mentorshipSessions || mockMentorshipSessions,
         };

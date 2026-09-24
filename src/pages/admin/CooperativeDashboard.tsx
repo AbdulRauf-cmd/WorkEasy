@@ -163,7 +163,7 @@ const CooperativeDashboard: React.FC = () => {
               <span className="text-emerald-700 font-bold text-[11px]">Option 2: Rebooked (₹200)</span>
             </div>
             <p className="text-[10px] text-slate-500">
-              Original Partner: Ramesh Kumar · Subsidized replacement dispatched: Priya Sundaram (55% cooperative subsidy).
+              Original Partner: Ramesh Kumar · Subsidized replacement dispatched: Karthik Sundaram (55% cooperative subsidy).
             </p>
           </div>
         </div>
