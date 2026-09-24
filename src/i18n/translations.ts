@@ -354,6 +354,24 @@ export interface Translations {
   workerAwaitingVerificationDesc: string;
   workerPaymentSettledTitle: string;
   workerPaymentSettledDesc: string;
+
+  // 3% Customer Platform Fee & 0% Worker Commission Model
+  customerPlatformFee: string;
+  customerPlatformFeeDetail: string;
+  workerCommissionZero: string;
+  workerCommissionZeroDetail: string;
+  workerKeepsFullPayout: string;
+
+  // Demand Forecasting
+  demandForecastingTitle: string;
+  demandForecastingSubtitle: string;
+  areaDemandSurge: string;
+  forecastedJobsToday: string;
+  activeSupplyNear: string;
+  peakDemandHours: string;
+  supplyGapAlert: string;
+  rebalanceRecommendation: string;
+  topDemandedSkills: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -691,6 +709,24 @@ export const translations: Record<Language, Translations> = {
     workerAwaitingVerificationDesc: 'Payment is held safely in Escrow and will be released to your account once customer confirms quality.',
     workerPaymentSettledTitle: 'Payment Settled & Deposited',
     workerPaymentSettledDesc: 'Quality verified! Payment has been deposited directly into your cooperative bank account with 0% commission deduction.',
+
+    // 3% Customer Platform Fee & 0% Worker Commission Model
+    customerPlatformFee: 'Cooperative Platform & Escrow Fee (3%)',
+    customerPlatformFeeDetail: 'Covers 48-hr escrow quality protection & zero-commission ecosystem',
+    workerCommissionZero: 'Worker Commission (0%)',
+    workerCommissionZeroDetail: 'WorkEasy charges 0% commission to trade partners — 100% of payout goes directly to worker',
+    workerKeepsFullPayout: '0% Commission • Keep 100% of Payout',
+
+    // Demand Forecasting
+    demandForecastingTitle: 'Area Demand Forecasting',
+    demandForecastingSubtitle: 'Real-time localized demand surge & workforce dispatch intelligence',
+    areaDemandSurge: 'Demand Surge Index',
+    forecastedJobsToday: 'Jobs Forecasted Today',
+    activeSupplyNear: 'Verified Partners Available',
+    peakDemandHours: 'Peak Surge Windows',
+    supplyGapAlert: 'Supply Rebalancing Required',
+    rebalanceRecommendation: 'AI Fleet Rebalancing Advice',
+    topDemandedSkills: 'In-Demand Trades',
   },
 
   ta: {
@@ -1027,6 +1063,24 @@ export const translations: Record<Language, Translations> = {
     workerAwaitingVerificationDesc: 'பணம் எஸ்க்ரோவில் பாதுகாப்பாக வைக்கப்பட்டுள்ளது. வாடிக்கையாளர் சரிபார்த்தவுடன் உங்கள் கணக்கில் சேர்க்கப்படும்.',
     workerPaymentSettledTitle: 'பணம் கணக்கில் வரவு வைக்கப்பட்டது',
     workerPaymentSettledDesc: 'வாடிக்கையாளர் சரிபார்த்தார்! 0% கமிஷன் பிடித்தம் இன்றி முழுப் பணமும் உங்கள் வங்கிக் கணக்கில் வரவு வைக்கப்பட்டது.',
+
+    // 3% Customer Platform Fee & 0% Worker Commission Model
+    customerPlatformFee: 'கூட்டுறவு தளம் & எஸ்க்ரோ கட்டணம் (3%)',
+    customerPlatformFeeDetail: '48 மணிநேர தரப் பாதுகாப்பு மற்றும் கமிஷன் இல்லாத எஸ்க்ரோ சேவைக்காக',
+    workerCommissionZero: 'தொழிலாளி கமிஷன் (0%)',
+    workerCommissionZeroDetail: 'தொழிலாளர்களுக்கு 0% கமிஷன் — தொழிலாளியின் உழைப்புப் பணம் 100% அவரிடமே சேர்கிறது',
+    workerKeepsFullPayout: '0% கமிஷன் • 100% வருமானம் உங்கள் கைக்கே',
+
+    // Demand Forecasting
+    demandForecastingTitle: 'பகுதி அளவிலான தேவை முன்கணிப்பு',
+    demandForecastingSubtitle: 'நிகழ்நேர பகுதி வாரியான தேவை அதிகரிப்பு & தொழிலாளர் வழிகாட்டுதல்',
+    areaDemandSurge: 'தேவை அதிகரிப்பு குறியீடு',
+    forecastedJobsToday: 'இன்று எதிர்பார்க்கப்படும் வேலைகள்',
+    activeSupplyNear: 'அருகிலுள்ள தொழிலாளர்கள்',
+    peakDemandHours: 'அதிக தேவை நேரம்',
+    supplyGapAlert: 'தொழிலாளர் பற்றாக்குறை எச்சரிக்கை',
+    rebalanceRecommendation: 'கூட்டுறவு மறுபகிர்வு வழிகாட்டுதல்',
+    topDemandedSkills: 'அதிக தேவைப்படும் வேலைகள்',
   },
 
   hi: {
@@ -1363,6 +1417,24 @@ export const translations: Record<Language, Translations> = {
     workerAwaitingVerificationDesc: 'भुगतान एस्क्रो में सुरक्षित रखा गया है। ग्राहक द्वारा काम स्वीकृत करने पर तुरंत आपके खाते में जमा होगा।',
     workerPaymentSettledTitle: 'भुगतान स्वीकृत और जमा किया गया',
     workerPaymentSettledDesc: 'गुणवत्ता सत्यापित! बिना किसी कमीशन कटौती के पूरा पैसा सीधे आपके बैंक खाते में जमा हो गया है।',
+
+    // 3% Customer Platform Fee & 0% Worker Commission Model
+    customerPlatformFee: 'सहकारी प्लेटफ़ॉर्म और एस्क्रो शुल्क (3%)',
+    customerPlatformFeeDetail: '48 घंटे की गुणवत्ता गारंटी और शून्य-कमीशन तंत्र के लिए',
+    workerCommissionZero: 'कारीगर कमीशन (0%)',
+    workerCommissionZeroDetail: 'कारीगरों से 0% कमीशन — 100% कमाई सीधे कारीगर के बैंक खाते में',
+    workerKeepsFullPayout: '0% कमीशन • 100% कमाई आपकी',
+
+    // Demand Forecasting
+    demandForecastingTitle: 'क्षेत्रीय मांग पूर्वानुमान',
+    demandForecastingSubtitle: 'वास्तविक समय में क्षेत्रवार मांग और कार्यबल प्रेषण बुद्धिमत्ता',
+    areaDemandSurge: 'मांग वृद्धि सूचकांक',
+    forecastedJobsToday: 'आज अनुमानित कुल कार्य',
+    activeSupplyNear: 'सत्यापित उपलब्ध कारीगर',
+    peakDemandHours: 'उच्च मांग के घंटे',
+    supplyGapAlert: 'कार्यबल पुनर्संतुलन की आवश्यकता',
+    rebalanceRecommendation: 'सहकारी पुनर्संतुलन सलाह',
+    topDemandedSkills: 'शीर्ष मांग वाले हुनर',
   },
 };
 

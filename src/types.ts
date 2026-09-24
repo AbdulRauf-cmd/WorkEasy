@@ -133,6 +133,8 @@ export interface Job {
   rating?: number;
   feedback?: string;
   tip?: number;
+  customerFee?: number;
+  workerCommission?: number;
   vehicleType?: '2_wheeler' | '4_wheeler';
   punctureType?: 'tubeless_strip' | 'tube_patch' | 'stepney_swap' | 'air_refill';
   createdAt: string;

@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
-import { Lock, Navigation } from 'lucide-react';
+import AreaDemandForecast from '../../components/AreaDemandForecast';
+import { Lock, Navigation, TrendingUp } from 'lucide-react';
 
 const WorkerHome: React.FC = () => {
   const { state, acceptJob, t, loc } = useApp();
@@ -187,6 +188,20 @@ const WorkerHome: React.FC = () => {
             Prerequisite: Level 3 Gas Certification. Complete the cooperative tutoring apprenticeship to unlock.
           </p>
         </div>
+      </div>
+
+      {/* LOCALITY DEMAND FORECAST & SURGE HEATMAP */}
+      <div className="mt-5">
+        <div className="flex items-center justify-between mb-2 px-0.5">
+          <div className="flex items-center gap-1.5">
+            <TrendingUp size={14} className="text-slate-800" />
+            <h2 className="text-xs font-bold text-slate-900 tracking-tight">{t('demandForecastingTitle')}</h2>
+          </div>
+          <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+            {t('workerCommissionZero')}
+          </span>
+        </div>
+        <AreaDemandForecast />
       </div>
     </AnimatedPage>
   );

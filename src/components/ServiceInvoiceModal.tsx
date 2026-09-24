@@ -25,7 +25,8 @@ export const ServiceInvoiceModal: React.FC<Props> = ({
   const basePrice = job.budget || 450;
   const laborCharge = Math.round(basePrice * 0.78);
   const materialsPrecisionFee = basePrice - laborCharge;
-  const totalAmount = basePrice + (tip || 0);
+  const customerFee = job.customerFee || Math.round(basePrice * 0.03); // 3% Customer Platform Fee
+  const totalAmount = basePrice + customerFee + (tip || 0);
   const invoiceId = `INV-${job.id.slice(-4).toUpperCase()}-2026`;
   const bookingDate = new Date().toLocaleDateString('en-IN', {
     day: 'numeric',
@@ -178,16 +179,22 @@ export const ServiceInvoiceModal: React.FC<Props> = ({
                 <span className="font-mono">₹{basePrice}</span>
               </div>
 
-              {/* 0% Commission Guarantee */}
+              {/* 0% Commission from Worker */}
               <div className="flex items-center justify-between text-slate-600">
                 <span className="flex items-center gap-1">
-                  <span>{t('platformCommission')}</span>
-                  <span className="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-1 rounded">Co-op Model</span>
+                  <span>{t('workerCommissionZero')}</span>
+                  <span className="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-1 rounded">Worker Keeps 100%</span>
                 </span>
-                <span>
-                  <del className="text-slate-400 text-[10px] mr-1">₹90</del>
-                  <strong className="text-emerald-700 font-bold">FREE (₹0)</strong>
+                <span className="text-emerald-700 font-bold font-mono">₹0 (0%)</span>
+              </div>
+
+              {/* 3% Customer Platform & Escrow Protection Fee */}
+              <div className="flex items-center justify-between text-slate-600">
+                <span className="flex items-center gap-1">
+                  <span>{t('customerPlatformFee')}</span>
+                  <span className="text-[9px] bg-blue-100 text-blue-800 font-bold px-1 rounded">3%</span>
                 </span>
+                <span className="font-mono font-bold text-slate-900">₹{customerFee}</span>
               </div>
 
               <div className="flex items-center justify-between text-slate-600">

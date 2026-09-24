@@ -499,8 +499,14 @@ export const CustomerJobDetails: React.FC = () => {
               </span>
             </div>
             <div className="flex justify-between text-slate-500">
-              <span>Platform Commission</span>
-              <span className="text-emerald-700 font-medium">₹0 (100% to Workforce)</span>
+              <span>{t('workerCommissionZero')}</span>
+              <span className="text-emerald-700 font-bold">₹0 (0% taken)</span>
+            </div>
+            <div className="flex justify-between text-slate-500">
+              <span>{t('customerPlatformFee')}</span>
+              <span className="font-semibold text-slate-800">
+                ₹{currentJob.customerFee || Math.round(currentJob.budget * 0.03)} (3%)
+              </span>
             </div>
             <div className="flex justify-between items-center pt-2 border-t border-slate-100 text-xs font-bold text-slate-900">
               <span>Total Guaranteed Escrow</span>

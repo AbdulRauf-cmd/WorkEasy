@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
-import { Users, Briefcase, CheckSquare, CheckCircle2, ShieldCheck, RefreshCw, Award, Globe } from 'lucide-react';
+import { Users, Briefcase, CheckSquare, CheckCircle2, ShieldCheck, RefreshCw, Award, Globe, TrendingUp } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import LanguageSwitch from '../../components/LanguageSwitch';
+import AreaDemandForecast from '../../components/AreaDemandForecast';
 
 const CooperativeDashboard: React.FC = () => {
   const { t } = useApp();
@@ -59,6 +60,48 @@ const CooperativeDashboard: React.FC = () => {
           <span className="text-sm font-bold text-emerald-700 block">₹18,450</span>
           <span className="text-[10px] text-slate-400 uppercase font-semibold">{t('totalEscrowHeldMetric')}</span>
         </div>
+      </div>
+
+      {/* Platform Pricing & Commission Model (3% Customer, 0% Worker) */}
+      <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 shadow-2xs mb-4">
+        <div className="flex justify-between items-center mb-2">
+          <div className="flex items-center gap-1.5">
+            <ShieldCheck size={14} className="text-emerald-700" />
+            <h2 className="text-xs font-bold text-slate-900 uppercase tracking-tight">Cooperative Revenue & Commission Model</h2>
+          </div>
+          <span className="text-[10px] bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-200">
+            0% Worker Cut
+          </span>
+        </div>
+        <p className="text-[11px] text-slate-500 mb-3">
+          WorkEasy charges a transparent 3% platform & escrow fee from customers while deducting 0% from workers. Partners keep 100% of their base labor earnings.
+        </p>
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+            <span className="text-[10px] text-slate-500 font-semibold block">Customer Platform Fee</span>
+            <span className="text-sm font-bold text-slate-900 font-mono">3% <span className="text-[10px] text-slate-500 font-normal">(e.g. ₹14 / ₹450)</span></span>
+            <p className="text-[10px] text-slate-500 mt-1">Covers escrow insurance, payment gateway, and customer dispute guarantee.</p>
+          </div>
+          <div className="bg-emerald-50/60 p-2.5 rounded-lg border border-emerald-200">
+            <span className="text-[10px] text-emerald-800 font-semibold block">Worker Commission</span>
+            <span className="text-sm font-bold text-emerald-700 font-mono">0% <span className="text-[10px] text-emerald-700 font-normal">(Zero deduction)</span></span>
+            <p className="text-[10px] text-emerald-800 mt-1">100% of labor payout released directly to worker cooperative accounts.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* COIMBATORE AREA DEMAND FORECASTING & FLEET REBALANCING */}
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-1.5 px-0.5">
+          <div className="flex items-center gap-1.5">
+            <TrendingUp size={14} className="text-slate-900" />
+            <h2 className="text-xs font-bold text-slate-900 uppercase tracking-tight">
+              Locality Demand Forecasting
+            </h2>
+          </div>
+          <span className="text-[10px] text-slate-500 font-mono">Real-time Surge Telemetry</span>
+        </div>
+        <AreaDemandForecast />
       </div>
 
       {/* PARTNER CREDENTIALING QUEUE */}

@@ -147,7 +147,9 @@ export const PostJob: React.FC = () => {
     activeSelectedContractor?.baseSupervisorRate || 300
   );
 
-  const totalBudget = isBulk ? bulkFare.total : soloFare.total;
+  const workerPayout = isBulk ? bulkFare.total : soloFare.total;
+  const customerFee = Math.round(workerPayout * 0.03); // 3% from customer
+  const totalBudget = workerPayout + customerFee;
 
   const handleNext = () => setStep(s => Math.min(s + 1, 4));
   const handleBack = () => setStep(s => Math.max(s - 1, 1));
@@ -160,6 +162,8 @@ export const PostJob: React.FC = () => {
       budget: totalBudget,
       baseLaborFee: isBulk ? bulkFare.laborTotal : soloFare.baseLaborRate,
       distanceFee: isBulk ? bulkFare.transitTotal : soloFare.transitFee,
+      customerFee,
+      workerCommission: 0,
       materialOption,
       materialCost: materialOption === 'worker_procures' ? (isBulk ? bulkFare.partsFee : soloFare.partsFee) : 0,
       workerId: isBulk ? (bulkOption === 'contractor' ? activeSelectedContractor?.id : pooledWorkersSquad[0]?.id) : undefined,
@@ -1075,8 +1079,18 @@ export const PostJob: React.FC = () => {
                 )}
                 
                 <div className="flex justify-between text-slate-500">
-                  <span>{t('platformCommission')}</span>
-                  <span className="text-emerald-700 font-medium">{t('zeroCommissionNote')}</span>
+                  <span>Workforce Payout (100% to Partner)</span>
+                  <span className="font-semibold text-slate-700">₹{workerPayout}</span>
+                </div>
+
+                <div className="flex justify-between text-slate-500">
+                  <span>{t('workerCommissionZero')}</span>
+                  <span className="text-emerald-700 font-bold">₹0 (0% Taken)</span>
+                </div>
+
+                <div className="flex justify-between text-slate-500">
+                  <span>{t('customerPlatformFee')}</span>
+                  <span className="font-semibold text-slate-800">₹{customerFee}</span>
                 </div>
 
                 <div className="flex justify-between items-center pt-2.5 border-t border-slate-100 text-sm font-bold text-slate-900">
