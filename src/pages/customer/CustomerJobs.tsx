@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
-import LanguageSwitch from '../../components/LanguageSwitch';
 import { Plus, KeyRound } from 'lucide-react';
 
 const CustomerJobs: React.FC = () => {
@@ -15,7 +14,6 @@ const CustomerJobs: React.FC = () => {
       <div className="flex items-center justify-between mb-3">
         <h1 className="text-base font-bold text-slate-900 tracking-tight">{t('orders')}</h1>
         <div className="flex items-center gap-1.5">
-          <LanguageSwitch />
           <button
             onClick={() => navigate('/post-job')}
             className="text-xs font-semibold text-slate-900 bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 flex items-center gap-1 shadow-2xs hover:bg-slate-50 transition active:scale-95"

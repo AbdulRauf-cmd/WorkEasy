@@ -4,7 +4,6 @@ import { Check, Download, ChevronRight, Heart } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import StarRating from '../../components/StarRating';
-import LanguageSwitch from '../../components/LanguageSwitch';
 
 export const JobComplete: React.FC = () => {
   const navigate = useNavigate();
@@ -41,10 +40,6 @@ export const JobComplete: React.FC = () => {
   return (
     <AnimatedPage className="min-h-screen bg-slate-50 flex flex-col p-4 pt-4 pb-16">
       <div className="flex-1 flex flex-col max-w-sm mx-auto w-full">
-        {/* Top Language Switch */}
-        <div className="flex justify-end mb-2">
-          <LanguageSwitch />
-        </div>
 
         {/* Success Header */}
         <div className="text-center mb-4">

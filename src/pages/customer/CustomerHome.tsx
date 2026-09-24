@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
-import LanguageSwitch from '../../components/LanguageSwitch';
 import { 
   Wrench, 
   Zap, 
@@ -60,11 +59,8 @@ export const CustomerHome: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <LanguageSwitch />
-          <div className="w-8 h-8 rounded-full bg-slate-900 text-white font-semibold text-xs flex items-center justify-center">
-            {customer.avatar || 'PS'}
-          </div>
+        <div className="w-8 h-8 rounded-full bg-slate-900 text-white font-semibold text-xs flex items-center justify-center">
+          {customer.avatar || 'PS'}
         </div>
       </div>
 

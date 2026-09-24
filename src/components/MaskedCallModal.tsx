@@ -140,7 +140,7 @@ export default function MaskedCallModal({
                   {maskedNumber}
                 </span>
                 <span className="text-[10px] text-emerald-700 mt-0.5 block">
-                  (Rapido-style Virtual Number — No direct phone exchange)
+                  (WorkEasy Virtual Number — No direct phone exchange)
                 </span>
               </div>
 

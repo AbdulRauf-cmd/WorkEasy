@@ -3,19 +3,15 @@ import AnimatedPage from '../components/AnimatedPage';
 import { useApp } from '../context/AppContext';
 import { Check, KeyRound, Wrench, ShieldCheck } from 'lucide-react';
 import TierBadge from '../components/TierBadge';
-import LanguageSwitch from '../components/LanguageSwitch';
 
 const Activity: React.FC = () => {
   const { state, t, loc } = useApp();
   
   return (
     <AnimatedPage className="pb-16 pt-3 px-4 bg-slate-50 min-h-screen">
-      <div className="flex items-center justify-between mb-3">
-        <div>
-          <h1 className="text-base font-bold text-slate-900 tracking-tight">{t('activityHistoryTitle')}</h1>
-          <p className="text-xs text-slate-500">{t('liveAuditLog')}</p>
-        </div>
-        <LanguageSwitch />
+      <div className="mb-3">
+        <h1 className="text-base font-bold text-slate-900 tracking-tight">{t('activityHistoryTitle')}</h1>
+        <p className="text-xs text-slate-500">{t('liveAuditLog')}</p>
       </div>
 
       <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-2xs">

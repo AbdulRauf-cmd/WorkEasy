@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, CalendarCheck2, Plus, Clock3, UserRound } from 'lucide-react';
+import { Home, CalendarCheck2, Clock3, UserRound } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 export default function BottomNav() {
@@ -44,19 +44,6 @@ export default function BottomNav() {
           </div>
           <span className="text-[10px] tracking-tight">{t('orders')}</span>
         </button>
-
-        {/* Primary Post / Dispatch Button */}
-        {state.role === 'customer' && (
-          <button
-            onClick={() => navigate('/post-job')}
-            className="flex-1 flex flex-col items-center justify-center py-1 text-slate-900 hover:text-slate-700 transition-colors"
-          >
-            <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center shadow-xs">
-              <Plus className="w-5 h-5" strokeWidth={2.5} />
-            </div>
-            <span className="text-[10px] font-bold text-slate-900 tracking-tight mt-0.5">{t('confirm')}</span>
-          </button>
-        )}
 
         {/* Activity */}
         <button 

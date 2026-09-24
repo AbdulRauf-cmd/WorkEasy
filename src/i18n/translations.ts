@@ -292,7 +292,7 @@ export interface Translations {
   zeroCommissionSaved: string;
   liveAuditLog: string;
 
-  // Masked Phone Calling (Rapido style)
+  // Masked Phone Calling (Virtual Relay)
   maskedCallTitle: string;
   maskedCallSubtitle: string;
   maskedCallPrivacyNote: string;
@@ -594,9 +594,9 @@ export const translations: Record<Language, Translations> = {
     zeroCommissionSaved: 'Saved in Zero Commissions',
     liveAuditLog: 'Live Algorithmic Allocation Stream',
 
-    // Masked Phone Calling (Rapido style)
+    // Masked Phone Calling (Virtual Relay)
     maskedCallTitle: 'Secure Masked Call',
-    maskedCallSubtitle: 'WorkEasy Encrypted Relay (Rapido-style)',
+    maskedCallSubtitle: 'WorkEasy Encrypted Relay',
     maskedCallPrivacyNote: 'Your real phone number remains 100% hidden and confidential. Calls are connected through our secure virtual proxy line with automatic fraud detection and safety monitoring.',
     maskedCallConnecting: 'Connecting through secure proxy...',
     maskedCallVirtualNumber: 'Virtual Relay Line',
@@ -895,9 +895,9 @@ export const translations: Record<Language, Translations> = {
     zeroCommissionSaved: 'கமிஷன் இல்லாததால் மிச்சமான தொகை',
     liveAuditLog: 'நேரலை ஒதுக்கீட்டுப் பதிவு',
 
-    // Masked Phone Calling (Rapido style)
+    // Masked Phone Calling (Virtual Relay)
     maskedCallTitle: 'பாதுகாப்பான மறைக்கப்பட்ட அழைப்பு',
-    maskedCallSubtitle: 'WorkEasy மறைகுறியாக்கப்பட்ட ரிலே (ராபிடோ பாணி)',
+    maskedCallSubtitle: 'WorkEasy பாதுகாப்பான ரிலே (Secure Relay)',
     maskedCallPrivacyNote: 'உங்கள் உண்மையான தொலைபேசி எண் 100% ரகசியமாக வைக்கப்படும். பாதுகாப்பு மற்றும் மோசடி தடுப்புக்காக மெய்நிகர் பிராக்ஸி வழியாக அழைப்புகள் இணைக்கப்படுகின்றன.',
     maskedCallConnecting: 'பாதுகாப்பான பிராக்ஸி வழியாக இணைக்கிறது...',
     maskedCallVirtualNumber: 'மெய்நிகர் ரிலே எண்',
@@ -1196,9 +1196,9 @@ export const translations: Record<Language, Translations> = {
     zeroCommissionSaved: 'कमीशन न कटने से बचत',
     liveAuditLog: 'लाइव आवंटन स्ट्रीम',
 
-    // Masked Phone Calling (Rapido style)
+    // Masked Phone Calling (Virtual Relay)
     maskedCallTitle: 'सुरक्षित नकाबपोश (मास्क्ड) कॉल',
-    maskedCallSubtitle: 'WorkEasy एन्क्रिप्टेड रिले (रैपिडो स्टाइल)',
+    maskedCallSubtitle: 'WorkEasy एन्क्रिप्टेड रिले (Secure Relay)',
     maskedCallPrivacyNote: 'आपका असली फोन नंबर 100% गोपनीय रहता है। सुरक्षा और गोपनीयता के लिए कॉल सुरक्षित वर्चुअल प्रॉक्सी के माध्यम से कनेक्ट किए जाते हैं।',
     maskedCallConnecting: 'सुरक्षित प्रॉक्सी से कनेक्ट हो रहा है...',
     maskedCallVirtualNumber: 'वर्चुअल रिले लाइन',

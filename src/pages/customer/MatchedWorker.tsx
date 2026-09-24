@@ -4,7 +4,6 @@ import { ShieldCheck, Check, ChevronRight } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import WorkerCard from '../../components/WorkerCard';
-import LanguageSwitch from '../../components/LanguageSwitch';
 import { Lock } from 'lucide-react';
 
 export const MatchedWorker: React.FC = () => {
@@ -21,12 +20,11 @@ export const MatchedWorker: React.FC = () => {
   return (
     <AnimatedPage className="min-h-screen bg-slate-50 flex flex-col p-4 pb-16 pt-4">
       <div className="flex-1 flex flex-col max-w-sm mx-auto w-full">
-        {/* Header with Language Switch */}
+        {/* Header */}
         <div className="flex items-center justify-between mb-2">
           <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 uppercase tracking-tight">
             {t('timelineBookingConfirmed')}
           </span>
-          <LanguageSwitch />
         </div>
 
         <div className="mb-3">

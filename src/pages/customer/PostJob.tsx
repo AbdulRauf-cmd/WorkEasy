@@ -34,7 +34,6 @@ import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import { ServiceType, MaterialOption, Worker, BulkOptionType, ContractorTeam } from '../../types';
 import TierBadge from '../../components/TierBadge';
-import LanguageSwitch from '../../components/LanguageSwitch';
 import { classifyTier, calculateDynamicFare, calculateBulkFare, TIER_BASE_RATES, calculateTransitFee } from '../../utils/tierClassification';
 
 const services = [
@@ -211,7 +210,7 @@ export const PostJob: React.FC = () => {
             <h2 className="text-xs font-bold text-slate-900">{steps[step - 1]}</h2>
           </div>
 
-          <LanguageSwitch />
+          <div className="w-8" />
         </div>
 
         {/* Step progress line */}

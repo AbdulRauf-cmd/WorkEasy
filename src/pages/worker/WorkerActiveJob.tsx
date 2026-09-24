@@ -4,7 +4,6 @@ import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
 import StatusTimeline from '../../components/StatusTimeline';
-import LanguageSwitch from '../../components/LanguageSwitch';
 import MaskedCallModal from '../../components/MaskedCallModal';
 import { 
   MapPin, 
@@ -34,7 +33,7 @@ const WorkerActiveJob: React.FC = () => {
   const [extensionTime, setExtensionTime] = useState('+45 mins');
   const [extensionReason, setExtensionReason] = useState('Adhesive / Sealant requires curing before pressure test');
 
-  // Masked Call Modal state (Rapido style)
+  // Masked Call Modal state (Secure Virtual Number)
   const [showMaskedCallModal, setShowMaskedCallModal] = useState(false);
 
   // Geo-Coordinates & OTP Proximity State
@@ -148,12 +147,11 @@ const WorkerActiveJob: React.FC = () => {
 
   return (
     <AnimatedPage className="pb-16 pt-3 px-4 bg-slate-50 min-h-screen">
-      {/* Top Header with Language Switch */}
+      {/* Top Header */}
       <div className="flex items-center justify-between mb-2">
         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">
           {t('activeAssignment')}
         </span>
-        <LanguageSwitch />
       </div>
 
       {/* Top Details Card */}
@@ -174,7 +172,7 @@ const WorkerActiveJob: React.FC = () => {
           <span className="text-[11px] text-slate-500 font-medium">{t('zeroCommissionKeep100')}</span>
         </div>
         
-        {/* Customer Location & Masked Contact Card (Rapido style) */}
+        {/* Customer Location & Masked Contact Card */}
         <div className="bg-slate-50 rounded-xl p-3 border border-slate-200/60 space-y-2 text-xs text-slate-600 mb-3">
           <div className="flex items-center justify-between">
             <div>
@@ -497,7 +495,7 @@ const WorkerActiveJob: React.FC = () => {
         </div>
       )}
 
-      {/* Rapido-Style Masked Call Modal */}
+      {/* WorkEasy Masked Call Modal */}
       <MaskedCallModal
         isOpen={showMaskedCallModal}
         onClose={() => setShowMaskedCallModal(false)}

@@ -24,7 +24,6 @@ import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
 import StatusTimeline from '../../components/StatusTimeline';
 import WorkerCard from '../../components/WorkerCard';
-import LanguageSwitch from '../../components/LanguageSwitch';
 import MaskedCallModal from '../../components/MaskedCallModal';
 import { Worker, ContractorTeam } from '../../types';
 
@@ -48,7 +47,7 @@ export const CustomerJobDetails: React.FC = () => {
   const [customWarrantyText, setCustomWarrantyText] = useState('');
   const [selectedAltWorkerId, setSelectedAltWorkerId] = useState<string>('');
   
-  // Masked calling state (Rapido style)
+  // Masked calling state (Secure Virtual Number)
   const [showMaskedCallModal, setShowMaskedCallModal] = useState(false);
   const [calleeInfo, setCalleeInfo] = useState({
     name: 'Ramesh Kumar',
@@ -119,7 +118,7 @@ export const CustomerJobDetails: React.FC = () => {
           <h1 className="text-xs font-bold text-slate-900">{t('bookingNumber')} #{currentJob.id.slice(-4).toUpperCase()}</h1>
           <span className="text-[10px] text-slate-500 font-medium">{t('liveStatus')}</span>
         </div>
-        <LanguageSwitch />
+        <div className="w-8" />
       </div>
 
       <div className="p-4 space-y-3.5">
@@ -658,7 +657,7 @@ export const CustomerJobDetails: React.FC = () => {
               </button>
             </div>
             
-            {/* Rapido-style Masked Line Notice */}
+            {/* WorkEasy Masked Line Notice */}
             <div className="flex items-center justify-between mt-2 px-2 py-1 bg-emerald-50/70 border border-emerald-200/60 rounded-lg text-[10px] text-emerald-800">
               <span className="flex items-center gap-1 font-medium">
                 <ShieldCheck size={11} className="text-emerald-600" />
@@ -788,7 +787,7 @@ export const CustomerJobDetails: React.FC = () => {
         </div>
       )}
 
-      {/* Rapido-Style Masked Call Modal */}
+      {/* WorkEasy Masked Call Modal */}
       <MaskedCallModal
         isOpen={showMaskedCallModal}
         onClose={() => setShowMaskedCallModal(false)}

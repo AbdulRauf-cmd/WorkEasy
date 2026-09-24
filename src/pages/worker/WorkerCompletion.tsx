@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
-import LanguageSwitch from '../../components/LanguageSwitch';
 import { 
   Camera, 
   Clock, 
@@ -222,13 +221,10 @@ const WorkerCompletion: React.FC = () => {
     <AnimatedPage className="pb-16 pt-3 px-4 bg-slate-50 min-h-screen flex flex-col items-center">
       {!submitted ? (
         <div className="w-full max-w-sm flex-1 flex flex-col">
-          {/* Header with Language Switch */}
-          <div className="flex items-center justify-between mb-3">
-            <div>
-              <h1 className="text-base font-bold text-slate-900 tracking-tight">{t('markTaskComplete')}</h1>
-              <p className="text-xs text-slate-500">{t('inspectCompletedWork')}</p>
-            </div>
-            <LanguageSwitch />
+          {/* Header */}
+          <div className="mb-3">
+            <h1 className="text-base font-bold text-slate-900 tracking-tight">{t('markTaskComplete')}</h1>
+            <p className="text-xs text-slate-500">{t('inspectCompletedWork')}</p>
           </div>
 
           {/* Job Details Card */}

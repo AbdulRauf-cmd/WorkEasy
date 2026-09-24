@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
-import LanguageSwitch from '../../components/LanguageSwitch';
 import { Check, Loader2 } from 'lucide-react';
 
 export const JobClassification: React.FC = () => {
@@ -49,10 +48,6 @@ export const JobClassification: React.FC = () => {
   return (
     <AnimatedPage className="min-h-screen bg-slate-50 flex flex-col justify-center px-4 py-8">
       <div className="max-w-sm mx-auto w-full">
-        {/* Language Switch */}
-        <div className="flex justify-end mb-3">
-          <LanguageSwitch />
-        </div>
 
         {/* Loading Header */}
         <div className="text-center mb-6">

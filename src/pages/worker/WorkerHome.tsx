@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
 import TierBadge from '../../components/TierBadge';
-import LanguageSwitch from '../../components/LanguageSwitch';
 import { Lock, Navigation } from 'lucide-react';
 
 const WorkerHome: React.FC = () => {
@@ -30,9 +29,8 @@ const WorkerHome: React.FC = () => {
           </h1>
         </div>
 
-        {/* Online / Offline Status Toggle & Language */}
+        {/* Online / Offline Status Toggle */}
         <div className="flex items-center gap-1.5">
-          <LanguageSwitch />
           <button 
             onClick={() => setIsOnline(!isOnline)}
             className={`px-2.5 py-1 rounded-full text-[11px] font-semibold flex items-center gap-1 transition-all ${
