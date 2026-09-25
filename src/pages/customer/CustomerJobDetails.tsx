@@ -18,7 +18,8 @@ import {
   Star,
   CheckCircle2,
   XCircle,
-  ReceiptText
+  ReceiptText,
+  ArrowRight
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import AnimatedPage from '../../components/AnimatedPage';
@@ -220,19 +221,35 @@ export const CustomerJobDetails: React.FC = () => {
 
         {/* WORK COMPLETED PROMPT */}
         {currentJob.status === 'completed' && (
-          <div className="bg-slate-900 text-white rounded-xl p-4 shadow-sm flex items-center justify-between">
-            <div>
-              <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-tight block">
-                {t('timelineServiceCompleted')}
-              </span>
-              <h3 className="text-xs font-bold text-white mt-0.5">{t('inspectCompletedWork')}</h3>
-              <p className="text-[11px] text-slate-400">{t('moneySafeNote')}</p>
+          <div className="bg-slate-900 text-white rounded-xl p-4 shadow-sm space-y-3">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <div className="flex items-center gap-1.5 text-emerald-400 mb-1">
+                  <CheckCircle2 size={13} className="text-emerald-400 shrink-0" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider">
+                    {t('timelineServiceCompleted')}
+                  </span>
+                </div>
+                <h3 className="text-sm font-bold text-white leading-tight">
+                  {t('inspectCompletedWork')}
+                </h3>
+                <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                  {t('moneySafeNote')}
+                </p>
+              </div>
+
+              <div className="text-right shrink-0 bg-slate-800/90 border border-slate-700/80 px-2.5 py-1.5 rounded-lg">
+                <span className="text-[9px] text-slate-400 block uppercase font-medium">{t('settlementAmount')}</span>
+                <span className="text-xs font-bold text-emerald-400 font-mono">₹{currentJob.budget}</span>
+              </div>
             </div>
+
             <button
               onClick={() => navigate('/verify')}
-              className="bg-white text-slate-900 font-bold px-3.5 py-2 rounded-lg text-xs shadow-xs active:scale-95 transition shrink-0"
+              className="w-full bg-white hover:bg-slate-100 text-slate-900 font-bold py-3 px-4 rounded-xl text-xs shadow-xs active:scale-98 transition flex items-center justify-center gap-2 text-center"
             >
-              {t('workLooksGoodPay')}
+              <span>{t('workLooksGoodPay')}</span>
+              <ArrowRight size={14} className="text-slate-900 shrink-0" />
             </button>
           </div>
         )}
